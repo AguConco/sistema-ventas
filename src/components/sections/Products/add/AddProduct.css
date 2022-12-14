@@ -1,0 +1,110 @@
+.sectionAddForm {
+    width: 500px;
+}
+
+.sectionAddForm h3 {
+    margin-bottom: 20px;
+}
+
+.sectionAddForm input {
+    width: 480px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--gray-dark);
+    outline: none;
+    margin: 10px 0;
+    background: var(--white);
+}
+
+.sectionAddForm select {
+    width: 480px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--gray-dark);
+    outline: none;
+}
+
+.sectionAddForm form input:nth-child(11) {
+    width: 500px;
+}
+
+.sectionAddForm form div:nth-child(1) {
+    position: relative;
+    margin-bottom: 20px;
+    border: 2px dashed var(--gray-dark);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.sectionAddForm form div:nth-child(1) span {
+    color: var(--gray-dark);
+}
+
+.sectionAddForm form div:nth-child(1) div {
+    height: 100px;
+    width: 100px;
+}
+
+.sectionAddForm form div:nth-child(1) div img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.sectionAddForm form div:nth-child(1) input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.sectionAddForm form button {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px 20px;
+    margin: 3px;
+    color: var(--primary);
+    background: var(--secondary);
+}
+
+.sectionAddForm form .agregar {
+    color: var(--white);
+    background: var(--primary);
+    display: inline-block;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.sectionAddForm form .reset {
+    color: var(--primary);
+    background: var(--gray-light);
+    width: 100%;
+    margin: 10px 0;
+}
+
+.sectionAddForm span {
+    margin: 10px;
+}
+
+.containerPrice {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.containerPrice h4 {
+    font-weight: 300;
+    width: 100%;
+}
+
+.containerPrice input {
+    width: 49%;
+}

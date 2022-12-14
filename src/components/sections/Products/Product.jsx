@@ -1,0 +1,46 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import imageDrive from '../../../assets/images/drive.png'
+import { useContext, useState } from 'react'
+import { ProductContext } from '../../../context/ProductContext'
+
+const Product = ({ detail }) => {
+    const { removeProduct, editProduct } = useContext(ProductContext)
+    const [confirmed, setConfirmed] = useState(false)
+
+
+    return (
+        <tr>
+            <td>
+                <div>
+                    <img src={detail.picture} alt="" />
+                    <div>
+                        <h3>{detail.name}</h3>
+                        <span>Cod. {detail.code}</span>
+                    </div>
+                </div>
+            </td>
+            <td>$ {detail.price.price_public}</td>
+            <td>$ {detail.price.price_wholesaler}</td>
+            <td>{detail.available_quantity}</td>
+            <td><span className={detail.state === 'active' ? 'active' : 'inactive'}> {detail.state === 'active' ? 'Activo' : 'Inactivo'} </span></td>
+            <td>
+                <div>
+                    <div><img src={imageDrive} alt="Logo google drive" /><span>Agregar al Drive</span></div>
+                    <div onClick={() => editProduct(detail.id)}><FontAwesomeIcon className='editIcon' icon={faEdit} size={'xs'} /><span>Editar</span></div>
+                    <div onClick={() => setConfirmed(!confirmed)}><FontAwesomeIcon className='deleteIcon' icon={faTrash} size={'xs'} />
+                        {confirmed &&
+                            <div id='confirmedRemove'>
+                                <h4>¿Quieres eliminar <span>"{detail.name}"</span> de código <span>"{detail.code}"</span>?</h4>
+                                <button>Cancelar</button>
+                                <button onClick={() => removeProduct(detail.id)}>Eliminar</button>
+                            </div>
+                        }
+                        <span>Eliminar</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    )
+}
+export default Product
