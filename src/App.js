@@ -7,6 +7,7 @@ import ProductsSection from './components/sections/Products/ProductsSection'
 import Header from './components/Header/Header';
 import NavigationProvider from './context/NavigationContext';
 import ProductProvider from './context/ProductContext';
+import Detail from './components/Detail/Detail';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route exact path='/clientes' element={<ClientsSection />} />
               <Route exact path='/productos/:categoryId' element={<ProductsSection />} />
               <Route exact path='/pedidos' element={<Orders />} />
+              <Route exact path='/:productId' element={<Detail />} />
             </Routes>
           </div>
         </ProductProvider>

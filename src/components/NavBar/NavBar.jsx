@@ -11,7 +11,12 @@ const Section = ({ section }) => {
     const { sectionCurrent } = useContext(NavigationContext)
 
     return <li key={section.name}>
-        <Link className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'} to={'/' + section.url}> {section.icon} {section.name} </Link>
+        {
+            section.type == '' ?
+                <Link className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'} to={'/' + section.url}> {section.icon} {section.name} </Link>
+                :
+                <a className='linkSection' href={section.url} target={section.type}><img src={section.icon} alt={section.name} /> {section.name}</a>
+        }
     </li>
 }
 

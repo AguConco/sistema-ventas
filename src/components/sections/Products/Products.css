@@ -101,11 +101,11 @@ table td:nth-child(5) .inactive {
     color: #ec575a;
 }
 
-table td>div {
+table td>a {
     display: flex;
 }
 
-table td>div h3 {
+table td>a h3 {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -113,7 +113,7 @@ table td>div h3 {
     font-size: 16px;
 }
 
-table td>div span {
+table td>a span {
     font-size: 12px;
 }
 

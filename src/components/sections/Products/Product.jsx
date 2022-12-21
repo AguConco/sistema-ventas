@@ -3,22 +3,22 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import imageDrive from '../../../assets/images/drive.png'
 import { useContext, useState } from 'react'
 import { ProductContext } from '../../../context/ProductContext'
+import { Link } from 'react-router-dom'
 
 const Product = ({ detail }) => {
     const { removeProduct, editProduct } = useContext(ProductContext)
     const [confirmed, setConfirmed] = useState(false)
 
-
     return (
         <tr>
             <td>
-                <div>
+                <Link to={'/' + detail.id}>
                     <img src={detail.picture} alt="" />
                     <div>
                         <h3>{detail.name}</h3>
                         <span>Cod. {detail.code}</span>
                     </div>
-                </div>
+                </Link>
             </td>
             <td>$ {detail.price.price_public}</td>
             <td>$ {detail.price.price_wholesaler}</td>

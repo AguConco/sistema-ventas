@@ -1,6 +1,7 @@
 import { createContext, useState } from "react"
 import { faHome, faBoxOpen, faAddressBook, faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import googleDrive from '../assets/images/google-drive.svg'
 
 export const NavigationContext = createContext()
 
@@ -13,25 +14,35 @@ const NavigationProvider = ({ children }) => {
             name: 'inicio',
             url:'inicio',
             icon: <FontAwesomeIcon icon={faHome} />,
-            description: ''
+            description: '',
+            type: ''
         },
         {
             name: 'productos',
             url:'productos/all',
             icon: <FontAwesomeIcon icon={faBoxOpen} />,
-            description: 'Registrar, eliminar o actualizar detalles prodcutos'
+            description: 'Registrar, eliminar o actualizar detalles prodcutos',
+            type: ''
         },
         {
             name: 'clientes',
             url:'clientes',
             icon: <FontAwesomeIcon icon={faAddressBook} />,
-            description: 'Registrar, eliminar o actualizar detalles clientes'
+            description: 'Registrar, eliminar o actualizar detalles clientes',
+            type: ''
         },
         {
             name: 'pedidos',
             url:'pedidos',
             icon: <FontAwesomeIcon icon={faFileInvoiceDollar} />,
-            description: 'Realizar pedidos, remito y comprobantes'
+            description: 'Realizar pedidos, remito y comprobantes',
+            type: ''
+        },
+        {
+            name: 'Google Drive',
+            url: 'https://drive.google.com/drive/folders/1xzJAvxjfXdOD_X810ZygKBsaauC9gJzv',
+            icon: googleDrive,
+            type: '_blank'
         }
     ]
 

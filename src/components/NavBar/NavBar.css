@@ -45,6 +45,13 @@ nav ul li {
 }
 
 .linkSection svg {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.linkSection img {
+    height: 20px;
     width: 20px;
     margin-right: 10px;
 }
