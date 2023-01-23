@@ -91,12 +91,12 @@ table td:nth-child(5) span {
     text-transform: capitalize;
 }
 
-table td:nth-child(5) .active {
+.active {
     background: #88c53b30;
     color: #589112;
 }
 
-table td:nth-child(5) .inactive {
+.inactive {
     background: #ec575a30;
     color: #ec575a;
 }
@@ -181,6 +181,7 @@ table td:nth-last-child(1)>div>div {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    display: inline;
 }
 
 #confirmedRemove button:nth-child(3) {

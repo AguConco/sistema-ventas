@@ -12,11 +12,9 @@ const AddProduct = () => {
     const [availableQuantity, setAvailableQuantity] = useState()
     const [pricePublic, setPricePublic] = useState()
     const [priceWholesaler, setPriceWholesaler] = useState()
-    const [discount, setDiscount] = useState(0)
     const [categoryId, setCategoryId] = useState()
     const [subcategory, setSubcategory] = useState('')
     const [state, setState] = useState()
-    const [mainFeatures, setMainFeatures] = useState('')
 
     const sub = [
         ['Aluminio y acero|scc01', 'Melamina|scc02', 'Teflón|scc03', 'Cerámica|scc04', 'Herméticos|scc05', 'Platos y compoteras|scc06', 'Vasos y copas|scc07', 'Jarras, jarros y tazas|scc08', 'Cubiertos|scc09', 'Utensillos|scc10', 'Bandejas, bowls y ensaladeras|scc11', 'Botellas y bidones|scc12', 'Tablas|scc13', 'Artículos de asador|scc14', 'Secaplatos y coladores|scc15', 'Repostería|scc16', 'Electrodomésticos|scc17', 'Infantiles|scc18', 'Rigolleau|scc19', 'Carol|scc20', 'Tramontina|scc21'],
@@ -57,13 +55,10 @@ const AddProduct = () => {
         setAvailableQuantity()
         setPricePublic()
         setPriceWholesaler()
-        setDiscount(0)
         setCategoryId()
         setSubcategory('')
         setState()
-        setMainFeatures('')
         document.getElementById('addForm').reset()
-
     }
 
     useEffect(() => {
@@ -72,41 +67,39 @@ const AddProduct = () => {
 
     return (
 
-            <section className="sectionAddForm">
-                <h3>Agregar producto nuevo...</h3>
-                <form id="addForm" onSubmit={e => {
-                    e.preventDefault()
-                    const dataProduct = {
-                        pictures: pictures,
-                        name: name,
-                        generarId: generarId,
-                        code: code,
-                        availableQuantity: availableQuantity,
-                        pricePublic: pricePublic,
-                        priceWholesaler: priceWholesaler,
-                        discount: discount,
-                        categoryId: categoryId,
-                        subcategory: subcategory,
-                        state: state,
-                        mainFeatures: mainFeatures
-
-                    }
-                    addProduct(dataProduct)
-                }}>
-                    <div>
-                        <span>¡Click o arrastrar una imagen acá!</span>
-                        {pictures && <div><img src={URL.createObjectURL(pictures)} alt='imagen temporal' /></div>}
-                        <input onChange={e => setPictures(e.target.files[0])} type="file" required />
-                    </div>
+        <section className="sectionAddForm">
+            <h3>Agregar producto nuevo</h3>
+            <form id="addForm" onSubmit={e => {
+                e.preventDefault()
+                const dataProduct = {
+                    pictures: pictures,
+                    name: name,
+                    generarId: generarId,
+                    code: code,
+                    availableQuantity: availableQuantity,
+                    pricePublic: pricePublic,
+                    priceWholesaler: priceWholesaler,
+                    categoryId: categoryId,
+                    subcategory: subcategory,
+                    state: state,
+                }
+                addProduct(dataProduct)
+            }}>
+                <div className="containerInputFile">
+                    <span>¡Click o arrastrar una imagen acá!</span>
+                    {console.log(pictures)}
+                    {pictures && <div><img src={URL.createObjectURL(pictures)} alt='imagen temporal' /></div>}
+                    <input onChange={e => setPictures(e.target.files[0])} type="file" accept="image/png, image/jpeg" required />
+                </div>
+                <div className="containerInputsInfo">
                     <input onKeyUp={e => setName(e.target.value)} type="text" placeholder="Nombre" required />
+                    <input onKeyUp={e => setCode(e.target.value)} type="number" min={0} placeholder="Código" required />
                     <div className="containerPrice">
                         <h4>Precios</h4>
                         <input onKeyUp={e => setPriceWholesaler(e.target.value)} type="number" min={0} placeholder="Precio mayorista" required />
                         <input onKeyUp={e => setPricePublic(e.target.value)} type="number" min={0} placeholder="Precio minorista" required />
                     </div>
-                    <input onKeyUp={e => setDiscount(e.target.value)} type="number" min={0} placeholder="Descuento" required />
-                    <input onKeyUp={e => setCode(e.target.value)} type="number" placeholder="Código" required />
-                    <input onKeyUp={e => setAvailableQuantity(e.target.value)} type="number" placeholder="Stock" required />
+                    <input onKeyUp={e => setAvailableQuantity(e.target.value)} type="number" min={0} placeholder="Stock" required />
                     <select onChange={e => setState(e.target.value)} required>
                         <option value="">Estado</option>
                         <option value="active">active</option>
@@ -125,7 +118,7 @@ const AddProduct = () => {
                         <option value="cv">Varios</option>
                     </select>
                     <input value={subcategory} type="text" placeholder="subcategoría" disabled required />
-                    <div>
+                    <div className="containerSubcaterogies">
                         {categoryId === 'cc' && sub[0].map(e => (<button onClick={e => addSubcategoria(e.target.value)} type="button" value={e.split('|')[1]}>{e.split('|')[0]}</button>))}
                         {categoryId === 'cr' && sub[1].map(e => (<button onClick={e => addSubcategoria(e.target.value)} type="button" value={e.split('|')[1]}>{e.split('|')[0]}</button>))}
                         {categoryId === 'cj' && sub[2].map(e => (<button onClick={e => addSubcategoria(e.target.value)} type="button" value={e.split('|')[1]}>{e.split('|')[0]}</button>))}
@@ -133,11 +126,11 @@ const AddProduct = () => {
                         {categoryId === 'clb' && sub[4].map(e => (<button onClick={e => addSubcategoria(e.target.value)} type="button" value={e.split('|')[1]}>{e.split('|')[0]}</button>))}
                         {categoryId === 'cv' && sub[5].map(e => (<button onClick={e => addSubcategoria(e.target.value)} type="button" value={e.split('|')[1]}>{e.split('|')[0]}</button>))}
                     </div>
-                    <input onKeyUp={e => setMainFeatures(e.target.value)} type="text" placeholder="caracteristicas separadas por |" />
-                    <button className="agregar" type="submit">Agregar</button>
-                    <button className="reset" type="button" onClick={() => resetForm()} >reset</button>
-                </form>
-            </section>
+                </div>
+                <button className="reset" type="button" onClick={() => resetForm()} >reset</button>
+                <button className="agregar" type="submit">Agregar</button>
+            </form>
+        </section>
     )
 }
 

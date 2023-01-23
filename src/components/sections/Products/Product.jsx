@@ -6,7 +6,8 @@ import { ProductContext } from '../../../context/ProductContext'
 import { Link } from 'react-router-dom'
 
 const Product = ({ detail }) => {
-    const { removeProduct, editProduct } = useContext(ProductContext)
+    
+    const { removeProduct } = useContext(ProductContext)
     const [confirmed, setConfirmed] = useState(false)
 
     return (
@@ -16,7 +17,7 @@ const Product = ({ detail }) => {
                     <img src={detail.picture} alt="" />
                     <div>
                         <h3>{detail.name}</h3>
-                        <span>Cod. {detail.code}</span>
+                        <span>Cód. {detail.code}</span>
                     </div>
                 </Link>
             </td>
@@ -27,7 +28,6 @@ const Product = ({ detail }) => {
             <td>
                 <div>
                     <div><img src={imageDrive} alt="Logo google drive" /><span>Agregar al Drive</span></div>
-                    <div onClick={() => editProduct(detail.id)}><FontAwesomeIcon className='editIcon' icon={faEdit} size={'xs'} /><span>Editar</span></div>
                     <div onClick={() => setConfirmed(!confirmed)}><FontAwesomeIcon className='deleteIcon' icon={faTrash} size={'xs'} />
                         {confirmed &&
                             <div id='confirmedRemove'>

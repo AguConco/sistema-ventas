@@ -1,32 +1,43 @@
 .sectionAddForm {
-    width: 500px;
+    width: 700px;
 }
 
 .sectionAddForm h3 {
     margin-bottom: 20px;
 }
 
+.sectionAddForm form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerInputFile {
+    height: 200px;
+    width: 200px;
+}
+
+.containerInputsInfo {
+    width: 440px;
+    margin-left: 20px;
+}
+
 .sectionAddForm input {
-    width: 480px;
-    padding: 10px;
+    width: 200px;
+    padding: 7px;
     border-radius: 5px;
     border: 1px solid var(--gray-dark);
     outline: none;
-    margin: 10px 0;
+    margin: 10px;
     background: var(--white);
 }
 
 .sectionAddForm select {
-    width: 480px;
+    width: 200px;
     border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 7px;
+    margin: 10px;
     border: 1px solid var(--gray-dark);
     outline: none;
-}
-
-.sectionAddForm form input:nth-child(11) {
-    width: 500px;
 }
 
 .sectionAddForm form div:nth-child(1) {
@@ -50,7 +61,7 @@
     width: 100px;
 }
 
-.sectionAddForm form div:nth-child(1) div img {
+.containerInputFile img {
     height: 100%;
     width: 100%;
     object-fit: contain;
@@ -70,24 +81,25 @@
     border-radius: 5px;
     outline: none;
     padding: 10px 20px;
-    margin: 3px;
     color: var(--primary);
     background: var(--secondary);
+    margin: 3px;
 }
 
 .sectionAddForm form .agregar {
     color: var(--white);
     background: var(--primary);
     display: inline-block;
-    margin: 10px 0;
-    width: 100%;
+    width: 49%;
+    margin-top: 20px;
 }
 
 .sectionAddForm form .reset {
     color: var(--primary);
     background: var(--gray-light);
-    width: 100%;
-    margin: 10px 0;
+    width: 49%;
+    margin-top: 20px;
+
 }
 
 .sectionAddForm span {
@@ -97,14 +109,14 @@
 .containerPrice {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .containerPrice h4 {
     font-weight: 300;
     width: 100%;
+    padding-left: 15px;
 }
 
-.containerPrice input {
-    width: 49%;
+.containerSubcaterogies {
+    padding-left: 10px;
 }
