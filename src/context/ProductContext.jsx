@@ -41,11 +41,12 @@ const ProductProvider = ({ children }) => {
 
     const editProduct = (data) => {
 
-        const { code, id, pictures, name, discount, pricePublic, priceWholesaler, mainFeatures, availableQuantity, state } = data
+        const { picture, id, name, discount, pricePublic, priceWholesaler, mainFeatures, availableQuantity, state } = data
 
-        console.log(pictures, name, discount, pricePublic, priceWholesaler, mainFeatures, availableQuantity, state)
+        console.log(picture)
+
         const productEditData = new FormData()
-        // productEditData.append('picture', pictures)
+        picture.length === undefined && productEditData.append('picture', picture)
         productEditData.append('id', id)
         productEditData.append('name', name)
         productEditData.append('pricePublic', pricePublic)

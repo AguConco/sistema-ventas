@@ -1,4 +1,4 @@
-import { faEdit, faTrash, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash, faArrowAltCircleLeft, faFloppyDisk, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import imageDrive from '../../assets/images/drive.png'
 import { useContext, useEffect, useState } from 'react'
@@ -14,12 +14,15 @@ const Detail = () => {
     const [detail, setDetail] = useState()
     const [loading, setLoading] = useState(true)
     const [confirmed, setConfirmed] = useState(false)
+
     const [edit, setEdit] = useState(false)
     const [name, setName] = useState('')
     const [pricePublic, setPricePublic] = useState(0)
     const [priceWholesaler, setPriceWholesaler] = useState(0)
     const [discount, setDiscount] = useState(0)
     const [state, setState] = useState(null)
+    const [availableQuantity, setAvailableQuantity] = useState()
+    const [picture, setPicture] = useState()
 
     const { removeProduct, editProduct } = useContext(ProductContext)
     const navigate = useNavigate()
@@ -36,6 +39,8 @@ const Detail = () => {
                     setPriceWholesaler(e[0].price.price_wholesaler)
                     setDiscount(e[0].price.discount)
                     setState(e[0].state)
+                    setAvailableQuantity(e[0].available_quantity)
+                    setPicture(e[0].picture)
                     setLoading(false)
                 } else {
                     navigate('/productos/all')
@@ -43,6 +48,36 @@ const Detail = () => {
             })
     }, [productId])
 
+    const cancelChange = () => {
+        setEdit(false)
+        setName(detail.name)
+        setDiscount(detail.price.discount)
+        setPricePublic(detail.price.price_public)
+        setPriceWholesaler(detail.price.price_wholesaler)
+        setState(detail.state)
+        setAvailableQuantity(detail.available_quantity)
+        setPicture(detail.picture)
+    }
+
+    const saveChange = () => {
+        const newData = {
+            name,
+            pricePublic,
+            priceWholesaler,
+            id: detail.id,
+            discount,
+            code: detail.code,
+            mainFeatures: detail.main_features,
+            availableQuantity,
+            state,
+            picture
+        }
+        if (edit) {
+            editProduct(newData)
+            setDetail(newData)
+        }
+        setEdit(!edit)
+    }
 
     return (
         <section className='sectionDetail'>
@@ -51,40 +86,69 @@ const Detail = () => {
                     <Loading />
                     :
                     <div>
-                        <div className='back' onClick={() => window.history.back()}>
+                        {console.log(detail)}
+                        <div className='back' onClick={() => {
+                            edit ? alert('Guarda los cambios antes de salir') : window.history.back()
+                        }}>
                             <FontAwesomeIcon icon={faArrowAltCircleLeft} />
                             <span>Volver para atras</span>
                         </div>
                         <div className='containerDetail'>
                             <div className='containerImage'>
-                                <img src={detail.picture} alt={detail.name} />
+                                <img src={picture.length !== undefined ? detail.picture : URL.createObjectURL(picture)} alt={detail.name} />
+                                {edit &&
+                                    <div className='editPicture'>
+                                        <button type='button'>Cambiar Foto</button>
+                                        <input onChange={e => setPicture(e.target.files[0])} type="file" accept="image/png, image/jpeg" />
+                                    </div>
+                                }
                             </div>
                             <div>
-                                <h1 className={edit ? 'detailName edit' : 'detailName'} contenteditable={edit && "true"} onKeyUp={e => setName(e.target.innerText)}>{detail.name}</h1>
-                                <div><span className='detailCode'>Código: {detail.code}</span><span className={detail.state === 'active' ? 'active' : 'inactive'}> {state === 'active' ? 'Activo' : 'Inactivo'} </span></div>
-                                <div className='price'>
-                                    <p>Precio mayorista <div><span>$ </span><span className={edit ? 'edit' : ''} contenteditable={edit && "true"} onKeyUp={e => setPriceWholesaler(e.target.innerText)}>{detail.price.price_wholesaler}</span></div></p>
-                                    <p>Precio al público <div><span>$ </span><span className={edit ? 'edit' : ''} contenteditable={edit && "true"} onKeyUp={e => setPricePublic(e.target.innerText)}>{detail.price.price_public}</span></div></p>
-                                    <p>Descuento <div><span className={edit ? 'edit' : ''} contenteditable={edit && "true"} onKeyUp={e => setDiscount(e.target.innerText)}>{detail.price.discount}</span><span>%</span></div></p>
+                                {edit ?
+                                    <input type={"text"} className={'detailName edit'} disabled={!edit} onChange={e => setName(e.target.value)} value={name} /> :
+                                    <h1 className={'detailName'}>{name}</h1>
+                                }
+                                <div>
+                                    <span className='detailCode'>Código: {detail.code}</span>
+                                    <span className={state === 'active' ? 'active' : 'inactive'}>
+                                        {edit && <div onClick={() => edit && state === 'active' ? setState('inactive') : setState('active')}></div>}
+                                        {state === 'active' ? 'Activo' : 'Inactivo'}
+                                    </span>
                                 </div>
+                                <div className='price'>
+                                    <p>Precio mayorista
+                                        <div>
+                                            <span>$ </span>
+                                            <input type={"number"} disabled={!edit} className={edit ? 'edit' : ''} onChange={e => setPriceWholesaler(e.target.value)} value={priceWholesaler} />
+                                        </div>
+                                    </p>
+                                    <p>Precio al público
+                                        <div>
+                                            <span>$ </span>
+                                            <input type={"number"} disabled={!edit} className={edit ? 'edit' : ''} onChange={e => setPricePublic(e.target.value)} value={pricePublic} />
+                                        </div>
+                                    </p>
+                                    <p>Descuento (%)
+                                        <div>
+                                            <input type={"number"} disabled={!edit} className={edit ? 'edit' : ''} onChange={e => setDiscount(e.target.value)} value={discount} />
+                                        </div>
+                                    </p>
+                                    <p>Stock
+                                        <div>
+                                            <input type={"number"} disabled={!edit} className={edit ? 'edit' : ''} onChange={e => setAvailableQuantity(e.target.value)} value={availableQuantity} />
+                                        </div>
+                                    </p>
+                                </div >
                                 <div className="options">
                                     <button><img src={imageDrive} alt="logo de google drive" /> Agregar a Drive</button>
-                                    <button onClick={() => {
-                                        console.log(edit)
-                                        edit && editProduct({
-                                            name,
-                                            pricePublic,
-                                            priceWholesaler,
-                                            id: detail.id,
-                                            discount,
-                                            code: detail.code,
-                                            mainFeatures: detail.main_features,
-                                            availableQuantity: detail.available_quantity,
-                                            state,
-                                            
-                                        })
-                                        setEdit(!edit)
-                                    }}> <FontAwesomeIcon className='editIcon' icon={faEdit} /> {edit ? 'Guardar cambios' : 'Editar'}</button>
+                                    {!edit ?
+                                        <button onClick={() => setEdit(!edit)}> <FontAwesomeIcon className='editIcon' icon={faEdit} /> Editar </button>
+                                        :
+                                        <div>
+                                            <button onClick={() => cancelChange()}> <FontAwesomeIcon className='deleteIcon' icon={faXmark} />Cancelar cambios</button>
+                                            <button onClick={() => saveChange()}> <FontAwesomeIcon className='saveIcon' icon={faFloppyDisk} />Guardar cambios</button>
+                                        </div>
+                                    }
                                     <button onClick={() => setConfirmed(!confirmed)} ><FontAwesomeIcon className='deleteIcon' icon={faTrash} />
                                         Eliminar
                                         {confirmed &&
@@ -94,16 +158,17 @@ const Detail = () => {
                                                 <button onClick={() => {
                                                     setDetail({})
                                                     removeProduct(detail.id)
+                                                    navigate('/productos/all')
                                                 }}>Eliminar</button>
                                             </div>
                                         }
                                     </button>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </div >
+                        </div >
+                    </div >
             }
-        </section>
+        </section >
     )
 }
 
