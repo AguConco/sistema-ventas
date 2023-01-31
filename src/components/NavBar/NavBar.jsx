@@ -4,16 +4,17 @@ import { useContext } from 'react'
 import { NavigationContext } from '../../context/NavigationContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
-// import { useState, useEffect } from 'react'
+import { ProductContext } from '../../context/ProductContext'
 
 const Section = ({ section }) => {
 
     const { sectionCurrent } = useContext(NavigationContext)
+    const { setCurrentCategory } = useContext(ProductContext)
 
     return <li key={section.name}>
         {
             section.type == '' ?
-                <Link className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'} to={'/' + section.url}> {section.icon} {section.name} </Link>
+                <Link onClick={() => setCurrentCategory(null)} className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'} to={'/' + section.url}> {section.icon} {section.name} </Link>
                 :
                 <a className='linkSection' href={section.url} target={section.type}><img src={section.icon} alt={section.name} /> {section.name}</a>
         }

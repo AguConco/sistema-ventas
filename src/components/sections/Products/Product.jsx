@@ -6,17 +6,17 @@ import { ProductContext } from '../../../context/ProductContext'
 import { Link } from 'react-router-dom'
 
 const Product = ({ detail }) => {
-    
-    const { removeProduct } = useContext(ProductContext)
+
+    const { removeProduct, setCurrentCategory } = useContext(ProductContext)
     const [confirmed, setConfirmed] = useState(false)
 
     return (
         <tr>
             <td>
-                <Link to={'/' + detail.id}>
-                    <img src={detail.picture} alt="" />
+                <Link onClick={()=> setCurrentCategory(null)} to={'/' + detail.id}>
+                    <img src={detail.picture} alt={detail.name} />
                     <div>
-                        <h3>{detail.name}</h3>
+                        <h3>{detail.name.charAt(0).toUpperCase() + detail.name.slice(1)}</h3>
                         <span>Cód. {detail.code}</span>
                     </div>
                 </Link>

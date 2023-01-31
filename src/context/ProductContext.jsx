@@ -1,11 +1,14 @@
 import { createContext, useState } from "react"
 import $ from 'jquery'
+import { useEffect } from "react"
 
 export const ProductContext = createContext()
 
 const ProductProvider = ({ children }) => {
 
     const [listState, setListState] = useState(false)
+    const [productList, setProductList] = useState([])
+    const [currentCategory, setCurrentCategory] = useState(null)
 
     const addProduct = (data) => {
 
@@ -34,16 +37,18 @@ const ProductProvider = ({ children }) => {
             contentType: false,
             data: productData,      // la informacion que queres mandar
             success: response => {
-                response && setListState(!listState)
+                if (response) {
+                    setCurrentCategory(null)
+                    setListState(!listState)
+                }
             }    //success
         }) // ajax
     }
 
     const editProduct = (data) => {
 
-        const { picture, id, name, discount, pricePublic, priceWholesaler, mainFeatures, availableQuantity, state } = data
-
-        console.log(picture)
+        const { picture, id, name, discount, pricePublic } = data
+        const { priceWholesaler, mainFeatures, availableQuantity, state } = data
 
         const productEditData = new FormData()
         picture.length === undefined && productEditData.append('picture', picture)
@@ -63,8 +68,10 @@ const ProductProvider = ({ children }) => {
             contentType: false,
             data: productEditData,      // la informacion que queres mandar
             success: response => {
-                console.log(response)
-                response && setListState(!listState)
+                if (response) {
+                    setCurrentCategory(null)
+                    setListState(!listState)
+                }
             }    //success
         }) // ajax
     }
@@ -79,12 +86,89 @@ const ProductProvider = ({ children }) => {
             contentType: false,
             data: removeProductData,      // la informacion que queres mandar
             success: response => {
-                response && setListState(!listState)
+                if (response) {
+                    setCurrentCategory(null)
+                    setListState(!listState)
+                }
             }    //success
         }) // ajax
     }
 
-    return <ProductContext.Provider value={{ listState, addProduct, editProduct, removeProduct }}>{children}</ProductContext.Provider>
+    const getProducts = (categoryId, setLoading) => {
+        setCurrentCategory(categoryId)
+        if (currentCategory !== categoryId) {
+            setLoading(true)
+            fetch('http://localhost:80/Bazar-Backend/category.php?categoryId=' + categoryId)
+                .then(e => e.json())
+                .then(e => {
+                    setProductList(e)
+                    setLoading(false)
+                })
+        }
+    }
+
+    const sortPricePublic = (e) => {
+        setListState(!listState)
+        e ?
+            setProductList(productList.sort((a, b) => a.price.price_public - b.price.price_public))
+            :
+            setProductList(productList.sort((a, b) => b.price.price_public - a.price.price_public))
+    }
+
+    const sortPriceWholesaler = (e) => {
+        setListState(!listState)
+        e ?
+            setProductList(productList.sort((a, b) => a.price.price_wholesaler - b.price.price_wholesaler))
+            :
+            setProductList(productList.sort((a, b) => b.price.price_wholesaler - a.price.price_wholesaler))
+
+    }
+
+    const sortAvailableQuantity = (e) => {
+        setListState(!listState)
+        e ?
+            setProductList(productList.sort((a, b) => a.available_quantity - b.available_quantity))
+            :
+            setProductList(productList.sort((a, b) => b.available_quantity - a.available_quantity))
+    }
+
+    const sortName = (e) => {
+        setListState(!listState)
+        const s = productList.sort((a, b) => {
+            const name_a = a.name.toLowerCase()
+            const name_b = b.name.toLowerCase()
+
+            if (name_a > name_b) {
+                return 1;
+            }
+            if (name_a < name_b) {
+                return -1;
+            }
+            return 0;
+        })
+
+
+        e ?
+            setProductList(s)
+            :
+            setProductList(s.reverse())
+    }
+
+    return <ProductContext.Provider value={
+        {
+            productList,
+            listState,
+            setCurrentCategory,
+            addProduct,
+            editProduct,
+            removeProduct,
+            getProducts,
+            sortPricePublic,
+            sortPriceWholesaler,
+            sortAvailableQuantity,
+            sortName
+        }
+    }>{children}</ProductContext.Provider>
 }
 
 export default ProductProvider

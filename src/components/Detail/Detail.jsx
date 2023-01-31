@@ -86,7 +86,6 @@ const Detail = () => {
                     <Loading />
                     :
                     <div>
-                        {console.log(detail)}
                         <div className='back' onClick={() => {
                             edit ? alert('Guarda los cambios antes de salir') : window.history.back()
                         }}>
