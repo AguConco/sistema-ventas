@@ -1,4 +1,4 @@
-.headerSectionProducts {
+.headerSection {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,7 +68,7 @@
     text-decoration: underline;
 }
 
-.btnAddProduct {
+.btnAdd {
     border-radius: 5px;
     margin-left: 20px;
     color: var(--white);
@@ -220,6 +220,7 @@ table td:nth-last-child(1)>div>div {
     font-size: 14px;
     transform: translateX(0);
     text-align: start;
+    word-break: break-all;
 }
 
 #confirmedRemove button {
@@ -289,7 +290,7 @@ table td:nth-last-child(1) img {
     padding: 20px 0;
 }
 
-.productListEmpty .btnAddProduct {
+.productListEmpty .btnAdd {
     font-size: 16px;
     margin: 0;
 }

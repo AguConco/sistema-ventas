@@ -36,7 +36,7 @@ const AddProduct = () => {
         }
     }
 
-    const generarId = () => {
+    const generateId = () => {
         const a = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789'
         const id = []
 
@@ -66,28 +66,26 @@ const AddProduct = () => {
     }, [listState])
 
     return (
-
         <section className="sectionAddForm">
             <h3>Agregar producto nuevo</h3>
             <form id="addForm" onSubmit={e => {
                 e.preventDefault()
                 const dataProduct = {
-                    pictures: pictures,
-                    name: name,
-                    generarId: generarId,
-                    code: code,
-                    availableQuantity: availableQuantity,
-                    pricePublic: pricePublic,
-                    priceWholesaler: priceWholesaler,
-                    categoryId: categoryId,
-                    subcategory: subcategory,
-                    state: state,
+                    pictures,
+                    name,
+                    generateId,
+                    code,
+                    availableQuantity,
+                    pricePublic,
+                    priceWholesaler,
+                    categoryId,
+                    subcategory,
+                    state,
                 }
                 addProduct(dataProduct)
             }}>
                 <div className="containerInputFile">
                     <span>¡Click o arrastrar una imagen acá!</span>
-                    {console.log(pictures)}
                     {pictures && <div><img src={URL.createObjectURL(pictures)} alt='imagen temporal' /></div>}
                     <input onChange={e => setPictures(e.target.files[0])} type="file" accept="image/png, image/jpeg" required />
                 </div>

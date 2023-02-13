@@ -1,0 +1,19 @@
+.sectionOrdersHistory {
+    margin-top: 40px;
+}
+
+.sectionOrdersHistory h2 {
+    font-weight: 300;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.ordersHistoryEmpty {
+    border-radius: 5px;
+    border: 1px solid var(--gray-light);
+    padding: 30px;
+}
+
+.ordersHistoryEmpty p {
+    text-align: center;
+}

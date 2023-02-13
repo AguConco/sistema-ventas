@@ -86,9 +86,7 @@ const Detail = () => {
                     <Loading />
                     :
                     <div>
-                        <div className='back' onClick={() => {
-                            edit ? alert('Guarda los cambios antes de salir') : window.history.back()
-                        }}>
+                        <div className='back' onClick={() => edit ? alert('Guarda los cambios antes de salir') : window.history.back()}>
                             <FontAwesomeIcon icon={faArrowAltCircleLeft} />
                             <span>Volver para atras</span>
                         </div>

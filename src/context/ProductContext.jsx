@@ -1,6 +1,5 @@
 import { createContext, useState } from "react"
 import $ from 'jquery'
-import { useEffect } from "react"
 
 export const ProductContext = createContext()
 
@@ -12,13 +11,13 @@ const ProductProvider = ({ children }) => {
 
     const addProduct = (data) => {
 
-        const { pictures, generarId, code, name } = data
+        const { pictures, generateId, code, name } = data
         const { pricePublic, priceWholesaler, availableQuantity } = data
         const { categoryId, subcategory, state } = data
 
         const productData = new FormData()
         productData.append('picture', pictures)
-        productData.append('id', generarId())
+        productData.append('id', generateId())
         productData.append('code', code)
         productData.append('name', name)
         productData.append('pricePublic', pricePublic)

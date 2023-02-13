@@ -26,7 +26,7 @@ const NavigationProvider = ({ children }) => {
         },
         {
             name: 'clientes',
-            url:'clientes',
+            url:'clientes/all',
             icon: <FontAwesomeIcon icon={faAddressBook} />,
             description: 'Registrar, eliminar o actualizar detalles clientes',
             type: ''

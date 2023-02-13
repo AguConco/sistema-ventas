@@ -59,7 +59,7 @@ const ProductsSection = () => {
 
   return (
     <section>
-      <div className='headerSectionProducts'>
+      <div className='headerSection headerSectionProducts'>
         <ul>
           <Categories categoryId={categoryId} />
         </ul>
@@ -67,7 +67,7 @@ const ProductsSection = () => {
           <div className='sortType'>
             <button className='sortProducts' onClick={() => setSortVisible(!sortVisible)}>Ordenar</button>
             {sortVisible &&
-              <ul>
+              <ul onClick={() => setSortVisible(false)}>
                 <li onClick={() => sortName(true)}>Nombre A-Z</li>
                 <li onClick={() => sortName(false)}>Nombre Z-A</li>
                 <li onClick={() => sortPriceWholesaler(true)}>Menor precio mayorista</li>
