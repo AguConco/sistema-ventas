@@ -1,0 +1,87 @@
+.headerSectionOrders {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerSectionOrders select {
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.headerSectionOrders select:hover {
+    border: 1px solid var(--gray-dark);
+}
+
+.formNewOrder {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.selectClient {
+    padding: 7px 10px;
+    border: 1px solid var(--gray-light);
+    display: inline-block;
+    margin: 30px 0 5px;
+    outline: none;
+    border-radius: 5px;
+}
+
+.formNewOrder .btnAdd {
+    margin: 0;
+    padding: 10px;
+}
+
+.searcher input{
+    margin-right: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--gray-light);
+    padding: 5px 10px;
+    outline: none;
+}
+
+.searcher input:focus {
+    border-color: var(--gray-dark);
+}
+
+.detailOrder h4{
+    padding: 0 20px;
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+.detailOrder h4 span {
+    font-weight: 600;
+}
+
+.detailOrder table thead th {
+    width: 80px;
+    max-width: 80px;
+}
+
+.detailOrder table thead th:nth-child(3) {
+    width: 500px;
+    max-width: 500px;
+}
+
+.detailOrder table tbody td {
+    text-align: end;
+    padding: 5px 10px;
+}
+
+.detailOrder table tbody td img {
+    width: 50px;
+    max-height: 50px;
+    object-fit: contain;
+}
+
+.detailOrder table tbody td:nth-child(3) {
+    text-align: start;
+}
+
+.detailOrder table tbody td:nth-child(3) div{
+    display: flex;
+    align-items: center;
+} 

@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { useState } from "react"
 import { ClientContext } from "../../../../context/ClientContext"
+import { generateId } from "../../../../funtions/generateId"
 
 const AddClient = () => {
 
@@ -9,18 +10,6 @@ const AddClient = () => {
     const [name, setName] = useState()
     const [transport, setTransport] = useState()
 
-    const generateId = () => {
-        const a = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789'
-        const id = []
-
-        for (let i = 0; i < 19; i++) {
-            id.push(a.charAt(Math.floor(Math.random() * a.length)))
-
-        }
-
-        return id.join('')
-    }
-
     return (
         <section className="sectionAddClient">
             <h3>Agregar nuevo cliente</h3>
@@ -28,7 +17,7 @@ const AddClient = () => {
             onSubmit={e => {
                 e.preventDefault()
                 const dataClient = {
-                    name,
+                    name: name.charAt(0).toUpperCase() + name.slice(1),
                     transport,
                     generateId: generateId(),
                 }

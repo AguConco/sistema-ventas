@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import './AddProduct.css'
 import { ProductContext } from "../../../../context/ProductContext"
+import { generateId } from "../../../../funtions/generateId"
 
 const AddProduct = () => {
 
@@ -34,18 +35,6 @@ const AddProduct = () => {
             const sArray = s.filter(e => e !== p)
             setSubcategory(sArray.join('|'))
         }
-    }
-
-    const generateId = () => {
-        const a = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789'
-        const id = []
-
-        for (let i = 0; i < 19; i++) {
-            id.push(a.charAt(Math.floor(Math.random() * a.length)))
-
-        }
-
-        return id.join('')
     }
 
     const resetForm = () => {

@@ -11,6 +11,15 @@
     align-items: center;
 }
 
+.backgroundModal{
+    height: 100%;
+    width: 100%;
+    outline: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .modal {
     background: #fff;
     padding: 15px;

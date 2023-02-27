@@ -5,7 +5,8 @@ import './Modal.css'
 const Modal = ({ children, setModalVisible }) => {
 
     return (
-        <div className="containerModal">
+        <div className="containerModal" >
+            <div className="backgroundModal" onClick={() => setModalVisible(false)}></div>
             <div className="modal">
                 <div>
                     <FontAwesomeIcon onClick={() => setModalVisible(false)} icon={faTimes} />

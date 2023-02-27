@@ -71,7 +71,10 @@ const DetailClient = () => {
                         Eliminar
                         {confirmed &&
                             <div id='confirmedRemove'>
-                                <h4>¿Quieres eliminar <span>"{detailClient.name}"</span> de código <span>"{detailClient.code}"</span>?</h4>
+                                <h4>
+                                    ¿Quieres eliminar a <span>"{detailClient.name}"</span>?
+                                    <p>Se eliminará también todo el historial de pedidos</p>
+                                </h4>
                                 <button>Cancelar</button>
                                 <button onClick={() => {
                                     setdetailClient({})

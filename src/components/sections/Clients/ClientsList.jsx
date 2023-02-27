@@ -20,7 +20,7 @@ const ClientsList = ({ setModalVisible }) => {
     return (
         clientsList.length === 0 ?
             <div className='productListEmpty'>
-                <p>¡No hay productos en esta categoría!</p>
+                <p>¡No hay clientes registrados!</p>
                 <BtnAddClient setModalVisible={setModalVisible} />
             </div>
             :
@@ -31,7 +31,6 @@ const ClientsList = ({ setModalVisible }) => {
                             <tr>
                                 <th>Nombre</th>
                                 <th>Transporte</th>
-                                <th>pedidos</th>
                                 <th>opciones</th>
                             </tr>
                         </thead>

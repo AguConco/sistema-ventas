@@ -1,12 +1,15 @@
 .headerSection {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 20px;
     position: sticky;
     top: 60px;
     z-index: 20;
     background: var(--white);
+}
+
+.headerSectionProducts {
+    justify-content: space-between;
 }
 
 .headerSectionProducts ul {
@@ -221,6 +224,10 @@ table td:nth-last-child(1)>div>div {
     transform: translateX(0);
     text-align: start;
     word-break: break-all;
+}
+
+#confirmedRemove h4 p {
+    color: #ec575a99;
 }
 
 #confirmedRemove button {
