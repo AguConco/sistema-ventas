@@ -3,21 +3,25 @@ import { OrdersContext } from "../../../context/OrdersContext"
 
 const Order = () => {
 
-    const { currentOrder, searchProduct, searchResult } = useContext(OrdersContext)
+    const { currentOrder, searchProduct, searchResult, addProductToOrder } = useContext(OrdersContext)
     
     const [code, setCode] = useState('')
-    const [filteredProduct, setFilteredProduct] = useState('')
+    const [checkboxEnabled, setCheckboxEnabled] = useState(false)
+    const [selectedProduct, setSelectedProduct] = useState('')
+    const [subtotal, setSubtotal] = useState(0)
 
     const filterSearch = (code) => {
         for(let i = 0; i < searchResult.length; i++){
             if (searchResult[i].code.includes(code)) {
-                setFilteredProduct({
+                setSelectedProduct({
                     name: searchResult[i].name,
                     picture :searchResult[i].picture,
-                    price: searchResult[i].price.price_wholesaler,                    
+                    price: searchResult[i].price.price_wholesaler,
+                    code: searchResult[i].code,                   
+                    id: searchResult[i].id                    
                 })
                 break
-            }else setFilteredProduct('')
+            }else setSelectedProduct('')
         } 
     }
 
@@ -37,11 +41,17 @@ const Order = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td contenteditable="true"
-                            onKeyDown={e => e.keyCode == 13 && e.target.blur()}
+                        <td contenteditable={checkboxEnabled ? "false" : "true"}
+                            onKeyDown={e => {
+                                if(e.keyCode === 13) {
+                                    e.target.blur()
+                                    selectedProduct !== '' && setCheckboxEnabled(true)
+                                } 
+                            }}
                             onKeyUp={e => {
+                                setCheckboxEnabled(false)
                                 const target = e.target.innerText
-                                target.length !== 0 ? filterSearch(target) : setFilteredProduct('') 
+                                target.length !== 0 ? filterSearch(target) : setSelectedProduct('') 
                                 
                                 target.length > 5 ?
                                     e.target.innerText = code
@@ -50,24 +60,41 @@ const Order = () => {
                                 searchProduct({ code: target, name: '' })
                             }
                             }
-                        ></td>
-                        <td></td>
+                        >
+                            {checkboxEnabled && (code !== selectedProduct.code && selectedProduct.code) }
+                        </td>
                         <td
-                            onKeyDown={e => e.keyCode == 13 && e.target.blur()}
+                            onKeyUp={e => setSubtotal(parseInt(e.target.innerText) * selectedProduct.price)}
+                            onKeyDown={e => {
+                                if(e.keyCode === 13) {
+                                    e.target.blur()
+                                    addProductToOrder({
+                                        productId: selectedProduct.id,
+                                        orderId: currentOrder.order_id,
+                                        quantity: subtotal / selectedProduct.price,
+                                        subtotal
+                                    })
+                                }
+                            }}
+                            contenteditable={checkboxEnabled && "true"}
+                            ></td>
+                        <td
                             onKeyUp={e => console.log(e.target.innerText)}>
                             <div>
-                                <img src={filteredProduct.picture} alt={filteredProduct.name} />
-                                <span>{filteredProduct.name}</span>
+                                <img src={selectedProduct.picture} alt={selectedProduct.name} />
+                                <span>{selectedProduct.name}</span>
                             </div>
                         </td>
-                        <td>{filteredProduct.price}</td>
-                        <td></td>
+                        <td>{selectedProduct.price && '$'+selectedProduct.price}</td>
+                        <td>{subtotal && '$'+subtotal}</td>
                     </tr>
                 </tbody>
             </table>
         </div >
     )
 }
+
+// FALTA QUE CUANDO COMPLETE LA CANTIDAD SE CONFIRME QUE SE AGREGÓ ESE PRODUCTO AL PEDIDO 
 
 export default Order  
 

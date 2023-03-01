@@ -66,15 +66,17 @@
     max-width: 500px;
 }
 
-.detailOrder table tbody td {
-    text-align: end;
-    padding: 5px 10px;
-}
-
 .detailOrder table tbody td img {
     width: 50px;
     max-height: 50px;
     object-fit: contain;
+    margin-right: 20px;
+}
+
+.detailOrder table tbody td {
+    text-align: end;
+    padding: 5px 10px;
+    height: 55px;
 }
 
 .detailOrder table tbody td:nth-child(3) {

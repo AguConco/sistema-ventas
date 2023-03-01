@@ -22,13 +22,6 @@ const Orders = () => {
     return (
         <section>
             <div className='headerSection headerSectionOrders'>
-                {/* {currentOrder !== undefined ?
-                    <div className='searcher'>
-                        <input type="number" placeholder="Buscar por código" />
-                        <input type="text" placeholder="Buscar por nombre" />
-                    </div>
-                    :
-                } */}
                     <div>
                     </div>
                 <div>

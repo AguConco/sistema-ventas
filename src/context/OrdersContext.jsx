@@ -38,6 +38,19 @@ const OrdersProvider = ({ children }) => {
         }
     }
 
+    const addProductToOrder = e => {
+        $.ajax({
+            url: 'http://localhost:80/Bazar-Backend/addProductOrder.php',
+            type: 'POST',
+            data: e,
+            success: e => {
+                    if (e) {
+                        alert(e)
+                    }
+            }
+        })
+    }
+
     return <OrdersContext.Provider value={{
         clientSelected,
         currentOrder,
@@ -48,6 +61,7 @@ const OrdersProvider = ({ children }) => {
         newOrder,
         pendingOrders,
         searchProduct,
+        addProductToOrder,
     }}>{children}</OrdersContext.Provider>
 }
 
