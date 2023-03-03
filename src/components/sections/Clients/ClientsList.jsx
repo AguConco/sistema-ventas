@@ -26,7 +26,7 @@ const ClientsList = ({ setModalVisible }) => {
             :
             !loading ?
                 clientsId === 'all' ?
-                    <table cellSpacing={0}>
+                    <table className="tableClients" cellSpacing={0}>
                         <thead>
                             <tr>
                                 <th>Nombre</th>

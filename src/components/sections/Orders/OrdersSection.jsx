@@ -10,20 +10,26 @@ import Order from './Order'
 const Orders = () => {
 
     const { setSectionCurrent } = useContext(NavigationContext)
-    const { currentOrder, pendingOrders, pending } = useContext(OrdersContext)
+    const {
+        currentOrder,
+        pendingOrders,
+        pending,
+        setCurrentOrder
+    } = useContext(OrdersContext)
 
     const [modalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
         setSectionCurrent('pedidos')
         pendingOrders('')
+        setCurrentOrder(undefined)
     }, [])
 
     return (
         <section>
             <div className='headerSection headerSectionOrders'>
-                    <div>
-                    </div>
+                <div>
+                </div>
                 <div>
                     {pending.length !== 0 &&
                         <select onChange={e => pendingOrders(e.target.value)}>

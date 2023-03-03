@@ -20,6 +20,44 @@
     flex-direction: column;
 }
 
+.formSearch {
+    padding: 10px;
+    margin: 0 20px;
+    background: var(--white-2);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.formSearch input {
+    margin-right: 10px;
+    border-radius: 5px;
+    padding: 7px 10px;
+    width: 100px;
+    border: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.formSearch input:nth-last-child(2) {
+    width: 400px;
+}
+
+.formSearch input:focus {
+    box-shadow: 0 0 0 1px var(--gray-dark);
+}
+
+.formSearch button {
+    padding: 7px 10px;
+    color: var(--primary);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: var(--secondary);
+}
+
+.formSearch button:focus {
+    outline: 1px solid var(--primary);
+}
+
 .selectClient {
     padding: 7px 10px;
     border: 1px solid var(--gray-light);
@@ -34,7 +72,7 @@
     padding: 10px;
 }
 
-.searcher input{
+.searcher input {
     margin-right: 15px;
     border-radius: 5px;
     border: 1px solid var(--gray-light);
@@ -46,7 +84,7 @@
     border-color: var(--gray-dark);
 }
 
-.detailOrder h4{
+.detailOrder h4 {
     padding: 0 20px;
     margin-top: 10px;
     font-weight: 300;
@@ -54,6 +92,14 @@
 
 .detailOrder h4 span {
     font-weight: 600;
+}
+
+.detailOrder table thead {
+    top: 133px;
+}
+
+.detailOrder .trFilter td {
+    padding-bottom: 30px;
 }
 
 .detailOrder table thead th {
@@ -66,24 +112,24 @@
     max-width: 500px;
 }
 
-.detailOrder table tbody td img {
+.detailOrder table td img {
     width: 50px;
     max-height: 50px;
     object-fit: contain;
     margin-right: 20px;
 }
 
-.detailOrder table tbody td {
+.detailOrder table td {
     text-align: end;
     padding: 5px 10px;
     height: 55px;
 }
 
-.detailOrder table tbody td:nth-child(3) {
+.detailOrder table td:nth-child(3) {
     text-align: start;
 }
 
-.detailOrder table tbody td:nth-child(3) div{
+.detailOrder table td:nth-child(3) div {
     display: flex;
     align-items: center;
-} 
+}

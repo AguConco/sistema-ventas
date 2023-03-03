@@ -8,7 +8,8 @@ const OrdersProvider = ({ children }) => {
     const [clientSelected, setClientSelected] = useState("")
     const [currentOrder, setCurrentOrder] = useState(undefined)
     const [pending, setPending] = useState([])
-    const [searchResult,setSearchResult] = useState([])
+    const [searchResult, setSearchResult] = useState([])
+    const [productsOrder, setproductsOrder] = useState([])
 
     const newOrder = (e, setModalVisible) => {
         $.ajax({
@@ -31,24 +32,32 @@ const OrdersProvider = ({ children }) => {
     }
 
     const searchProduct = e => {
-        if(e.code.length === 1 || e.name.length === 1){
+        if (e.code.length === 1 || e.name.length === 1) { 
+            // VER LA FORMA DE QUE NO ENVIE LA UNICA LETRA/NÚMERO QUE QUEDA CUANDO VOY BORRANDO
             fetch(`http://localhost:80/Bazar-Backend/searchProduct.php?name=${e.name}&code=${e.code}`)
-            .then(e => e.json())
-            .then(e => setSearchResult(e))
+                .then(e => e.json())
+                .then(e => setSearchResult(e))
         }
     }
 
-    const addProductToOrder = e => {
+    const addProductToOrder = (e, setSelectedProduct) => {
         $.ajax({
             url: 'http://localhost:80/Bazar-Backend/addProductOrder.php',
             type: 'POST',
             data: e,
             success: e => {
-                    if (e) {
-                        alert(e)
-                    }
+                if (e) {
+                    setSelectedProduct(null)
+                    getProductsOrder(currentOrder.order_id)
+                }   
             }
         })
+    }
+
+    const getProductsOrder = e => {
+        fetch(`http://localhost:80/Bazar-Backend/getOrders.php?orderId=${e}`)
+            .then(e => e.json())
+            .then(e => setproductsOrder(e))
     }
 
     return <OrdersContext.Provider value={{
@@ -56,12 +65,14 @@ const OrdersProvider = ({ children }) => {
         currentOrder,
         pending,
         searchResult,
+        productsOrder,
         setClientSelected,
         setCurrentOrder,
         newOrder,
         pendingOrders,
         searchProduct,
         addProductToOrder,
+        getProductsOrder
     }}>{children}</OrdersContext.Provider>
 }
 

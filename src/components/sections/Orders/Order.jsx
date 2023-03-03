@@ -1,36 +1,105 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { OrdersContext } from "../../../context/OrdersContext"
 
 const Order = () => {
 
-    const { currentOrder, searchProduct, searchResult, addProductToOrder } = useContext(OrdersContext)
-    
-    const [code, setCode] = useState('')
-    const [checkboxEnabled, setCheckboxEnabled] = useState(false)
-    const [selectedProduct, setSelectedProduct] = useState('')
-    const [subtotal, setSubtotal] = useState(0)
+    const {
+        currentOrder,
+        searchProduct,
+        searchResult,
+        addProductToOrder,
+        getProductsOrder,
+        productsOrder
+    } = useContext(OrdersContext)
 
-    const filterSearch = (code) => {
-        for(let i = 0; i < searchResult.length; i++){
-            if (searchResult[i].code.includes(code)) {
-                setSelectedProduct({
-                    name: searchResult[i].name,
-                    picture :searchResult[i].picture,
-                    price: searchResult[i].price.price_wholesaler,
-                    code: searchResult[i].code,                   
-                    id: searchResult[i].id                    
-                })
+    const [quantity, setQuantity] = useState()
+    const [selectedProduct, setSelectedProduct] = useState(null)
+
+    const filterSearch = e => {
+        for (let i = 0; i < searchResult.length; i++) {
+            const nameProduct = searchResult[i].name.toLowerCase()
+            if ((searchResult[i].code.includes(e) || nameProduct.includes(e.toLowerCase())) && searchResult[i].available_quantity !== '0') {
+                setSelectedProduct(searchResult[i])
                 break
-            }else setSelectedProduct('')
-        } 
+            } else setSelectedProduct(null)
+        }
     }
+
+    const changeValueName = e => {
+        const valueInputName = e.value
+        valueInputName.length !== 0 ? filterSearch(valueInputName) : setSelectedProduct(null)
+
+        searchProduct({ code: '', name: valueInputName })
+    }
+
+    const changeValueCode = e => {
+        const valueInputCode = e.value
+        valueInputCode.length !== 0 ? filterSearch(valueInputCode) : setSelectedProduct(null)
+
+        searchProduct({ code: valueInputCode, name: '' })
+    }
+
+    const submitForm = e => {
+        e.preventDefault()
+        if (selectedProduct !== null && quantity >= 1) {
+            addProductToOrder({
+                productId: selectedProduct.id,
+                name: selectedProduct.name,
+                picture: selectedProduct.picture,
+                price: selectedProduct.price.price_wholesaler,
+                code: selectedProduct.code,
+                orderId: currentOrder.order_id,
+                quantity,
+                subtotal: quantity * selectedProduct.price.price_wholesaler
+            }, setSelectedProduct)
+            setQuantity(0)
+            document.querySelectorAll('.formSearch')[0].reset()
+        }
+    }
+
+    useEffect(() => {
+        currentOrder !== undefined && getProductsOrder(currentOrder.order_id)
+    }, [currentOrder])
 
     return (
         <div className='detailOrder'>
+            <form className="formSearch" onSubmit={e => submitForm(e)}>
+                <input
+                    type="text"
+                    maxLength="5"
+                    placeholder="Código"
+                    onKeyUp={e => changeValueCode(e.target)}
+                />
+                <input
+                    type="number"
+                    placeholder="Cantidad"
+                    min={1}
+                    max={selectedProduct !== null ? selectedProduct.available_quantity : 0}
+                    onChange={e => setQuantity(e.target.value)} />
+                <input
+                    type="text"
+                    placeholder="Nombre producto"
+                    onKeyUp={e => changeValueName(e.target)}
+                />
+                <button type="submit">Agregar al pedido</button>
+            </form>
             <h4>Pedido para: <span>{currentOrder.client}</span></h4>
             <h4>Total: <span>$00</span></h4>
             <table cellSpacing={0}>
                 <thead>
+                    {selectedProduct !== null &&
+                        <tr className="trFilter">
+                            <td>{selectedProduct.code}</td>
+                            <td>{quantity}</td>
+                            <td>
+                                <div>
+                                    <img src={selectedProduct.picture} alt={selectedProduct.name} />
+                                    <span>{selectedProduct.name}</span>
+                                </div>
+                            </td>
+                            <td>${selectedProduct.price.price_wholesaler}</td>
+                            <td>${quantity * selectedProduct.price.price_wholesaler}</td>
+                        </tr>}
                     <tr>
                         <th>Código</th>
                         <th>Cantidad</th>
@@ -40,81 +109,25 @@ const Order = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td contenteditable={checkboxEnabled ? "false" : "true"}
-                            onKeyDown={e => {
-                                if(e.keyCode === 13) {
-                                    e.target.blur()
-                                    selectedProduct !== '' && setCheckboxEnabled(true)
-                                } 
-                            }}
-                            onKeyUp={e => {
-                                setCheckboxEnabled(false)
-                                const target = e.target.innerText
-                                target.length !== 0 ? filterSearch(target) : setSelectedProduct('') 
-                                
-                                target.length > 5 ?
-                                    e.target.innerText = code
-                                    :
-                                    setCode(target)
-                                searchProduct({ code: target, name: '' })
-                            }
-                            }
-                        >
-                            {checkboxEnabled && (code !== selectedProduct.code && selectedProduct.code) }
-                        </td>
-                        <td
-                            onKeyUp={e => setSubtotal(parseInt(e.target.innerText) * selectedProduct.price)}
-                            onKeyDown={e => {
-                                if(e.keyCode === 13) {
-                                    e.target.blur()
-                                    addProductToOrder({
-                                        productId: selectedProduct.id,
-                                        orderId: currentOrder.order_id,
-                                        quantity: subtotal / selectedProduct.price,
-                                        subtotal
-                                    })
-                                }
-                            }}
-                            contenteditable={checkboxEnabled && "true"}
-                            ></td>
-                        <td
-                            onKeyUp={e => console.log(e.target.innerText)}>
-                            <div>
-                                <img src={selectedProduct.picture} alt={selectedProduct.name} />
-                                <span>{selectedProduct.name}</span>
-                            </div>
-                        </td>
-                        <td>{selectedProduct.price && '$'+selectedProduct.price}</td>
-                        <td>{subtotal && '$'+subtotal}</td>
-                    </tr>
+                    {productsOrder.map(e => (
+                        <tr>
+                            <td>{e.code}</td>
+                            <td>{e.quantity}</td>
+                            <td>
+                                <div>
+                                    <img src={e.picture} alt={e.name} />
+                                    <span>{e.name}</span>
+                                </div>
+                            </td>
+                            <td>${e.price}</td>
+                            <td>${e.quantity * e.price}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div >
     )
 }
 
-// FALTA QUE CUANDO COMPLETE LA CANTIDAD SE CONFIRME QUE SE AGREGÓ ESE PRODUCTO AL PEDIDO 
+export default Order
 
-export default Order  
-
-
-// let buscar = $('#buscar').val();
-// let producto2 = '';
-
-// for(let i = 0; i < datos_respuesta.length; i++){
-
-//     if(datos_respuesta[i].descripcion.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").includes(buscar.toLowerCase().trim()) == true || datos_respuesta[i].codigo.includes(buscar.toLowerCase().trim()) == true){
-//         producto2 +=`<tr class="fila1" id="${datos_respuesta[i].codigo}" >
-//                         <td class="codigo" >#${datos_respuesta[i].codigo}</td>
-//                         <td class="descripcion"><p title="${datos_respuesta[i].descripcion.toLowerCase()}">${datos_respuesta[i].descripcion.charAt(0).toUpperCase() + datos_respuesta[i].descripcion.slice(1)}</p></td>
-//                         <td class="p-precios">$ ${datos_respuesta[i].pCompra}</td>
-//                         <td class="p-precios">$ ${datos_respuesta[i].pVenta}</td>
-//                         <td class="stock">${datos_respuesta[i].stock}</td>
-//                         <td class="opciones"><i class="fas fa-edit editar"></i><i class="fas fa-trash-alt borrar"></i></td>
-//                     </tr>` 
-                    
-//     }
-                   
-// }
-// $('#div-tabla-productos').html(producto2 || '<h4 class="no-encuentro">No se encontró el producto "' + buscar +'"</h4>');

@@ -29,11 +29,11 @@ const Categories = ({ categoryId }) => {
       categoryId: 'cj'
     },
     {
-      categoryName: 'Mates y Termos',
+      categoryName: 'Mates/Termos',
       categoryId: 'cmt'
     },
     {
-      categoryName: 'Limpieza y Baño',
+      categoryName: 'Limpieza/Baño',
       categoryId: 'clb'
     },
     {

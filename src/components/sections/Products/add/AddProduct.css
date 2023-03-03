@@ -40,7 +40,11 @@
     outline: none;
 }
 
-.sectionAddForm form div:nth-child(1) {
+.sectionAddForm form input:focus, .sectionAddForm form select:focus {
+    outline: 1px solid var(--gray-dark);
+}
+
+.containerInputFile {
     position: relative;
     margin-bottom: 20px;
     border: 2px dashed var(--gray-dark);
@@ -52,11 +56,11 @@
     padding: 15px;
 }
 
-.sectionAddForm form div:nth-child(1) span {
+.containerInputFile span {
     color: var(--gray-dark);
 }
 
-.sectionAddForm form div:nth-child(1) div {
+.containerInputFile div {
     height: 100px;
     width: 100px;
 }
@@ -67,7 +71,7 @@
     object-fit: contain;
 }
 
-.sectionAddForm form div:nth-child(1) input {
+.containerInputFile input {
     position: absolute;
     top: 0;
     left: 0;
@@ -119,4 +123,26 @@
 
 .containerSubcaterogies {
     padding-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerSubcaterogies div {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px 5px 0;
+}
+
+.containerSubcaterogies div label {
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+}
+
+.containerSubcaterogies div label:hover {
+    border-bottom: 1px solid var(--primary);
+}
+
+.containerSubcaterogies div input {
+    height: 12px;
+    width: 12px;
 }

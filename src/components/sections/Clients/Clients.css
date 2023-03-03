@@ -46,6 +46,10 @@
 
 }
 
+.tableClients thead {
+    top: 133px;
+}
+
 .client td {
     padding: 0;
     border-bottom: 1px solid var(--gray-light);
