@@ -26,14 +26,14 @@ const Order = () => {
     }
 
     const changeValueName = e => {
-        const valueInputName = e.value
+        const valueInputName = e.value.trim()
         valueInputName.length !== 0 ? filterSearch(valueInputName) : setSelectedProduct(null)
 
         searchProduct({ code: '', name: valueInputName })
     }
 
     const changeValueCode = e => {
-        const valueInputCode = e.value
+        const valueInputCode = e.value.trim()
         valueInputCode.length !== 0 ? filterSearch(valueInputCode) : setSelectedProduct(null)
 
         searchProduct({ code: valueInputCode, name: '' })
@@ -66,7 +66,7 @@ const Order = () => {
             <form className="formSearch" onSubmit={e => submitForm(e)}>
                 <input
                     type="text"
-                    maxLength="5"
+                    maxLength="10"
                     placeholder="Código"
                     onKeyUp={e => changeValueCode(e.target)}
                 />
@@ -84,7 +84,8 @@ const Order = () => {
                 <button type="submit">Agregar al pedido</button>
             </form>
             <h4>Pedido para: <span>{currentOrder.client}</span></h4>
-            <h4>Total: <span>$00</span></h4>
+            {console.log(productsOrder)}
+            <h4>Total: <span>${productsOrder.total}</span></h4>
             <table cellSpacing={0}>
                 <thead>
                     {selectedProduct !== null &&
@@ -98,7 +99,7 @@ const Order = () => {
                                 </div>
                             </td>
                             <td>${selectedProduct.price.price_wholesaler}</td>
-                            <td>${quantity * selectedProduct.price.price_wholesaler}</td>
+                            <td></td>
                         </tr>}
                     <tr>
                         <th>Código</th>
@@ -109,20 +110,28 @@ const Order = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {productsOrder.map(e => (
-                        <tr>
-                            <td>{e.code}</td>
-                            <td>{e.quantity}</td>
-                            <td>
-                                <div>
-                                    <img src={e.picture} alt={e.name} />
-                                    <span>{e.name}</span>
-                                </div>
-                            </td>
-                            <td>${e.price}</td>
-                            <td>${e.quantity * e.price}</td>
-                        </tr>
-                    ))}
+                    {productsOrder.length !== 0 &&
+                        productsOrder.products.map(e => (
+                            <tr>
+                                <td>{e.code}</td>
+                                <td>{e.quantity}</td>
+                                <td>
+                                    <div>
+                                        <img src={e.picture} alt={e.name} />
+                                        <span>{e.name}</span>
+                                    </div>
+                                </td>
+                                <td>${e.price}</td>
+                                <td>${e.quantity * e.price}</td>
+                            </tr>
+                        ))}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Precio total:</td>
+                        <td>${productsOrder.total}</td>
+                    </tr>
                 </tbody>
             </table>
         </div >

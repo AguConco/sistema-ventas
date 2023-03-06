@@ -11,9 +11,9 @@
 :root {
   --text: #575758;
   --white: #fff;
-  --white-2: #f5f5f5;
+  --white-2: #eee;
   --gray-dark: #aaa;
-  --gray-light: #eee;
+  --gray-light: #ddd;
   --primary: #d66140;
   --secondary: #d6614033;
   --shadow: #00000010;
@@ -51,6 +51,7 @@ ul {
 
 .app {
   display: flex;
+  background: var(--white);
 }
 
 .containerSections {

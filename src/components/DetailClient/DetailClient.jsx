@@ -18,18 +18,15 @@ const DetailClient = () => {
     const [detailClient, setdetailClient] = useState(clientsList[0])
 
     const [name, setName] = useState(detailClient.name)
-    const [transport, setTransport] = useState(detailClient.transport)
 
     const cancelChange = () => {
         setEdit(false)
         setName(detailClient.name)
-        setTransport(detailClient.transport)
     }
 
     const saveChange = () => {
         const newData = {
             name,
-            transport,
             id: detailClient.id
         }
         if (edit) {
@@ -50,13 +47,6 @@ const DetailClient = () => {
                     <input className="nameClient" type="text" value={name.charAt(0).toUpperCase() + name.slice(1)} onChange={e => setName(e.target.value)} />
                     :
                     <h1 className="nameClient">{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
-                }
-                {edit ?
-                    <div>
-                        Transporte: <input className="transportClient" type="text" value={transport} onChange={e => setTransport(e.target.value)} />
-                    </div>
-                    :
-                    <h4 className="transportClient">Transporte: <span>{transport || '---'}</span></h4>
                 }
                 <div className="options optionSectionClient">
                     {!edit ?
@@ -86,7 +76,7 @@ const DetailClient = () => {
                     </button>
                 </div>
             </div>
-            <OrdersHistory client={{ name, transport, id: detailClient.id }} />
+            <OrdersHistory client={detailClient} />
         </section>
     )
 }

@@ -12,7 +12,7 @@ const Client = ({ data }) => {
     return (
         <tr className="client">
             <td><Link to={'/clientes/' + data.id}> <span>{data.name}</span> </Link></td>
-            <td><Link to={'/clientes/' + data.id}>{data.transport || '---'} </Link></td>
+            <td><Link to={'/clientes/' + data.id}>{'Acá van los la cantida de pedidos'} </Link></td>
             <td>
                 <div>
                     <div onClick={() => setConfirmed(!confirmed)}><FontAwesomeIcon className='deleteIcon' icon={faTrash} size={'xs'} />

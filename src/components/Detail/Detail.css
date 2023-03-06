@@ -161,7 +161,7 @@
     border: none;
     display: inline-flex;
     align-items: center;
-    background: var(--gray-light);
+    background: var(--white-2);
     cursor: pointer;
 }
 

@@ -80,7 +80,7 @@ const AddProduct = () => {
                 </div>
                 <div className="containerInputsInfo">
                     <input onKeyUp={e => setName(e.target.value)} type="text" placeholder="Nombre" required />
-                    <input onKeyUp={e => setCode(e.target.value)} type="number" min={0} placeholder="Código" required />
+                    <input onKeyUp={e => setCode(e.target.value)} type="text" placeholder="Código" required />
                     <div className="containerPrice">
                         <h4>Precios</h4>
                         <input onKeyUp={e => setPriceWholesaler(e.target.value)} type="number" min={0} placeholder="Precio mayorista" required />

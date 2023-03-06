@@ -22,7 +22,7 @@
 
 .formSearch {
     padding: 10px;
-    margin: 0 20px;
+    margin: 0 20px 20px;
     background: var(--white-2);
     border-radius: 10px;
     display: inline-block;
@@ -110,6 +110,11 @@
 .detailOrder table thead th:nth-child(3) {
     width: 500px;
     max-width: 500px;
+}
+
+.detailOrder table thead th:nth-child(4) {
+    width: 100px;
+    max-width: 100px;
 }
 
 .detailOrder table td img {

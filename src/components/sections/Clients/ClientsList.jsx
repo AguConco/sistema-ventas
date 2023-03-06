@@ -30,7 +30,7 @@ const ClientsList = ({ setModalVisible }) => {
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Transporte</th>
+                                <th>pedidos</th>
                                 <th>opciones</th>
                             </tr>
                         </thead>
