@@ -9,6 +9,7 @@ const Client = ({ data }) => {
     const { removeClient } = useContext(ClientContext)
 
     const [confirmed, setConfirmed] = useState(false)
+    
     return (
         <tr className="client">
             <td><Link to={'/clientes/' + data.id}> <span>{data.name}</span> </Link></td>

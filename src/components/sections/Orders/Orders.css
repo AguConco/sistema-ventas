@@ -84,13 +84,13 @@
     border-color: var(--gray-dark);
 }
 
-.detailOrder h4 {
+.detailOrder>h4 {
     padding: 0 20px;
     margin-top: 10px;
     font-weight: 300;
 }
 
-.detailOrder h4 span {
+.detailOrder>h4 span {
     font-weight: 600;
 }
 
@@ -108,8 +108,8 @@
 }
 
 .detailOrder table thead th:nth-child(3) {
-    width: 500px;
-    max-width: 500px;
+    width: 400px;
+    max-width: 400px;
 }
 
 .detailOrder table thead th:nth-child(4) {
@@ -137,4 +137,15 @@
 .detailOrder table td:nth-child(3) div {
     display: flex;
     align-items: center;
+}
+
+.detailOrder tbody #confirmedRemove h4 {
+    text-align: start;
+}
+
+.orderEmpty {
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    font-size: 20px;
 }

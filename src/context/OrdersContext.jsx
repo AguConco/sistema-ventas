@@ -9,7 +9,7 @@ const OrdersProvider = ({ children }) => {
     const [currentOrder, setCurrentOrder] = useState(undefined)
     const [pending, setPending] = useState([])
     const [searchResult, setSearchResult] = useState([])
-    const [productsOrder, setproductsOrder] = useState([])
+    const [productsOrder, setproductsOrder] = useState({products: []})
 
     const newOrder = (e, setModalVisible) => {
         $.ajax({
@@ -42,7 +42,7 @@ const OrdersProvider = ({ children }) => {
 
     const addProductToOrder = (e, setSelectedProduct) => {
         $.ajax({
-            url: 'http://localhost:80/Bazar-Backend/addProductOrder.php',
+            url: 'http://localhost:80/Bazar-Backend/order.php',
             type: 'POST',
             data: e,
             success: e => {
@@ -54,8 +54,18 @@ const OrdersProvider = ({ children }) => {
         })
     }
 
+    const removeProductToOrder = e => {
+        $.ajax({
+            url: 'http://localhost:80/Bazar-Backend/order.php',
+            type: 'DELETE',
+            data: e,
+            success: e => e && getProductsOrder(currentOrder.order_id)
+
+        })
+    }
+
     const getProductsOrder = e => {
-        fetch(`http://localhost:80/Bazar-Backend/getOrders.php?orderId=${e}`)
+        fetch(`http://localhost:80/Bazar-Backend/order.php?orderId=${e}`)
             .then(e => e.json())
             .then(e => setproductsOrder(e))
     }
@@ -72,7 +82,8 @@ const OrdersProvider = ({ children }) => {
         pendingOrders,
         searchProduct,
         addProductToOrder,
-        getProductsOrder
+        getProductsOrder,
+        removeProductToOrder
     }}>{children}</OrdersContext.Provider>
 }
 

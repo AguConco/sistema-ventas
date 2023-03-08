@@ -222,12 +222,15 @@ table td:nth-last-child(1)>div>div {
     z-index: 110;
     box-shadow: 0 5px 10px var(--shadow);
     cursor: auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #confirmedRemove h4 {
     font-weight: 300;
     font-size: 14px;
     padding-bottom: 10px;
+    width: 100%;
 }
 
 #confirmedRemove h4 span {

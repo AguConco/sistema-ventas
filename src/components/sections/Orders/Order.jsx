@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { OrdersContext } from "../../../context/OrdersContext"
+import ProductOrder from "./ProductOrder"
 
 const Order = () => {
 
@@ -27,16 +28,16 @@ const Order = () => {
 
     const changeValueName = e => {
         const valueInputName = e.value.trim()
-        valueInputName.length !== 0 ? filterSearch(valueInputName) : setSelectedProduct(null)
 
         searchProduct({ code: '', name: valueInputName })
+        valueInputName.length !== 0 ? filterSearch(valueInputName) : setSelectedProduct(null)
     }
 
     const changeValueCode = e => {
         const valueInputCode = e.value.trim()
-        valueInputCode.length !== 0 ? filterSearch(valueInputCode) : setSelectedProduct(null)
 
         searchProduct({ code: valueInputCode, name: '' })
+        valueInputCode.length !== 0 ? filterSearch(valueInputCode) : setSelectedProduct(null)
     }
 
     const submitForm = e => {
@@ -84,7 +85,6 @@ const Order = () => {
                 <button type="submit">Agregar al pedido</button>
             </form>
             <h4>Pedido para: <span>{currentOrder.client}</span></h4>
-            {console.log(productsOrder)}
             <h4>Total: <span>${productsOrder.total}</span></h4>
             <table cellSpacing={0}>
                 <thead>
@@ -107,33 +107,28 @@ const Order = () => {
                         <th>Producto</th>
                         <th>p/unidad</th>
                         <th>subtotal</th>
+                        <th>opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {productsOrder.length !== 0 &&
-                        productsOrder.products.map(e => (
-                            <tr>
-                                <td>{e.code}</td>
-                                <td>{e.quantity}</td>
-                                <td>
-                                    <div>
-                                        <img src={e.picture} alt={e.name} />
-                                        <span>{e.name}</span>
-                                    </div>
-                                </td>
-                                <td>${e.price}</td>
-                                <td>${e.quantity * e.price}</td>
-                            </tr>
-                        ))}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Precio total:</td>
-                        <td>${productsOrder.total}</td>
-                    </tr>
+                    {productsOrder.products.map(e => (<ProductOrder e={e} />))}
+                    {productsOrder.total !== null &&
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Precio total:</td>
+                            <td>${productsOrder.total}</td>
+                            <td></td>
+                        </tr>}
                 </tbody>
             </table>
+            {
+                productsOrder.total === null &&
+                <div className="orderEmpty">
+                    Todavía no se agregaron productos al pedido
+                </div>
+            }
         </div >
     )
 }

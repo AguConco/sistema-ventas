@@ -10,7 +10,7 @@ const ClientProvider = ({ children }) => {
 
     const addClient = (e) => {
         $.ajax({
-            url: 'http://localhost:80/Bazar-Backend/addClient.php',
+            url: 'http://localhost:80/Bazar-Backend/client.php',
             type: 'POST',
             data: e,      // la informacion que queres mandar
             success: response => {
@@ -21,8 +21,8 @@ const ClientProvider = ({ children }) => {
 
     const removeClient = (e) => {
         $.ajax({
-            url: 'http://localhost:80/Bazar-Backend/removeClient.php',
-            type: 'POST',
+            url: 'http://localhost:80/Bazar-Backend/client.php',
+            type: 'DELETE',
             data: { id: e },      // la informacion que queres mandar
             success: response => {
                 response && setListState(!listState)
@@ -43,7 +43,7 @@ const ClientProvider = ({ children }) => {
 
     const getClients = (c, setLoading) => {
         setLoading(true)
-        fetch('http://localhost:80/Bazar-Backend/clients.php?c=' + c)
+        fetch('http://localhost:80/Bazar-Backend/client.php?c=' + c)
             .then(e => e.json())
             .then(e => {
                 setLoading(false)
