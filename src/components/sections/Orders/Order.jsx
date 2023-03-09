@@ -1,5 +1,8 @@
+import { faFilePdf } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useEffect, useState } from "react"
 import { OrdersContext } from "../../../context/OrdersContext"
+import Modal from "../../Modal/Modal"
 import ProductOrder from "./ProductOrder"
 
 const Order = () => {
@@ -10,11 +13,15 @@ const Order = () => {
         searchResult,
         addProductToOrder,
         getProductsOrder,
-        productsOrder
+        productsOrder,
+        remit,
+        generateRemit
     } = useContext(OrdersContext)
 
     const [quantity, setQuantity] = useState()
     const [selectedProduct, setSelectedProduct] = useState(null)
+    const [modalVisible, setModalVisible] = useState(false)
+
 
     const filterSearch = e => {
         for (let i = 0; i < searchResult.length; i++) {
@@ -84,8 +91,18 @@ const Order = () => {
                 />
                 <button type="submit">Agregar al pedido</button>
             </form>
-            <h4>Pedido para: <span>{currentOrder.client}</span></h4>
-            <h4>Total: <span>${productsOrder.total}</span></h4>
+            <div className='infoOrder' >
+                <div>
+                    <h4>Pedido para: <span>{currentOrder.client}</span></h4>
+                    <h4>Total: <span>${productsOrder.total}</span></h4>
+                </div>
+                <div>
+                    <button onClick={() => {
+                        setModalVisible(true)
+                        generateRemit(currentOrder.order_id)
+                    }}>Generear remito</button>
+                </div>
+            </div>
             <table cellSpacing={0}>
                 <thead>
                     {selectedProduct !== null &&
@@ -123,11 +140,15 @@ const Order = () => {
                         </tr>}
                 </tbody>
             </table>
-            {
-                productsOrder.total === null &&
+            {productsOrder.total === null &&
                 <div className="orderEmpty">
                     Todavía no se agregaron productos al pedido
                 </div>
+            }
+            {modalVisible && remit &&
+                <Modal setModalVisible={setModalVisible} >
+                    <object data={remit} type="application/pdf"></object>
+                </Modal>
             }
         </div >
     )

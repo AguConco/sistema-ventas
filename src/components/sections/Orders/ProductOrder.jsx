@@ -1,4 +1,4 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useState } from "react"
 import { OrdersContext } from "../../../context/OrdersContext"
@@ -22,6 +22,10 @@ const ProductOrder = ({ e }) => {
             <td>${e.quantity * e.price}</td>
             <td>
                 <div>
+                    <div>
+                        <FontAwesomeIcon icon={faEdit} className='editIcon' />
+                        <span>Editar Precio</span>
+                    </div>
                     <div onClick={() => setConfirmed(!confirmed)}><FontAwesomeIcon className='deleteIcon' icon={faTrash} size={'xs'} />
                         {confirmed &&
                             <div id='confirmedRemove'>
@@ -32,6 +36,7 @@ const ProductOrder = ({ e }) => {
                         }
                         <span>Eliminar</span>
                     </div>
+
                 </div>
             </td>
         </tr>

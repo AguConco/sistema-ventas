@@ -11,14 +11,16 @@ const Section = ({ section }) => {
     const { sectionCurrent } = useContext(NavigationContext)
     const { setCurrentCategory } = useContext(ProductContext)
 
-    return <li key={section.name}>
-        {
-            section.type == '' ?
-                <Link onClick={() => setCurrentCategory(null)} className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'} to={'/' + section.url}> {section.icon} {section.name} </Link>
-                :
-                <a className='linkSection' href={section.url} target={section.type}><img src={section.icon} alt={section.name} /> {section.name}</a>
-        }
-    </li>
+    return (
+        <li key={section.name}>
+            {<Link
+                onClick={() => setCurrentCategory(null)}
+                className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'}
+                to={'/' + section.url}>
+                {section.icon} {section.name}
+            </Link>}
+        </li>
+    )
 }
 
 const NavBar = () => {

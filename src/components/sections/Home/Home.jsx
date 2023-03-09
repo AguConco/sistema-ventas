@@ -13,7 +13,7 @@ const Home = () => {
     return (
         <section>
             <Sections sections={sections} />
-            <h2>Productos más vistos</h2>
+            <h2>Inicio</h2>
         </section>
     )
 }

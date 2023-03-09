@@ -9,7 +9,8 @@ const OrdersProvider = ({ children }) => {
     const [currentOrder, setCurrentOrder] = useState(undefined)
     const [pending, setPending] = useState([])
     const [searchResult, setSearchResult] = useState([])
-    const [productsOrder, setproductsOrder] = useState({products: []})
+    const [productsOrder, setproductsOrder] = useState({ products: [] })
+    const [remit, setRemit] = useState(null)
 
     const newOrder = (e, setModalVisible) => {
         $.ajax({
@@ -32,7 +33,7 @@ const OrdersProvider = ({ children }) => {
     }
 
     const searchProduct = e => {
-        if (e.code.length === 1 || e.name.length === 1) { 
+        if (e.code.length === 1 || e.name.length === 1) {
             // VER LA FORMA DE QUE NO ENVIE LA UNICA LETRA/NÚMERO QUE QUEDA CUANDO VOY BORRANDO
             fetch(`http://localhost:80/Bazar-Backend/searchProduct.php?name=${e.name}&code=${e.code}`)
                 .then(e => e.json())
@@ -49,7 +50,7 @@ const OrdersProvider = ({ children }) => {
                 if (e) {
                     setSelectedProduct(null)
                     getProductsOrder(currentOrder.order_id)
-                }   
+                }
             }
         })
     }
@@ -70,12 +71,19 @@ const OrdersProvider = ({ children }) => {
             .then(e => setproductsOrder(e))
     }
 
+    const generateRemit = e => {
+        fetch(`http://localhost:80/Bazar-Backend/generatePDF.php?orderId=${e}`)
+            .then(e => e.json())
+            .then(e => setRemit(e.pdf))
+    }
+
     return <OrdersContext.Provider value={{
         clientSelected,
         currentOrder,
         pending,
         searchResult,
         productsOrder,
+        remit,
         setClientSelected,
         setCurrentOrder,
         newOrder,
@@ -83,7 +91,8 @@ const OrdersProvider = ({ children }) => {
         searchProduct,
         addProductToOrder,
         getProductsOrder,
-        removeProductToOrder
+        removeProductToOrder,
+        generateRemit
     }}>{children}</OrdersContext.Provider>
 }
 

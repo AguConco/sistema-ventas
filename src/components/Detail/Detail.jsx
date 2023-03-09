@@ -1,6 +1,5 @@
 import { faEdit, faTrash, faArrowAltCircleLeft, faFloppyDisk, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import imageDrive from '../../assets/images/drive.png'
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../Loading/Loading'
@@ -137,7 +136,6 @@ const Detail = () => {
                                     </p>
                                 </div >
                                 <div className="options">
-                                    <button><img src={imageDrive} alt="logo de google drive" /> Agregar a Drive</button>
                                     {!edit ?
                                         <button onClick={() => setEdit(!edit)}> <FontAwesomeIcon className='editIcon' icon={faEdit} /> Editar </button>
                                         :

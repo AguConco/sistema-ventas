@@ -37,12 +37,6 @@ const NavigationProvider = ({ children }) => {
             icon: <FontAwesomeIcon icon={faFileInvoiceDollar} />,
             description: 'Realizar pedidos, remito y comprobantes',
             type: ''
-        },
-        {
-            name: 'Google Drive',
-            url: 'https://drive.google.com/drive/folders/1xzJAvxjfXdOD_X810ZygKBsaauC9gJzv',
-            icon: googleDrive,
-            type: '_blank'
         }
     ]
 
