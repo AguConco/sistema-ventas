@@ -61,7 +61,7 @@ const AddProduct = () => {
                 e.preventDefault()
                 const dataProduct = {
                     pictures,
-                    name,
+                    name: name.charAt(0).toUpperCase() + name.slice(1),
                     generateId,
                     code,
                     availableQuantity,

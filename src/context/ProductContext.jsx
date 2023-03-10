@@ -9,7 +9,7 @@ const ProductProvider = ({ children }) => {
     const [productList, setProductList] = useState([])
     const [currentCategory, setCurrentCategory] = useState(null)
 
-    const addProduct = (data) => {
+    const addProduct = data => {
 
         const { pictures, generateId, code, name } = data
         const { pricePublic, priceWholesaler, availableQuantity } = data
@@ -44,7 +44,7 @@ const ProductProvider = ({ children }) => {
         }) // ajax
     }
 
-    const editProduct = (data) => {
+    const editProduct = data => {
 
         const { picture, id, name, discount, pricePublic } = data
         const { priceWholesaler, mainFeatures, availableQuantity, state } = data
@@ -75,7 +75,7 @@ const ProductProvider = ({ children }) => {
         }) // ajax
     }
 
-    const removeProduct = (id) => {
+    const removeProduct = id => {
         const removeProductData = new FormData()
         removeProductData.append('id', id)
         $.ajax({
@@ -106,7 +106,7 @@ const ProductProvider = ({ children }) => {
         }
     }
 
-    const sortPricePublic = (e) => {
+    const sortPricePublic = e => {
         setListState(!listState)
         e ?
             setProductList(productList.sort((a, b) => a.price.price_public - b.price.price_public))
@@ -114,7 +114,7 @@ const ProductProvider = ({ children }) => {
             setProductList(productList.sort((a, b) => b.price.price_public - a.price.price_public))
     }
 
-    const sortPriceWholesaler = (e) => {
+    const sortPriceWholesaler = e => {
         setListState(!listState)
         e ?
             setProductList(productList.sort((a, b) => a.price.price_wholesaler - b.price.price_wholesaler))
@@ -123,7 +123,7 @@ const ProductProvider = ({ children }) => {
 
     }
 
-    const sortAvailableQuantity = (e) => {
+    const sortAvailableQuantity = e => {
         setListState(!listState)
         e ?
             setProductList(productList.sort((a, b) => a.available_quantity - b.available_quantity))
@@ -131,7 +131,7 @@ const ProductProvider = ({ children }) => {
             setProductList(productList.sort((a, b) => b.available_quantity - a.available_quantity))
     }
 
-    const sortName = (e) => {
+    const sortName = e => {
         setListState(!listState)
         const s = productList.sort((a, b) => {
             const name_a = a.name.toLowerCase()

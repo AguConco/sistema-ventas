@@ -71,10 +71,42 @@ const OrdersProvider = ({ children }) => {
             .then(e => setproductsOrder(e))
     }
 
+    const editQuantity = (data, setAvailableQuantity, state) => {
+        if (state)
+            fetch('http://localhost:80/Bazar-Backend/productDetail.php?id=' + data)
+                .then(e => e.json())
+                .then(e => setAvailableQuantity(e[0].available_quantity))
+        else
+            $.ajax({
+                url: 'http://localhost:80/Bazar-Backend/editQuantity.php',
+                type: 'POST',
+                data: data,
+                success: e => e && getProductsOrder(currentOrder.order_id)
+            })
+    }
+
     const generateRemit = e => {
-        fetch(`http://localhost:80/Bazar-Backend/generatePDF.php?orderId=${e}`)
+        fetch(`http://localhost:80/Bazar-Backend/generateRemit.php?orderId=${e}`)
             .then(e => e.json())
             .then(e => setRemit(e.pdf))
+    }
+
+    const cancelOrder = e => {
+        $.ajax({
+            url: 'http://localhost:80/Bazar-Backend/cancelOrder.php',
+            type: 'DELETE',
+            data: e,
+            success: e => e && setCurrentOrder(undefined)
+        })
+    }
+
+    const confirmOrder = e => {
+        $.ajax({
+            url: 'http://localhost:80/Bazar-Backend/generateRemit.php',
+            type: 'POST',
+            data: e,
+            success: e => e && setCurrentOrder(undefined)
+        })
     }
 
     return <OrdersContext.Provider value={{
@@ -92,7 +124,10 @@ const OrdersProvider = ({ children }) => {
         addProductToOrder,
         getProductsOrder,
         removeProductToOrder,
-        generateRemit
+        generateRemit,
+        editQuantity,
+        cancelOrder,
+        confirmOrder
     }}>{children}</OrdersContext.Provider>
 }
 

@@ -18,8 +18,7 @@ const AddClient = () => {
                 e.preventDefault()
                 const dataClient = {
                     name: name.charAt(0).toUpperCase() + name.slice(1),
-                    transport,
-                    generateId: generateId(),
+                    generateId: generateId()
                 }
                 addClient(dataClient)
                 document.getElementById('formAddClient').reset()

@@ -20,6 +20,19 @@
     flex-direction: column;
 }
 
+.selectOrder {
+    border: 1px solid var(--gray-light);
+    border-radius: 10px;
+    margin: 30px 170px;
+    padding: 100px;
+}
+
+.selectOrder span {
+    text-align: center;
+    display: block;
+    font-size: 18px;
+}
+
 .formSearch {
     padding: 10px;
     margin: 0 20px 20px;
@@ -88,16 +101,31 @@
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .infoOrder button {
     padding: 7px 10px;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
+    margin-left: 10px;
+}
+
+.infoOrder .generateRemit {
     color: var(--primary);
     background: var(--white-2);
+}
+
+.infoOrder .cancelOrder {
+    color: var(--text);
+    background: var(--white-2);
+}
+
+.infoOrder .confirmOrder {
+    color: var(--white);
+    background: var(--primary);
 }
 
 .detailOrder>h4 {
@@ -178,7 +206,84 @@
     fill: rgb(231, 185, 0);
 }
 
+.editQuantity {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px var(--shadow);
+    width: 250px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.editQuantity input {
+    padding: 5px 10px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid var(--gray-light)
+}
+
+.editQuantity button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+.editQuantity button:nth-child(2) {
+    background: var(--primary);
+    color: var(--white);
+}
+
 object {
     min-width: 1024px;
     height: 30cm;
+}
+
+.confirmCancel, .confirmConfirm{
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    z-index: 100;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px var(--shadow);
+    width: 400px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.confirmConfirm {
+    right: 320px;
+}
+
+.confirmConfirm button, .confirmCancel button {
+    margin: 10px 10px 0 0;
+    width: 120px;
+}
+
+.confirmConfirm span, .confirmCancel span {
+    font-size: 16px;
+}
+
+.confirmConfirm button:nth-last-child(1) {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.confirmCancel button:nth-last-child(1) {
+    background: #ec575a;
+    color: var(--white);
 }

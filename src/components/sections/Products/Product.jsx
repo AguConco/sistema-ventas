@@ -13,10 +13,10 @@ const Product = ({ detail }) => {
     return (
         <tr>
             <td>
-                <Link onClick={()=> setCurrentCategory(null)} to={'/' + detail.id}>
+                <Link onClick={() => setCurrentCategory(null)} to={'/' + detail.id}>
                     <img src={detail.picture} alt={detail.name} />
                     <div>
-                        <h3>{detail.name.charAt(0).toUpperCase() + detail.name.slice(1)}</h3>
+                        <h3>{detail.name}</h3>
                         <span>Cód. {detail.code}</span>
                     </div>
                 </Link>
@@ -27,7 +27,9 @@ const Product = ({ detail }) => {
             <td><span className={detail.state === 'active' ? 'active' : 'inactive'}> {detail.state === 'active' ? 'Activo' : 'Inactivo'} </span></td>
             <td>
                 <div>
-                    <div><img src={imageDrive} alt="Logo google drive" /><span>Agregar al Drive</span></div>
+                    <div><FontAwesomeIcon className='editIcon' icon={faEdit} size={'xs'} />
+                        <span>Editar precio</span>
+                    </div>
                     <div onClick={() => setConfirmed(!confirmed)}><FontAwesomeIcon className='deleteIcon' icon={faTrash} size={'xs'} />
                         {confirmed &&
                             <div id='confirmedRemove'>

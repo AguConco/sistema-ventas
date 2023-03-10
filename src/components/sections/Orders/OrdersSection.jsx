@@ -39,7 +39,11 @@ const Orders = () => {
                     <BtnNewOrder setModalVisible={setModalVisible} />
                 </div>
             </div>
-            {currentOrder !== undefined && <Order />}
+            {currentOrder !== undefined ?
+                <Order />
+                :
+                <div className='selectOrder'><span>¡Crea un nuevo pedido o selecciona uno pendiente!</span></div>
+            }
             {modalVisible &&
                 <Modal setModalVisible={setModalVisible}>
                     <CreateOrder setModalVisible={setModalVisible} />

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useEffect, useState } from "react"
 import { OrdersContext } from "../../../context/OrdersContext"
 import Modal from "../../Modal/Modal"
+import OptionsOrder from "./OptionsOrder"
 import ProductOrder from "./ProductOrder"
 
 const Order = () => {
@@ -14,14 +15,12 @@ const Order = () => {
         addProductToOrder,
         getProductsOrder,
         productsOrder,
-        remit,
-        generateRemit
+        remit
     } = useContext(OrdersContext)
 
     const [quantity, setQuantity] = useState()
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [modalVisible, setModalVisible] = useState(false)
-
 
     const filterSearch = e => {
         for (let i = 0; i < searchResult.length; i++) {
@@ -83,7 +82,9 @@ const Order = () => {
                     placeholder="Cantidad"
                     min={1}
                     max={selectedProduct !== null ? selectedProduct.available_quantity : 0}
-                    onChange={e => setQuantity(e.target.value)} />
+                    onChange={e => setQuantity(e.target.value)}
+                    required
+                />
                 <input
                     type="text"
                     placeholder="Nombre producto"
@@ -96,12 +97,7 @@ const Order = () => {
                     <h4>Pedido para: <span>{currentOrder.client}</span></h4>
                     <h4>Total: <span>${productsOrder.total}</span></h4>
                 </div>
-                <div>
-                    <button onClick={() => {
-                        setModalVisible(true)
-                        generateRemit(currentOrder.order_id)
-                    }}>Generear remito</button>
-                </div>
+                {productsOrder.total !== null && <OptionsOrder setModalVisible={setModalVisible} />}
             </div>
             <table cellSpacing={0}>
                 <thead>
