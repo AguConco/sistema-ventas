@@ -21,9 +21,17 @@ if ($_POST) {
 
     $json = array();
     while ($array = mysqli_fetch_array($response)) {
+
+        $id = $array['id'];
+
+        $order = "SELECT * FROM orders WHERE state_order = 'completed' and client_id = '$id'";
+        $r = mysqli_query($connection_db, $order);
+        $completedOrders = mysqli_num_rows($r);
+
         $json[] = array(
             'name' => $array['name'],
-            'id' => $array['id']
+            'id' => $array['id'],
+            'completedOrders' => $completedOrders
         );
     }
 

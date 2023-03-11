@@ -249,8 +249,9 @@
     color: var(--white);
 }
 
-object {
-    min-width: 1024px;
+.viewGenerateRemit {
+    width: 100vw;
+    max-width: 1024px;
     height: 30cm;
 }
 

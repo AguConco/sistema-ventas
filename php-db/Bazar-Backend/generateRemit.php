@@ -57,8 +57,8 @@ ob_start();
 
     td {
         border-bottom: 1px solid #eee;
-        padding: 5px 2px;
-        font-size: 13px;
+        padding: 2px;
+        font-size: 12px;
         font-family: 'Poppins-Regular';
     }
 
@@ -79,7 +79,7 @@ ob_start();
 
     .priceTotal {
         -webkit-text-stroke: 1px #000;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     h3 {
@@ -89,7 +89,7 @@ ob_start();
 
     span {
         font-size: 14px;
-        color: #575758;
+        color: #444;
     }
 
     div {
@@ -170,7 +170,7 @@ ob_start();
             <td></td>
             <td></td>
             <td></td>
-            <td class="priceTotal">Precio total:</td>
+            <td>Precio total:</td>
             <td class="priceTotal">
                 <?php echo '$ ' . $priceTotal ?>
             </td>

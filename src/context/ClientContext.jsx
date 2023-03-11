@@ -7,6 +7,7 @@ const ClientProvider = ({ children }) => {
 
     const [clientsList, setClientsList] = useState([])
     const [listState, setListState] = useState(false)
+    const [historyClient, setHistoryClient] = useState([])
 
     const addClient = (e) => {
         $.ajax({
@@ -51,13 +52,21 @@ const ClientProvider = ({ children }) => {
             })
     }
 
+    const orderCompleted = () => {
+        fetch('http://localhost:80/Bazar-Backend/historyClient.php')
+            .then(e => e.json())
+            .then(e => setHistoryClient(e))
+    }
+
     return <ClientContext.Provider value={{
         clientsList,
         listState,
+        historyClient,
         addClient,
         getClients,
         removeClient,
         editClient,
+        orderCompleted,
     }}>{children}</ClientContext.Provider>
 }
 

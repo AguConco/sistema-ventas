@@ -143,7 +143,7 @@ const Order = () => {
             }
             {modalVisible && remit &&
                 <Modal setModalVisible={setModalVisible} >
-                    <object data={remit} type="application/pdf"></object>
+                    <object className="viewGenerateRemit" data={remit} type="application/pdf"></object>
                 </Modal>
             }
         </div >
