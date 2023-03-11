@@ -1,7 +1,11 @@
 <?php
 include './config.php';
+include './actionOrder.php';
 
-$orderId = $_GET['orderId'];
+if ($_POST)
+    $orderId = $_POST['orderId'];
+else if ($_GET)
+    $orderId = $_GET['orderId'];
 
 $order = "SELECT * FROM products_order WHERE order_id = '$orderId'";
 $response = mysqli_query($connection_db, $order);
@@ -58,6 +62,10 @@ ob_start();
         font-family: 'Poppins-Regular';
     }
 
+    tr:nth-last-child(1) td {
+        border-bottom: none;
+    }
+
     .code,
     .quantity,
     .price,
@@ -67,6 +75,11 @@ ob_start();
 
     .product {
         width: 9cm;
+    }
+
+    .priceTotal {
+        -webkit-text-stroke: 1px #000;
+        font-size: 15px;
     }
 
     h3 {
@@ -142,11 +155,28 @@ ob_start();
         ?>
     </tbody>
 </table>
-<div>
-    <h4>Precio total:
-        <?php echo '$ 8' . $priceTotal ?>
-    </h4>
-</div>
+<table cellspacing="0">
+    <thead>
+        <tr>
+        <th class="code"></th>
+            <th class="quantity"></th>
+            <th class="product"></th>
+            <th class="price"></th>
+            <th class="subtotal"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="priceTotal">Precio total:</td>
+            <td class="priceTotal">
+                <?php echo '$ ' . $priceTotal ?>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 
 <?php
@@ -168,13 +198,27 @@ $dompdf->setPaper('A4', 'portrait');
 
 $dompdf->render();
 
-// la funcion stream() creo que genera los binarios del pdf, ver si se puede guardar en mysql
+// si se ejecuta el archivo generateRemit.php por le navagador y se quiere mostrar el archivo pdf
+// se hace la funcion stream()
 // $dompdf->stream($namePDF, array("Attachment" => false)); // si se cambia el false a true se descarga el pdf solo
 
 $output = $dompdf->output();
 
-$json = array('pdf' => 'data:application/pdf;base64,' . base64_encode($output));
+$base64pdf = 'data:application/pdf;base64,' . base64_encode($output);
 
-echo json_encode($json);
+$json = array('pdf' => $base64pdf);
+
+if ($_POST) {
+    $date = date("Y-m-d H:i:s");
+
+    $updateOrder = "UPDATE orders SET `state_order` = 'completed', `date` = '$date', `remit` = '$base64pdf' WHERE order_id = '$orderId'";
+    $verify = mysqli_query($connection_db, $updateOrder);
+
+    if ($verify) {
+        deleteProductsOrder($connection_db, $orderId);
+    }
+
+} else if ($_GET)
+    echo json_encode($json);
 
 ?>

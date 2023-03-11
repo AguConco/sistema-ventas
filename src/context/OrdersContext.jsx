@@ -26,10 +26,23 @@ const OrdersProvider = ({ children }) => {
         })
     }
 
-    const pendingOrders = e => {
-        fetch(`http://localhost:80/Bazar-Backend/pendingOrders.php?c=${e}`)
+    const pendingOrders = id => {
+        if (id === undefined) {
+            setCurrentOrder(undefined)
+            return
+        }
+
+        fetch(`http://localhost:80/Bazar-Backend/pendingOrders.php`)
             .then(e => e.json())
-            .then(e => e.length > 1 ? setPending(e) : setCurrentOrder(e[0]))
+            .then(e => {
+                setPending(e)
+                for (const p of e) {
+                    if (p.client_id === id) {
+                        setCurrentOrder(p)
+                        return
+                    }
+                }
+            })
     }
 
     const searchProduct = e => {
@@ -93,7 +106,7 @@ const OrdersProvider = ({ children }) => {
 
     const cancelOrder = e => {
         $.ajax({
-            url: 'http://localhost:80/Bazar-Backend/cancelOrder.php',
+            url: 'http://localhost:80/Bazar-Backend/actionOrder.php',
             type: 'DELETE',
             data: e,
             success: e => e && setCurrentOrder(undefined)
@@ -102,11 +115,31 @@ const OrdersProvider = ({ children }) => {
 
     const confirmOrder = e => {
         $.ajax({
-            url: 'http://localhost:80/Bazar-Backend/generateRemit.php',
+            url: 'http://localhost:80/Bazar-Backend/getProductOrder.php',
             type: 'POST',
             data: e,
-            success: e => e && setCurrentOrder(undefined)
+            success: e => {
+                const productsOrderUpdate = JSON.parse(e)
+
+                for (let i = 0; i < productsOrderUpdate.length; i++) {
+                    $.ajax({
+                        url: 'http://localhost:80/Bazar-Backend/actionOrder.php',
+                        type: 'POST',
+                        data: productsOrderUpdate[i],
+                        success: e => {
+                            productsOrderUpdate.length === (i + 1) &&
+                                $.ajax({
+                                    url: 'http://localhost:80/Bazar-Backend/generateRemit.php',
+                                    type: 'POST',
+                                    data: { orderId: currentOrder.order_id },
+                                    success: e => e && setCurrentOrder(undefined)
+                                })
+                        }
+                    })
+                }
+            }
         })
+
     }
 
     return <OrdersContext.Provider value={{

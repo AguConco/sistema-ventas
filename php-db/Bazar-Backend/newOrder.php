@@ -14,8 +14,8 @@ if ($_POST) {
     if ($ordersQuantity == 0) {
 
         $newOrder = "INSERT INTO `orders` 
-			(`order_id`,`client`,`client_id`, `state_order`) VALUES 
-			('$orderId' ,'$clientName', '$clientId', '$state')";
+			(`order_id`,`client`,`client_id`, `state_order`, `remit`) VALUES 
+			('$orderId' ,'$clientName', '$clientId', '$state', 'null')";
 
         $verify = mysqli_query($connection_db, $newOrder);
 

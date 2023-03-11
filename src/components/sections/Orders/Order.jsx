@@ -97,7 +97,7 @@ const Order = () => {
                     <h4>Pedido para: <span>{currentOrder.client}</span></h4>
                     <h4>Total: <span>${productsOrder.total}</span></h4>
                 </div>
-                {productsOrder.total !== null && <OptionsOrder setModalVisible={setModalVisible} />}
+                <OptionsOrder setModalVisible={setModalVisible} />
             </div>
             <table cellSpacing={0}>
                 <thead>

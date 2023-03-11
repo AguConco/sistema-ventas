@@ -104,6 +104,11 @@
     position: relative;
 }
 
+.infoOrder div:nth-child(2) {
+    display: flex;
+    align-items: center;
+}
+
 .infoOrder button {
     padding: 7px 10px;
     border: 1px solid transparent;

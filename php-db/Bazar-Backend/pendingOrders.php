@@ -1,13 +1,7 @@
 <?php
     include './config.php';
 
-    $clientId = $_GET['c'];
-
-    $clientId != "" ? 
-        $order = "SELECT * FROM orders WHERE client_id = '$clientId' and state_order = 'pending'"
-        :
-        $order = "SELECT * FROM orders WHERE state_order = 'pending'";
-        
+    $order = "SELECT * FROM orders WHERE state_order = 'pending'";        
     $response = mysqli_query($connection_db, $order);
 
     $json = array();
