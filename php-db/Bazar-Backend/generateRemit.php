@@ -29,7 +29,6 @@ ob_start();
         src: url("./dompdf/vendor/dompdf/dompdf/lib/fonts/Poppins-Regular.ttf") format("truetype");
         font-weight: normal;
         font-style: normal;
-
     }
 
     * {
@@ -85,6 +84,21 @@ ob_start();
     h3 {
         margin: 0;
         text-transform: uppercase;
+        display: inline-block;
+        width: 49%;
+    }
+
+    .infoOrder div {
+        padding: 0;
+    }
+
+    .infoOrder div span {
+        text-transform: none;
+        color: #000;
+        display: inline-block;
+        width: 49%;
+        text-align: right;
+        margin-left: 1%;
     }
 
     span {
@@ -110,15 +124,20 @@ ob_start();
         <?php echo $orderId ?>
     </title>
 </head>
-<div>
-    <h3>
-        <?php echo $nameClient ?>
-    </h3>
+<div class="infoOrder">
+    <div>
+        <h3>
+            <?php echo $nameClient ?>
+        </h3>
+        <span>Fecha:
+            <?php echo date('d/m/Y') ?>
+        </span>
+    </div>
     <span>Código del pedido:
         <?php echo $orderId ?>
     </span>
 </div>
-<table id="tabla-productos" cellspacing="0">
+<table cellspacing="0">
     <thead>
         <tr>
             <th class="code">CÓDIGO</th>
@@ -158,7 +177,7 @@ ob_start();
 <table cellspacing="0">
     <thead>
         <tr>
-        <th class="code"></th>
+            <th class="code"></th>
             <th class="quantity"></th>
             <th class="product"></th>
             <th class="price"></th>

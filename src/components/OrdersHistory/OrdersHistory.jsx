@@ -1,16 +1,19 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ClientContext } from '../../context/ClientContext'
+import Modal from '../Modal/Modal'
 import './OrdersHistory.css'
 
 const OrdersHistory = ({ client }) => {
 
     const { orderCompleted, historyClient } = useContext(ClientContext)
+    const [remit, setRemit] = useState(null)
+    const [modalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
         orderCompleted()
     }, [])
 
-    console.log(historyClient)
+    console.log(historyClient, client)
 
     return (
         <div className='sectionOrdersHistory'>
@@ -21,8 +24,12 @@ const OrdersHistory = ({ client }) => {
                 </div>
                 :
                 <div className='containerOrders'>
-                    {historyClient.map(e =>
-                        <div className='order'>
+                    {historyClient.map(e => ( 
+                        e.client_id === client.id &&
+                        <div className='order' onClick={() => {
+                            setModalVisible(true)
+                            setRemit(e.remit)
+                        }}>
                             <div>
                                 <h4>
                                     {e.date.split(' ')[0].split('-').reverse().join('/')}
@@ -34,8 +41,14 @@ const OrdersHistory = ({ client }) => {
                                 <object className='miniature' data={e.remit} type="application/pdf"></object>
                             </div>
                         </div>
+                    )
                     )}
                 </div>
+            }
+            {modalVisible && remit &&
+                <Modal setModalVisible={setModalVisible} >
+                    <object className="viewGenerateRemit" data={remit} type="application/pdf"></object>
+                </Modal>
             }
         </div>
     )
