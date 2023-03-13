@@ -1,7 +1,6 @@
 import { createContext, useState } from "react"
-import { faHome, faBoxOpen, faAddressBook, faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faBoxOpen, faAddressBook, faFileInvoiceDollar, faBook } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import googleDrive from '../assets/images/google-drive.svg'
 
 export const NavigationContext = createContext()
 
@@ -37,6 +36,13 @@ const NavigationProvider = ({ children }) => {
             icon: <FontAwesomeIcon icon={faFileInvoiceDollar} />,
             description: 'Realizar pedidos, remito y comprobantes',
             type: ''
+        },
+        {
+            name: 'catálogo',
+            url:'catalogo/all',
+            icon: <FontAwesomeIcon icon={faBook} />,
+            description: 'Realizar pedidos, remito y comprobantes',
+            type: '_blank'
         }
     ]
 

@@ -16,7 +16,9 @@ const Section = ({ section }) => {
             {<Link
                 onClick={() => setCurrentCategory(null)}
                 className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'}
-                to={'/' + section.url}>
+                to={'/' + section.url}
+                target={section.type}
+            >
                 {section.icon} {section.name}
             </Link>}
         </li>
