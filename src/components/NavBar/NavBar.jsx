@@ -17,7 +17,6 @@ const Section = ({ section }) => {
                 onClick={() => setCurrentCategory(null)}
                 className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'}
                 to={'/' + section.url}
-                target={section.type}
             >
                 {section.icon} {section.name}
             </Link>}

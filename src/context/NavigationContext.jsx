@@ -41,8 +41,8 @@ const NavigationProvider = ({ children }) => {
             name: 'catálogo',
             url:'catalogo/all',
             icon: <FontAwesomeIcon icon={faBook} />,
-            description: 'Realizar pedidos, remito y comprobantes',
-            type: '_blank'
+            description: 'Catálogo de productos y lista de precios',
+            type: ''
         }
     ]
 

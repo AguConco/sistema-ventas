@@ -9,41 +9,14 @@ import BtnAddProduct from './BtnAddProduct'
 import Modal from '../../Modal/Modal'
 import AddProduct from "./add/AddProduct"
 import { ProductContext } from '../../../context/ProductContext'
+import { category } from '../../../constants/constants'
 
-const Categories = ({ categoryId }) => {
-  const category = [
-    {
-      categoryName: 'Todos',
-      categoryId: 'all'
-    },
-    {
-      categoryName: 'Cocina',
-      categoryId: 'cc'
-    },
-    {
-      categoryName: 'Regalería',
-      categoryId: 'cr'
-    },
-    {
-      categoryName: 'Juguetería',
-      categoryId: 'cj'
-    },
-    {
-      categoryName: 'Mates/Termos',
-      categoryId: 'cmt'
-    },
-    {
-      categoryName: 'Limpieza/Baño',
-      categoryId: 'clb'
-    },
-    {
-      categoryName: 'Varios',
-      categoryId: 'cv'
-    }
-  ]
+const Categories = ({ categoryId }) => category.map(e => (
+  <li key={e.categoryId}>
+    <Link className={categoryId === e.categoryId ? 'btnCategories categorySelect' : 'btnCategories'} to={"/productos/" + e.categoryId} >{e.categoryName}</Link>
+  </li>
+))
 
-  return category.map(e => (<li key={e.categoryId}><Link className={categoryId === e.categoryId ? 'btnCategories categorySelect' : 'btnCategories'} to={"/productos/" + e.categoryId} >{e.categoryName}</Link></li>))
-}
 
 const ProductsSection = () => {
 
