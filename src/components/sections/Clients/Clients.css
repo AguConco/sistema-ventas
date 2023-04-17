@@ -1,0 +1,68 @@
+.headerSectionClients {
+    justify-content: end !important;
+}
+
+.sectionAddClient h3 {
+    margin-bottom: 20px;
+}
+
+#formAddClient {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 250px;
+}
+
+#formAddClient input {
+    width: 250px;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid var(--gray-dark);
+    outline: none;
+    margin: 10px 0;
+    background: var(--white);
+}
+
+#formAddClient .agregar {
+    border-radius: 5px;
+    color: var(--white);
+    background: var(--primary);
+    width: 47%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+#formAddClient .reset {
+    border-radius: 5px;
+    color: var(--primary);
+    background: var(--gray-light);
+    width: 47%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    outline: none;
+
+}
+
+.tableClients thead {
+    top: 73px;
+}
+
+.client td {
+    padding: 0;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.client a{
+    padding: 10px;
+}
+
+.client a span{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 250px;
+    font-size: 16px;
+}

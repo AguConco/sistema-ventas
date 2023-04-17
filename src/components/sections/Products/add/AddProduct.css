@@ -1,0 +1,148 @@
+.sectionAddForm {
+    width: 700px;
+}
+
+.sectionAddForm h3 {
+    margin-bottom: 20px;
+}
+
+.sectionAddForm form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerInputFile {
+    height: 200px;
+    width: 200px;
+}
+
+.containerInputsInfo {
+    width: 440px;
+    margin-left: 20px;
+}
+
+.sectionAddForm input {
+    width: 200px;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid var(--gray-dark);
+    outline: none;
+    margin: 10px;
+    background: var(--white);
+}
+
+.sectionAddForm select {
+    width: 200px;
+    border-radius: 5px;
+    padding: 7px;
+    margin: 10px;
+    border: 1px solid var(--gray-dark);
+    outline: none;
+}
+
+.sectionAddForm form input:focus, .sectionAddForm form select:focus {
+    outline: 1px solid var(--gray-dark);
+}
+
+.containerInputFile {
+    position: relative;
+    margin-bottom: 20px;
+    border: 2px dashed var(--gray-dark);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.containerInputFile span {
+    color: var(--gray-dark);
+}
+
+.containerInputFile div {
+    height: 100px;
+    width: 100px;
+}
+
+.containerInputFile img {
+    min-height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.containerInputFile input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.sectionAddForm form button {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px 20px;
+    color: var(--primary);
+    background: var(--secondary);
+    margin: 3px;
+}
+
+.sectionAddForm form .agregar {
+    color: var(--white);
+    background: var(--primary);
+    display: inline-block;
+    width: 49%;
+    margin-top: 20px;
+}
+
+.sectionAddForm form .reset {
+    color: var(--primary);
+    background: var(--gray-light);
+    width: 49%;
+    margin-top: 20px;
+
+}
+
+.sectionAddForm span {
+    margin: 10px;
+}
+
+.containerPrice {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerPrice h4 {
+    font-weight: 300;
+    width: 100%;
+    padding-left: 15px;
+}
+
+.containerSubcaterogies {
+    padding-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerSubcaterogies div {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px 5px 0;
+}
+
+.containerSubcaterogies div label {
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+}
+
+.containerSubcaterogies div label:hover {
+    border-bottom: 1px solid var(--primary);
+}
+
+.containerSubcaterogies div input {
+    height: 12px;
+    width: 12px;
+}

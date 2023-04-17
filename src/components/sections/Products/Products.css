@@ -1,0 +1,369 @@
+.headerSection {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--white);
+}
+
+.headerSectionProducts {
+    justify-content: space-between;
+}
+
+.headerSectionProducts ul {
+    display: flex;
+    max-width: 680px;
+    overflow: auto;
+    padding: 5px 0;
+    margin-top: 15px;
+}
+
+.headerSectionProducts ul::-webkit-scrollbar-thumb {
+    border: 7px solid var(--white);
+    background: var(--gray-light);
+    border-radius: 10px;
+    display: none;
+}
+
+.headerSectionProducts ul:hover::-webkit-scrollbar-thumb {
+    display: block;
+}
+
+.btnCategories {
+    border-radius: 15px;
+    margin: 0 5px;
+    background: var(--white-2);
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-size: 14px;
+}
+
+.categorySelect {
+    background: var(--secondary);
+    color: var(--primary);
+}
+
+.sortProducts {
+    border-radius: 5px;
+    border: 1px solid var(--gray-light);
+    background: #fff;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 20px;
+}
+
+.sortType {
+    display: inline-block;
+    position: relative;
+}
+
+.sortType ul {
+    position: absolute;
+    right: 20px;
+    top: 110%;
+    border: 1px solid var(--gray-light);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0 5px 10px var(--shadow);
+}
+
+.sortType ul li {
+    font-size: 13px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.sortType ul li:hover {
+    text-decoration: underline;
+}
+
+.searcher {
+    display: inline-block;
+    position: relative;
+}
+
+.searcher svg {
+    cursor: pointer;
+}
+
+.searcher form {
+    background: var(--white);
+    position: absolute;
+    right: 0;
+    top: 210%;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 15px;
+    border: 1px solid var(--gray-light);
+    box-shadow: 0 5px 10px var(--shadow);
+    border-radius:  5px;
+}
+
+.searcher form input {
+    width: 100px;
+}
+
+.searcher form input:nth-child(2) {
+    width: calc(100% - 115px);
+    margin: 0;
+}
+
+.searcher form .containerResultSearch {
+    position: relative;
+    top: 10px;
+    box-shadow: none;
+}
+
+.searcher form .containerResultSearch a {
+    padding: 3px;
+    margin: 3px;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.btnAdd {
+    border-radius: 5px;
+    margin-left: 20px;
+    color: var(--white);
+    background: var(--primary);
+    outline: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-size: 14px;
+}
+
+table {
+    padding: 20px;
+    width: 100%;
+}
+
+thead {
+    position: sticky; 
+    z-index: 15;
+}
+
+.tableProducts thead {
+    top: 107px;
+}
+
+table tr {
+    border: 1px solid var(--white-2);
+}
+
+table th {
+    text-align: start;
+    text-transform: uppercase;
+    padding: 10px;
+    background: var(--white-2);
+    font-size: 14px;
+}
+
+table th:nth-child(1) {
+    border-radius: 5px 0 0 5px;
+    width: 350px;
+}
+
+table th:nth-child(2),
+table th:nth-child(3),
+table th:nth-child(4),
+table th:nth-child(5) {
+    width: 150px;
+}
+
+table th:nth-child(6) {
+    border-radius: 0 5px 5px 0;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+table tbody tr:hover {
+    outline: 1px solid var(--gray-dark);
+}
+
+table tr:hover td {
+    border-bottom: 1px solid transparent;
+}
+
+table td:nth-child(5) span {
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+.active {
+    background: #88c53b30;
+    color: #589112;
+}
+
+.inactive {
+    background: #ec575a30;
+    color: #ec575a;
+}
+
+table td>a {
+    display: flex;
+}
+
+table td>a h3 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 250px;
+    font-size: 16px;
+}
+
+table td>a span {
+    font-size: 12px;
+}
+
+table td:nth-child(1) img {
+    object-fit: contain;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+table td:nth-last-child(1)>div {
+    display: flex;
+}
+
+table td:nth-last-child(1)>div>div {
+    background: var(--white-2);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+#confirmedRemove {
+    position: absolute;
+    right: -20px;
+    top: 0;
+    width: 300px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid var(--gray-light);
+    border-radius: 10px;
+    z-index: 110;
+    box-shadow: 0 5px 10px var(--shadow);
+    cursor: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#confirmedRemove h4 {
+    font-weight: 300;
+    font-size: 14px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+#confirmedRemove h4 span {
+    position: relative !important;
+    background: transparent;
+    padding: 0;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    color: var(--text);
+    font-size: 14px;
+    transform: translateX(0);
+    text-align: start;
+    word-break: break-all;
+}
+
+#confirmedRemove h4 p {
+    color: #ec575a99;
+}
+
+#confirmedRemove button {
+    width: 100px;
+    text-align: center;
+    padding: 3px 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: inline;
+}
+
+#confirmedRemove button:nth-child(3) {
+    background: #ec575a;
+    color: #fff;
+    margin-left: 10px;
+}
+
+table td:nth-last-child(1)>div div span {
+    position: absolute;
+    border-radius: 5px;
+    top: 110%;
+    background: #000000aa;
+    padding: 3px 5px;
+    color: var(--white);
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    text-align: center;
+    z-index: 10;
+    font-size: 12px;
+}
+
+table td:nth-last-child(1)>div div:hover span {
+    display: block;
+}
+
+table td:nth-last-child(1) img {
+    height: 20px;
+    width: 20px;
+    object-fit: contain;
+}
+
+.editIcon path {
+    fill: #ffc456;
+}
+
+.deleteIcon path {
+    fill: #ec575a;
+}
+
+.productListEmpty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+    border: 1px solid var(--gray-light);
+    margin-top: 30px;
+}
+
+.productListEmpty p {
+    font-size: 18px;
+    padding: 20px 0;
+}
+
+.productListEmpty .btnAdd {
+    font-size: 16px;
+    margin: 0;
+}

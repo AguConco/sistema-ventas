@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Omelette';
+  src: url('./assets/fonts/Omelette.otf');
+}
+
+:root {
+  --text: #575758;
+  --white: #fff;
+  --white-2: #eee;
+  --gray-dark: #aaa;
+  --gray-light: #ddd;
+  --primary: #d66140;
+  --secondary: #d6614033;
+  --shadow: #00000020;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: var(--text);
+  font-family: 'Poppins';
+}
+
+*::selection {
+  background: var(--shadow);
+}
+
+*::-webkit-scrollbar {
+  appearance: none;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--gray-dark);
+  border-radius: 5px;
+  border: 3px solid var(--gray-light);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.app {
+  display: flex;
+  background: var(--white);
+}
+
+.containerSections {
+  width: 100%;
+}

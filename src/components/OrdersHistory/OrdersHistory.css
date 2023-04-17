@@ -1,0 +1,94 @@
+.sectionOrdersHistory {
+    margin-top: 40px;
+}
+
+.sectionOrdersHistory h2 {
+    font-weight: 300;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.ordersHistoryEmpty {
+    border-radius: 5px;
+    border: 1px solid var(--gray-light);
+    padding: 30px;
+}
+
+.ordersHistoryEmpty p {
+    text-align: center;
+}
+
+.containerOrders {
+    display: flex;
+    background: var(--white-2);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.containerOrders .order {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 15px;
+    height: 250px;
+    width: 220px;
+    margin-right: 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.containerOrders .order:hover .miniature{
+    transform: scale(1);
+}
+
+.containerOrders .order div:nth-child(1) {
+    height: 60px;
+}
+
+.containerOrders .order div:nth-child(1) h4 {
+    font-size: 14px;
+}
+
+.containerOrders .order div:nth-child(1) h4 span{
+    background: #00000099;
+    color: #fff;
+    font-weight: 300;
+    padding: 1px 3px;
+    border-radius: 5px;
+    font-size: 10px;
+    position: relative;
+    top: -2px;
+    left: -20px;
+    display: inline-block;
+    transform: scaleX(0);
+    transition: .3s;
+}
+
+.containerOrders .order div:nth-child(1) h4:hover span{
+    transform: scaleX(1);
+    left: 5px;
+}
+
+.containerOrders .order div:nth-child(1) span {
+    font-size: 12px;
+}
+
+.containerRemit {
+    height: 160px;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid var(--gray-dark);
+    position: relative;
+}
+
+.miniature{
+    pointer-events: none;
+    cursor: pointer;
+    min-height: 160px;
+    min-width: 190px;
+    position: relative;
+    top: -2px;
+    left: -2px;
+    overflow: hidden;
+    transform: scale(1.1);
+    transition: .3s;
+}

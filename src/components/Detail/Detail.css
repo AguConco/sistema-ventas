@@ -1,0 +1,188 @@
+.sectionDetail {
+    padding: 20px;
+}
+
+.back {
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.back svg {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+
+}
+
+.back:hover svg path {
+    fill: var(--primary);
+}
+
+.containerDetail {
+    margin-top: 20px;
+    display: flex;
+}
+
+.containerImage {
+    min-height: 250px;
+    width: 250px;
+    border-radius: 10px;
+    border: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    padding: 10px;
+    position: relative;
+}
+
+.containerImage img {
+    width: 90%;
+    object-fit: contain;
+}
+
+.editPicture {
+    position: absolute;
+    width: 90%;
+    margin: auto;
+    bottom: 20px;
+}
+
+.editPicture button {
+    padding: 7px 10px;
+    border-radius:  5px;
+    border: none;
+    color: #fff;
+    background: var(--primary);
+    width: 100%;
+}
+
+.editPicture input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.detailName {
+    position: relative;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    width: 600px;
+    max-width: 600px;
+    border: 1px solid transparent;
+    background: #fff;
+    word-wrap: break-word;
+}
+
+.detailCode {
+    padding-left: 15px;
+    font-size: 16px;
+    color: var(--gray-dark);
+}
+
+.containerDetail .active,
+.containerDetail .inactive {
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 15px;
+    text-transform: capitalize;
+    margin-left: 230px;
+    position: relative;
+}
+
+.containerDetail .active div,
+.containerDetail .inactive div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    border: 1px solid var(--gray-dark);
+    border-radius: 20px;
+}
+
+
+.price {
+    padding-left: 15px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 400px;
+}
+
+.price p {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    margin-top: 10px;
+}
+
+.price p div {
+    display: flex;
+    align-items: center;
+
+}
+
+.price p input {
+    outline: none;
+    font-weight: 300;
+    font-size: 22px;
+    width: 140px;
+    border: 1px solid transparent;
+    background: #fff;
+}
+
+.price p span {
+    font-weight: 300;
+    font-size: 22px;
+}
+
+.options {
+    margin-top: 20px;
+    padding-left: 15px;
+    display: flex;
+}
+
+.options button {
+    position: relative;
+    margin-right: 20px;
+    padding: 7px 15px !important;
+    border-radius: 5px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    background: var(--white-2);
+    cursor: pointer;
+}
+
+.options button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.options button svg {
+    height: 15px;
+    margin-right: 10px;
+}
+
+.edit {
+    border-radius: 5px;
+    border: 1px solid var(--gray-dark) !important;
+    outline: none;
+    padding: 0 10px;
+}
+
+.saveIcon path {
+    fill: #1872fa;
+}

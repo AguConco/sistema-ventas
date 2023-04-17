@@ -1,0 +1,60 @@
+.containerModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--shadow);  
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backgroundModal{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.modal {
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 5px 10px var(--shadow);
+    border-radius: 10px;
+    max-height: 95vh;
+    overflow: auto;
+    position: relative;
+}
+
+.modal img {
+    min-height: 320px;
+    max-height: 85vh;
+    object-fit: contain;
+}
+
+.modal>div {
+    position: sticky;
+    top: 0;
+    right: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+    z-index: 10;
+}
+
+.modal>div svg {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.modal>div svg path {
+    transform: scale(.5) translate(50%, 50%);
+}
+
+.modal>div svg:hover {
+    background: var(--white-2);
+}

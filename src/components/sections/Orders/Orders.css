@@ -1,0 +1,333 @@
+.headerSectionOrders {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerSectionOrders select {
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.headerSectionOrders select:hover {
+    border: 1px solid var(--gray-dark);
+}
+
+.formNewOrder {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.selectOrder {
+    border: 1px solid var(--gray-light);
+    border-radius: 10px;
+    margin: 30px 170px;
+    padding: 100px;
+}
+
+.selectOrder span {
+    text-align: center;
+    display: block;
+    font-size: 18px;
+}
+
+.formSearch {
+    padding: 10px;
+    margin: 0 20px 20px;
+    background: var(--white-2);
+    border-radius: 10px;
+    display: inline-block;
+    position: relative;
+}
+
+.formSearch input {
+    margin-right: 10px;
+    border-radius: 5px;
+    padding: 7px 10px;
+    width: 100px;
+    border: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.formSearch input:nth-last-child(3) {
+    width: 350px;
+}
+
+.formSearch input:focus {
+    box-shadow: 0 0 0 1px var(--gray-dark);
+}
+
+.formSearch button {
+    padding: 7px 10px;
+    color: var(--primary);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: var(--secondary);
+}
+
+.formSearch button:focus {
+    outline: 1px solid var(--primary);
+}
+
+.selectClient {
+    padding: 7px 10px;
+    border: 1px solid var(--gray-light);
+    display: inline-block;
+    margin: 30px 0 5px;
+    outline: none;
+    border-radius: 5px;
+}
+
+.formNewOrder .btnAdd {
+    margin: 0;
+    padding: 10px;
+}
+
+.searcher input {
+    margin-right: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--gray-light);
+    padding: 5px 10px;
+    outline: none;
+}
+
+.searcher input:focus {
+    border-color: var(--gray-dark);
+}
+
+.infoOrder {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.infoOrder div:nth-child(2) {
+    display: flex;
+    align-items: center;
+}
+
+.infoOrder button {
+    padding: 7px 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.infoOrder .generateRemit {
+    color: var(--primary);
+    background: var(--white-2);
+}
+
+.infoOrder .cancelOrder {
+    color: var(--text);
+    background: var(--white-2);
+}
+
+.infoOrder .confirmOrder {
+    color: var(--white);
+    background: var(--primary);
+}
+
+.detailOrder>h4 {
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+.detailOrder>h4 span {
+    font-weight: 600;
+}
+
+.detailOrder table thead {
+    top: 73px;
+}
+
+.detailOrder .trFilter td {
+    padding-bottom: 30px;
+}
+
+.detailOrder table thead th {
+    width: 80px;
+    max-width: 80px;
+}
+
+.detailOrder table thead tr th:nth-child(3),
+.detailOrder table thead tr th:nth-last-child(1) {
+    text-align: start;
+}
+
+.detailOrder table thead tr th {
+    text-align: end;
+}
+
+.detailOrder table thead th:nth-child(3) {
+    width: 400px;
+    max-width: 400px;
+}
+
+.detailOrder table thead th:nth-child(4) {
+    width: 100px;
+    max-width: 100px;
+}
+
+.detailOrder table td img {
+    width: 50px;
+    max-height: 50px;
+    object-fit: contain;
+    margin-right: 20px;
+}
+
+.detailOrder table td {
+    text-align: end;
+    padding: 5px 10px;
+    height: 55px;
+}
+
+.detailOrder table td:nth-child(3) {
+    text-align: start;
+}
+
+.detailOrder table td:nth-child(3) div {
+    display: flex;
+    align-items: center;
+}
+
+.detailOrder tbody #confirmedRemove h4 {
+    text-align: start;
+}
+
+.orderEmpty {
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.editIcon svg path {
+    fill: rgb(231, 185, 0);
+}
+
+.editQuantity {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px var(--shadow);
+    width: 250px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.editQuantity input {
+    padding: 5px 10px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid var(--gray-light)
+}
+
+.editQuantity button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+.editQuantity button:nth-child(2) {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.viewGenerateRemit {
+    width: 100vw;
+    max-width: 1024px;
+    height: 30cm;
+}
+
+.confirmCancel, .confirmConfirm{
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    z-index: 100;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px var(--shadow);
+    width: 400px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.confirmConfirm {
+    right: 320px;
+}
+
+.confirmConfirm button, .confirmCancel button {
+    margin: 10px 10px 0 0;
+    width: 120px;
+}
+
+.confirmConfirm span, .confirmCancel span {
+    font-size: 16px;
+}
+
+.confirmConfirm button:nth-last-child(1) {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.confirmCancel button:nth-last-child(1) {
+    background: #ec575a;
+    color: var(--white);
+}
+
+.containerResultSearch {
+    position: absolute;
+    overflow: auto;
+    z-index: 1000;
+    max-height: 400px;
+    width: 350px;
+    left: 0;
+    top: 80px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px var(--shadow);
+}
+
+.resultSearch {
+    background: var(--white) !important;        
+    display: flex;
+    margin: 10px 5%;
+    min-width: 90%;
+    text-align: start;
+
+}
+
+.resultSearch:hover {
+    box-shadow:  0 0 0 1px var(--gray-light);
+}
+
+.resultSearch:focus {
+    outline-color: #575758 !important;
+}
+
+.resultSearch img{
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    margin-right: 10px;
+}

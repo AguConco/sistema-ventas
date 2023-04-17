@@ -1,0 +1,21 @@
+.nameClient {
+    font-size: 28px;
+    margin: 15px 0 10px;
+    font-weight: 300;
+}
+
+.transportClient {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+input.nameClient, input.transportClient {
+    border-radius: 5px;
+    border: 1px solid var(--gray-dark) !important;
+    outline: none;
+    padding: 0 10px;
+}
+
+.optionSectionClient {
+    padding-left: 0 !important;
+}
