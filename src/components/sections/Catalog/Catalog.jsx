@@ -12,7 +12,12 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 const Catalog = () => {
 
     const { setSectionCurrent } = useContext(NavigationContext)
-    const { getProducts, productList, getProductsForSubcategory, setCurrentCategory } = useContext(ProductContext)
+    const {
+        getProducts,
+        productList,
+        getProductsForSubcategory,
+        setCurrentCategory,
+    } = useContext(ProductContext)
 
     const { categoryId, subcategoryId } = useParams()
 
@@ -20,11 +25,30 @@ const Catalog = () => {
     const [modalVisible, setModalVisible] = useState(false)
     const [picture, setPicture] = useState('')
     const [height, setHeight] = useState(false)
+    const [loadedProducts, setLoadedProducts] = useState(2);
+
+    const products = productList.sort((a, b) => {
+        const name_a = a.name.toLowerCase()
+        const name_b = b.name.toLowerCase()
+
+        if (name_a > name_b) {
+            return 1;
+        }
+        if (name_a < name_b) {
+            return -1;
+        }
+        return 0;
+    }).slice(0, loadedProducts * 10)
+
+    window.onscroll = () => {
+        if (products.length < productList.length)
+            if (window.innerHeight + (window.scrollY + 5) >= document.body.offsetHeight) setLoadedProducts(loadedProducts + 1)
+    }
 
     useEffect(() => {
         setSectionCurrent('catálogo')
-        subcategoryId === undefined && getProducts(categoryId, setLoading)
-        subcategoryId !== undefined && getProductsForSubcategory(subcategoryId, setLoading)
+        if (subcategoryId === undefined) getProducts(categoryId, setLoading)
+        else getProductsForSubcategory(subcategoryId, setLoading)
     }, [categoryId, subcategoryId])
 
     const Categories = () => category.map(e => (
@@ -83,7 +107,7 @@ const Catalog = () => {
                 :
                 <div className="containerCatalog">
                     {
-                        productList.map(e => (
+                        products.map(e => (
                             <div key={e.id}
                                 className="productCatalog"
                                 title={e.name}

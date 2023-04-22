@@ -56,7 +56,7 @@ const AddProduct = () => {
                     pictures,
                     name: name.charAt(0).toUpperCase() + name.slice(1),
                     generateId,
-                    code,
+                    code: code.toUpperCase(),
                     availableQuantity,
                     pricePublic,
                     priceWholesaler,

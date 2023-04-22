@@ -27,9 +27,6 @@ const Product = ({ detail }) => {
             <td><span className={detail.state === 'active' ? 'active' : 'inactive'}> {detail.state === 'active' ? 'Activo' : 'Inactivo'} </span></td>
             <td>
                 <div>
-                    <div><FontAwesomeIcon className='editIcon' icon={faEdit} size={'xs'} />
-                        <span>Editar precio</span>
-                    </div>
                     <div onClick={() => setConfirmed(!confirmed)}><FontAwesomeIcon className='deleteIcon' icon={faTrash} size={'xs'} />
                         {confirmed &&
                             <div id='confirmedRemove'>

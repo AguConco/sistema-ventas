@@ -155,10 +155,7 @@ const ProductProvider = ({ children }) => {
         })
 
 
-        e ?
-            setProductList(s)
-            :
-            setProductList(s.reverse())
+        e ? setProductList(s) : setProductList(s.reverse())
     }
 
     return <ProductContext.Provider value={

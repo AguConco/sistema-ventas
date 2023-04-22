@@ -4,10 +4,19 @@ import Product from './Product'
 import Loading from '../../Loading/Loading'
 import { ProductContext } from '../../../context/ProductContext'
 
+
 const Productlist = ({ setModalVisible, categoryId }) => {
 
     const { listState, getProducts, productList } = useContext(ProductContext)
     const [loading, setLoading] = useState(true)
+    const [loadedProducts, setLoadedProducts] = useState(2);
+
+    const products = productList.slice(0, loadedProducts * 10)
+
+    window.onscroll = () => {
+        if (products.length < productList.length)
+            if (window.innerHeight + (window.scrollY + 5) >= document.body.offsetHeight) setLoadedProducts(loadedProducts + 1)
+    }
 
     useEffect(() => {
         getProducts(categoryId, setLoading)
@@ -33,7 +42,7 @@ const Productlist = ({ setModalVisible, categoryId }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {productList.map(e => <Product key={e.id} detail={e} />)}
+                        {products.map(e => <Product key={e.id} detail={e} />)}
                     </tbody>
                 </table> :
                 <Loading />

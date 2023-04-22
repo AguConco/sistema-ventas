@@ -131,7 +131,7 @@ const Order = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {productsOrder.products.map(e => (<ProductOrder e={e} />))}
+                    {productsOrder.products.map(e => (<ProductOrder key={e.id} e={e} />))}
                     {productsOrder.total !== null &&
                         <tr>
                             <td></td>
