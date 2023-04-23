@@ -3,59 +3,11 @@ import { OrdersContext } from "../../../context/OrdersContext"
 import Modal from "../../Modal/Modal"
 import OptionsOrder from "./OptionsOrder"
 import ProductOrder from "./ProductOrder"
-import { filterSearch } from "../../../funtions/filterSearch"
 
 const Order = () => {
 
-    const {
-        currentOrder,
-        searchProduct,
-        searchResult,
-        addProductToOrder,
-        getProductsOrder,
-        productsOrder,
-        remit,
-        viewProductSearch,
-        setViewProductSearch
-    } = useContext(OrdersContext)
-
-    const [quantity, setQuantity] = useState()
-    const [selectedProduct, setSelectedProduct] = useState(null)
+    const { currentOrder, getProductsOrder, productsOrder, remit } = useContext(OrdersContext)
     const [modalVisible, setModalVisible] = useState(false)
-    const [code, setCode] = useState('')
-    const [name, setName] = useState('')
-
-    const changeValueName = e => {
-        const valueInputName = e.value.trim()
-        const dataSearch = { code: '', name: valueInputName }
-        searchProduct(dataSearch)
-        setViewProductSearch(filterSearch({ ...dataSearch, searchResult }))
-    }
-
-    const changeValueCode = e => {
-        const valueInputCode = e.value.trim()
-        const dataSearch = { code: valueInputCode, name: '' }
-        searchProduct(dataSearch)
-        setViewProductSearch(filterSearch({ ...dataSearch, searchResult }))
-    }
-
-    const submitForm = e => {
-        e.preventDefault()
-        if (selectedProduct !== null && quantity >= 1) {
-            addProductToOrder({
-                productId: selectedProduct.id,
-                name: selectedProduct.name,
-                picture: selectedProduct.picture,
-                price: selectedProduct.price.price_wholesaler,
-                code: selectedProduct.code,
-                orderId: currentOrder.order_id,
-                quantity,
-                subtotal: quantity * selectedProduct.price.price_wholesaler
-            }, setSelectedProduct)
-            setQuantity(0)
-            document.querySelectorAll('.formSearch')[0].reset()
-        }
-    }
 
     useEffect(() => {
         currentOrder !== undefined && getProductsOrder(currentOrder.order_id)
@@ -63,55 +15,6 @@ const Order = () => {
 
     return (
         <div className='detailOrder'>
-            <form className="formSearch" onSubmit={e => submitForm(e)}>
-                <input
-                    type="text"
-                    maxLength="10"
-                    placeholder="Código"
-                    onChange={({ target }) => {
-                        setSelectedProduct(null)
-                        setCode(target.value)
-                        changeValueCode(target)
-                    }}
-                    value={selectedProduct !== null ? selectedProduct.code : code}
-                />
-                <input
-                    type="number"
-                    placeholder="Cantidad"
-                    min={1}
-                    max={selectedProduct !== null ? selectedProduct.available_quantity : 0}
-                    onChange={e => setQuantity(e.target.value)}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Nombre producto"
-                    onChange={({ target }) => {
-                        setSelectedProduct(null)
-                        setName(target.value)
-                        changeValueName(target)
-                    }}
-                    value={selectedProduct !== null ? selectedProduct.name : name}
-
-                />
-                <button type="submit">Agregar al pedido</button>
-                <div className="containerResultSearch">
-                    {viewProductSearch.map(e =>
-                        <button
-                            onClick={() => {
-                                setViewProductSearch([])
-                                setSelectedProduct(e)
-                            }}
-                            type="button"
-                            className="resultSearch">
-                            <img src={e.picture} />
-                            <div>
-                                <span> {e.code} <br /> {e.name} </span>
-                            </div>
-                        </button>
-                    )}
-                </div>
-            </form>
             <div className='infoOrder' >
                 <div>
                     <h4>Pedido para: <span>{currentOrder.client}</span></h4>

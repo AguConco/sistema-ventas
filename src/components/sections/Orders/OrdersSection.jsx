@@ -6,6 +6,7 @@ import Modal from '../../Modal/Modal'
 import CreateOrder from './CreateOrder'
 import { OrdersContext } from '../../../context/OrdersContext'
 import Order from './Order'
+import FormSearchProduct from './FormSearchProduct'
 
 const Orders = () => {
 
@@ -34,13 +35,16 @@ const Orders = () => {
                     {pending.length !== 0 &&
                         <select onChange={e => pendingOrders(e.target.value)}>
                             <option value={undefined}>Pedidos pendientes</option>
-                            {pending.map(e => <option key={e.id} value={e.client_id}>{e.client}</option>)}
+                            {pending.map(e => <option key={e.client_id} value={e.client_id}>{e.client}</option>)}
                         </select>}
                     <BtnNewOrder setModalVisible={setModalVisible} />
                 </div>
             </div>
             {currentOrder !== undefined ?
-                <Order />
+                <div>
+                    <FormSearchProduct />
+                    <Order />
+                </div>
                 :
                 <div className='selectOrder'><span>¡Crea un nuevo pedido o selecciona uno pendiente!</span></div>
             }
