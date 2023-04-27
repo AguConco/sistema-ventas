@@ -10,17 +10,25 @@ import { ProductContext } from '../../../context/ProductContext'
 import { category } from '../../../constants/constants'
 import Searcher from './Searcher'
 
-const Categories = ({ categoryId }) => category.map(e => (
-  <li key={e.categoryId}>
-    <Link className={categoryId === e.categoryId ? 'btnCategories categorySelect' : 'btnCategories'} to={"/productos/" + e.categoryId} >{e.categoryName}</Link>
-  </li>
-))
+const Categories = ({ categoryId, setLoadedProducts }) => category.map(e => {
+  return (
+    <li key={e.categoryId} onClick={() => setLoadedProducts(1)}>
+      <Link className={categoryId === e.categoryId ? 'btnCategories categorySelect' : 'btnCategories'} to={"/productos/" + e.categoryId} >{e.categoryName}</Link>
+    </li>
+  )
+})
 
 
 const ProductsSection = () => {
 
   const { setSectionCurrent } = useContext(NavigationContext)
-  const { sortAvailableQuantity, sortPriceWholesaler, sortPricePublic, sortName } = useContext(ProductContext)
+  const {
+    sortAvailableQuantity,
+    sortPriceWholesaler,
+    sortPricePublic,
+    sortName,
+    setLoadedProducts,
+  } = useContext(ProductContext)
   const { categoryId } = useParams()
   const [modalVisible, setModalVisible] = useState(false)
   const [sortVisible, setSortVisible] = useState(false)
@@ -33,7 +41,7 @@ const ProductsSection = () => {
     <section>
       <div className='headerSection headerSectionProducts'>
         <ul>
-          <Categories categoryId={categoryId} />
+          <Categories categoryId={categoryId} setLoadedProducts={setLoadedProducts} />
         </ul>
         <div>
           <div className='sortType'>

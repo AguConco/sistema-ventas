@@ -8,6 +8,15 @@
   src: url('./assets/fonts/Omelette.otf');
 }
 
+body>div {
+  transform: scale(0);
+}
+
+#root {
+  padding: 0;
+  width: auto;
+}
+
 :root {
   --text: #575758;
   --white: #fff;

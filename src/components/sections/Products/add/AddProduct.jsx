@@ -7,7 +7,7 @@ import { roundToSpecialNumber } from "../../../../funtions/roundNumber"
 
 const AddProduct = () => {
 
-    const { addProduct, listState } = useContext(ProductContext)
+    const { addProduct, listState, responseAjax, setResponseAjax } = useContext(ProductContext)
 
     const [pictures, setPictures] = useState()
     const [name, setName] = useState()
@@ -43,33 +43,38 @@ const AddProduct = () => {
         document.getElementById('addForm').reset()
     }
 
+    const submitAddProduct = e => {
+        e.preventDefault()
+        const dataProduct = {
+            pictures,
+            name: name.charAt(0).toUpperCase() + name.slice(1),
+            generateId,
+            code: code.toUpperCase(),
+            availableQuantity,
+            pricePublic,
+            priceWholesaler,
+            categoryId,
+            subcategory,
+            state,
+        }
+        addProduct(dataProduct)
+    }
+
     useEffect(() => {
+        setResponseAjax('')
         resetForm()
     }, [listState])
 
     return (
         <section className="sectionAddForm">
             <h3>Agregar producto nuevo</h3>
-            <form id="addForm" onSubmit={e => {
-                e.preventDefault()
-                const dataProduct = {
-                    pictures,
-                    name: name.charAt(0).toUpperCase() + name.slice(1),
-                    generateId,
-                    code: code.toUpperCase(),
-                    availableQuantity,
-                    pricePublic,
-                    priceWholesaler,
-                    categoryId,
-                    subcategory,
-                    state,
-                }
-                addProduct(dataProduct)
-            }}>
+            
+            {responseAjax.response === 'error' && <span className="responseAjax">{responseAjax.message}</span>}
+            <form id="addForm" onSubmit={e => submitAddProduct(e)}>
                 <div className="containerInputFile">
                     <span>¡Click o arrastrar una imagen acá!</span>
                     {pictures && <div><img src={URL.createObjectURL(pictures)} alt='imagen temporal' /></div>}
-                    <input onChange={e => setPictures(e.target.files[0])} type="file" accept="image/png, image/jpeg" required />
+                    <input onChange={e => setPictures(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/webp" required />
                 </div>
                 <div className="containerInputsInfo">
                     <input onKeyUp={e => setName(e.target.value)} type="text" placeholder="Nombre" required />
@@ -131,8 +136,9 @@ const AddProduct = () => {
                         }
                     </div>
                 </div>
-                <button className="reset" type="button" onClick={() => resetForm()} >reset</button>
-                <button className="agregar" type="submit">Agregar</button>
+                    <button className="reset" type="button" onClick={() => resetForm()} >reset</button>
+                    <button className="agregar" type="submit">Agregar</button>
+
             </form>
         </section>
     )

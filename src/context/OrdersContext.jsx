@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import $ from 'jquery'
-import { filterSearch } from "../funtions/filterSearch";
 
 export const OrdersContext = createContext()
 

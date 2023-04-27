@@ -367,3 +367,16 @@ table td:nth-last-child(1) img {
     font-size: 16px;
     margin: 0;
 }
+
+.seeMore {
+    color: var(--primary);
+    background: var(--gray-light);
+    border-radius: 5px;
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    width: 100px;
+    margin: 10px calc(50% - 100px);
+}

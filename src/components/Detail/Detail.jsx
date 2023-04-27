@@ -15,6 +15,7 @@ const Detail = () => {
     const [loading, setLoading] = useState(true)
     const [confirmed, setConfirmed] = useState(false)
 
+    const [id, setId] = useState(null)
     const [edit, setEdit] = useState(false)
     const [name, setName] = useState('')
     const [pricePublic, setPricePublic] = useState(0)
@@ -23,32 +24,14 @@ const Detail = () => {
     const [state, setState] = useState(null)
     const [availableQuantity, setAvailableQuantity] = useState()
     const [picture, setPicture] = useState()
+    const [newPicture, setNewPicture] = useState(undefined)
 
-    const { removeProduct, editProduct } = useContext(ProductContext)
+    const { removeProduct, editProduct, responseAjax, setResponseAjax } = useContext(ProductContext)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        setLoading(true)
-        fetch('http://localhost:80/Bazar-Backend/productDetail.php?id=' + productId)
-            .then(e => e.json())
-            .then(e => {
-                if (e.length !== 0) {
-                    setDetail(e[0])
-                    setName(e[0].name)
-                    setPricePublic(e[0].price.price_public)
-                    setPriceWholesaler(e[0].price.price_wholesaler)
-                    setDiscount(e[0].price.discount)
-                    setState(e[0].state)
-                    setAvailableQuantity(e[0].available_quantity)
-                    setPicture(e[0].picture)
-                    setLoading(false)
-                } else {
-                    navigate('/productos/all')
-                }
-            })
-    }, [productId])
-
     const cancelChange = () => {
+        setId(null)
+        setResponseAjax({ response: 'not change' })
         setEdit(false)
         setName(detail.name)
         setDiscount(detail.price.discount)
@@ -56,7 +39,7 @@ const Detail = () => {
         setPriceWholesaler(detail.price.price_wholesaler)
         setState(detail.state)
         setAvailableQuantity(detail.available_quantity)
-        setPicture(detail.picture)
+        setPicture(picture)
     }
 
     const saveChange = () => {
@@ -67,18 +50,54 @@ const Detail = () => {
             id: detail.id,
             discount,
             code: detail.code,
-            mainFeatures: detail.main_features,
             availableQuantity,
             state,
-            picture
+            picture: newPicture
         }
         if (edit) {
             editProduct(newData)
             setDetail(newData)
         }
-        setEdit(!edit)
     }
 
+    useEffect(() => {
+        switch (responseAjax.response) {
+            case 'success':
+                setEdit(false)
+                newPicture !== undefined && setPicture(URL.createObjectURL(newPicture))
+                // setId(null)
+                setNewPicture()
+                break;
+            case 'not change':
+                setNewPicture(undefined)
+                break;
+            default:
+                break;
+        }
+
+        if (id !== productId) {
+            setLoading(true)
+            setId(productId)
+
+            fetch('http://localhost:80/Bazar-Backend/productDetail.php?id=' + productId)
+                .then(e => e.json())
+                .then(e => {
+                    if (e.length !== 0) {
+                        setDetail(e[0])
+                        setName(e[0].name)
+                        setPricePublic(e[0].price.price_public)
+                        setPriceWholesaler(e[0].price.price_wholesaler)
+                        setDiscount(e[0].price.discount)
+                        setState(e[0].state)
+                        setAvailableQuantity(e[0].available_quantity)
+                        setPicture(e[0].picture)
+                    } else {
+                        navigate('/productos/all')
+                    }
+                })
+                .finally(() => setLoading(false))
+        }
+    }, [productId, responseAjax])
 
     return (
         <section className='sectionDetail'>
@@ -87,23 +106,32 @@ const Detail = () => {
                     <Loading />
                     :
                     <div>
-                        <div className='back' onClick={() => edit ? alert('Guarda los cambios antes de salir') : window.history.back()}>
+                        <div className='back' onClick={() => {
+                            edit ?
+                                alert('Guarda los cambios antes de salir')
+                                :
+                                window.history.state !== null ?
+                                    window.history.back()
+                                    :
+                                    navigate('/productos/all')
+                        }}>
                             <FontAwesomeIcon icon={faArrowAltCircleLeft} />
                             <span>Volver para atras</span>
                         </div>
                         <div className='containerDetail'>
                             <div className='containerImage'>
-                                <img src={picture.length !== undefined ? detail.picture : URL.createObjectURL(picture)} alt={detail.name} />
+                                {newPicture !== undefined && <img className='newImage' src={URL.createObjectURL(newPicture)} />}
+                                <img src={picture} alt={detail.name} />
                                 {edit &&
                                     <div className='editPicture'>
                                         <button type='button'>Cambiar Foto</button>
-                                        <input onChange={e => setPicture(e.target.files[0])} type="file" accept="image/png, image/jpeg" />
+                                        <input onChange={({ target }) => setNewPicture(target.files[0])} type="file" accept="image/png, image/jpeg, image/webp" />
                                     </div>
                                 }
                             </div>
                             <div>
                                 {edit ?
-                                    <input type={"text"} className={'detailName edit'} disabled={!edit} onChange={({ target }) => setName(target.value)} value={name} /> :
+                                    <input type={"text"} className={'detailName edit'} disabled={!edit} onChange={({ target }) => setName(target.value.charAt(0).toUpperCase() + target.value.slice(1))} value={name} /> :
                                     <h1 className={'detailName'}>{name}</h1>
                                 }
                                 <div>
@@ -150,8 +178,8 @@ const Detail = () => {
                                         <button onClick={() => setEdit(!edit)}> <FontAwesomeIcon className='editIcon' icon={faEdit} /> Editar </button>
                                         :
                                         <div>
-                                            <button onClick={() => cancelChange()}> <FontAwesomeIcon className='deleteIcon' icon={faXmark} />Cancelar cambios</button>
-                                            <button onClick={() => saveChange()}> <FontAwesomeIcon className='saveIcon' icon={faFloppyDisk} />Guardar cambios</button>
+                                            <button onClick={cancelChange}> <FontAwesomeIcon className='deleteIcon' icon={faXmark} />Cancelar cambios</button>
+                                            <button onClick={saveChange}> <FontAwesomeIcon className='saveIcon' icon={faFloppyDisk} />Guardar cambios</button>
                                         </div>
                                     }
                                     <button onClick={() => setConfirmed(!confirmed)} ><FontAwesomeIcon className='deleteIcon' icon={faTrash} />
@@ -162,7 +190,7 @@ const Detail = () => {
                                                 <button>Cancelar</button>
                                                 <button onClick={() => {
                                                     setDetail({})
-                                                    removeProduct(detail.id)
+                                                    removeProduct({ id: detail.id, picture: detail.picture })
                                                     navigate('/productos/all')
                                                 }}>Eliminar</button>
                                             </div>
@@ -171,6 +199,7 @@ const Detail = () => {
                                 </div>
                             </div >
                         </div >
+                        {responseAjax.response === 'error' && <span className="responseAjax">{responseAjax.message}</span>}
                     </div >
             }
         </section >

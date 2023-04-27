@@ -6,14 +6,25 @@ export const ProductContext = createContext()
 const ProductProvider = ({ children }) => {
 
     const [listState, setListState] = useState(false)
-    const [productList, setProductList] = useState([])
+    const [productList, setProductList] = useState({ 'products': [] })
     const [currentCategory, setCurrentCategory] = useState(null)
+    const [loadedProducts, setLoadedProducts] = useState(1);
+    const [responseAjax, setResponseAjax] = useState('')
 
     const addProduct = data => {
 
-        const { pictures, generateId, code, name } = data
-        const { pricePublic, priceWholesaler, availableQuantity } = data
-        const { categoryId, subcategory, state } = data
+        const {
+            pictures,
+            generateId,
+            code,
+            name,
+            pricePublic,
+            priceWholesaler,
+            availableQuantity,
+            categoryId,
+            subcategory,
+            state
+        } = data
 
         const productData = new FormData()
         productData.append('picture', pictures)
@@ -26,7 +37,6 @@ const ProductProvider = ({ children }) => {
         productData.append('availableQuantity', availableQuantity)
         productData.append('categoryId', categoryId)
         productData.append('subcategory', subcategory)
-        productData.append('mainFeatures', '')
         productData.append('state', state)
 
         $.ajax({
@@ -35,8 +45,11 @@ const ProductProvider = ({ children }) => {
             processData: false,
             contentType: false,
             data: productData,      // la informacion que queres mandar
-            success: response => {
-                if (response) {
+            success: e => {
+                const { response } = JSON.parse(e)
+
+                setResponseAjax(JSON.parse(e))
+                if (response === 'success') {
                     setCurrentCategory(null)
                     setListState(!listState)
                 }
@@ -46,18 +59,25 @@ const ProductProvider = ({ children }) => {
 
     const editProduct = data => {
 
-        const { picture, id, name, discount, pricePublic } = data
-        const { priceWholesaler, mainFeatures, availableQuantity, state } = data
+        const {
+            picture,
+            id,
+            name,
+            discount,
+            pricePublic,
+            priceWholesaler,
+            availableQuantity,
+            state
+        } = data
 
         const productEditData = new FormData()
-        picture.length === undefined && productEditData.append('picture', picture)
+        picture && productEditData.append('picture', picture)
         productEditData.append('id', id)
         productEditData.append('name', name)
         productEditData.append('pricePublic', pricePublic)
         productEditData.append('priceWholesaler', priceWholesaler)
         productEditData.append('discount', discount)
         productEditData.append('availableQuantity', availableQuantity)
-        productEditData.append('mainFeatures', mainFeatures)
         productEditData.append('state', state)
 
         $.ajax({
@@ -66,48 +86,53 @@ const ProductProvider = ({ children }) => {
             processData: false,
             contentType: false,
             data: productEditData,      // la informacion que queres mandar
-            success: response => {
-                if (response) {
-                    setCurrentCategory(null)
-                    setListState(!listState)
-                }
+            success: e => {
+                setResponseAjax(JSON.parse(e))
             }    //success
         }) // ajax
     }
 
-    const removeProduct = id => {
-        const removeProductData = new FormData()
-        removeProductData.append('id', id)
+    const removeProduct = ({ id, picture }) => {
+
+        const productData = new FormData()
+        productData.append('id', id)
+        productData.append('picture', picture)
+
         $.ajax({
             url: `http://localhost:80/Bazar-Backend/removeProduct.php`,              // a donde queres enviar la informacion
-            type: 'POST',                 // como la queres mandar si POST, GET, PUT o DELETE
+            type: 'POST',
             processData: false,
-            contentType: false,
-            data: removeProductData,      // la informacion que queres mandar
-            success: response => {
-                if (response) {
+            contentType: false,               // como la queres mandar si POST, GET, PUT o DELETE
+            data: productData,      // la informacion que queres mandar
+            success: e => {
+                const { response, message } = JSON.parse(e)
+                if (response === 'success') {
                     setCurrentCategory(null)
                     setListState(!listState)
+                } else {
+                    alert(message)
                 }
             }    //success
         }) // ajax
     }
 
-    const getProducts = (categoryId, setLoading) => {
+    const getProducts = (categoryId, setLoading, offset) => {
         setCurrentCategory(categoryId)
-        if (currentCategory !== categoryId) {
-            setLoading(true)
-            fetch('http://localhost:80/Bazar-Backend/category.php?categoryId=' + categoryId)
-                .then(e => e.json())
-                .then(e => setProductList(e))
-                .finally(() => setLoading(false))
+        setLoading(true)
+        fetch(`http://localhost:80/Bazar-Backend/category.php?categoryId=${categoryId}&offset=${(offset * 10) - 10}`)
+            .then(e => e.json())
+            .then(e => {
+                const { total, products } = e
+                if (currentCategory !== categoryId || loadedProducts === 1) setProductList({ total, products }) // Serviria como para hacer una paginacion
+                else setProductList({ total, 'products': [...productList.products, ...products] }) // Muestra todos los productos
+            })
+            .finally(() => setLoading(false))
 
-        }
     }
 
-    const getProductsForSubcategory = (subcategoryId,setLoading) => {
+    const getProductsForSubcategory = (subcategoryId, setLoading) => {
         setLoading(true)
-        fetch('http://localhost:80/Bazar-Backend/subcategory.php?subcategoryId='+subcategoryId)
+        fetch('http://localhost:80/Bazar-Backend/subcategory.php?subcategoryId=' + subcategoryId)
             .then(e => e.json())
             .then(e => setProductList(e))
             .finally(() => setLoading(false))
@@ -162,6 +187,10 @@ const ProductProvider = ({ children }) => {
         {
             productList,
             listState,
+            loadedProducts,
+            responseAjax,
+            setResponseAjax,
+            setLoadedProducts,
             setCurrentCategory,
             setProductList,
             addProduct,

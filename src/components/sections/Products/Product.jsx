@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import imageDrive from '../../../assets/images/drive.png'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useState } from 'react'
 import { ProductContext } from '../../../context/ProductContext'
 import { Link } from 'react-router-dom'
@@ -32,7 +31,7 @@ const Product = ({ detail }) => {
                             <div id='confirmedRemove'>
                                 <h4>¿Quieres eliminar <span>"{detail.name}"</span> de código <span>"{detail.code}"</span>?</h4>
                                 <button>Cancelar</button>
-                                <button onClick={() => removeProduct(detail.id)}>Eliminar</button>
+                                <button onClick={() => removeProduct({id: detail.id, picture: detail.picture})}>Eliminar</button>
                             </div>
                         }
                         <span>Eliminar</span>
