@@ -8,7 +8,7 @@ const ProductProvider = ({ children }) => {
     const [listState, setListState] = useState(false)
     const [productList, setProductList] = useState({ 'products': [] })
     const [currentCategory, setCurrentCategory] = useState(null)
-    const [loadedProducts, setLoadedProducts] = useState(1);
+    const [loadedProducts, setLoadedProducts] = useState(2);
     const [responseAjax, setResponseAjax] = useState('')
 
     const addProduct = data => {
@@ -116,14 +116,14 @@ const ProductProvider = ({ children }) => {
         }) // ajax
     }
 
-    const getProducts = (categoryId, setLoading, offset) => {
+    const getProducts = (categoryId, setLoading) => {
         setCurrentCategory(categoryId)
         setLoading(true)
-        fetch(`http://localhost:80/Bazar-Backend/category.php?categoryId=${categoryId}&offset=${(offset * 10) - 10}`)
+        fetch(`http://localhost:80/Bazar-Backend/category.php?categoryId=${categoryId}&offset=${(loadedProducts * 10) - 20}`)
             .then(e => e.json())
             .then(e => {
                 const { total, products } = e
-                if (currentCategory !== categoryId || loadedProducts === 1) setProductList({ total, products }) // Serviria como para hacer una paginacion
+                if (currentCategory !== categoryId || loadedProducts === 2) setProductList(e) // Serviria como para hacer una paginacion
                 else setProductList({ total, 'products': [...productList.products, ...products] }) // Muestra todos los productos
             })
             .finally(() => setLoading(false))
@@ -132,9 +132,13 @@ const ProductProvider = ({ children }) => {
 
     const getProductsForSubcategory = (subcategoryId, setLoading) => {
         setLoading(true)
-        fetch('http://localhost:80/Bazar-Backend/subcategory.php?subcategoryId=' + subcategoryId)
+        fetch(`http://localhost:80/Bazar-Backend/subcategory.php?subcategoryId=${subcategoryId}&offset=${(loadedProducts * 10) - 20}`)
             .then(e => e.json())
-            .then(e => setProductList(e))
+            .then(e => {
+                const { total, products } = e
+                if ( loadedProducts === 2) setProductList(e) // Serviria como para hacer una paginacion
+                else setProductList({ total, 'products': [...productList.products, ...products] }) // Muestra todos los productos
+            })
             .finally(() => setLoading(false))
 
     }

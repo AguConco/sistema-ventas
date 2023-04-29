@@ -16,7 +16,7 @@ const Productlist = ({ setModalVisible, categoryId }) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getProducts(categoryId, setLoading, loadedProducts)
+        getProducts(categoryId, setLoading)
     }, [categoryId, listState, loadedProducts])
 
     return (
@@ -44,7 +44,7 @@ const Productlist = ({ setModalVisible, categoryId }) => {
                         </tbody>
                     </table>
                     <div>
-                       {((loadedProducts * 10) < productList.total) && <button className='seeMore' onClick={() =>  setLoadedProducts(loadedProducts + 1)}>ver más</button>}
+                       {(loadedProducts * 10) < productList.total && <button className='seeMore' onClick={() =>  setLoadedProducts(loadedProducts + 2)}>ver más</button>}
                     </div>
                 </div>
                 :

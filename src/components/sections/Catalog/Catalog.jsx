@@ -17,6 +17,8 @@ const Catalog = () => {
         productList,
         getProductsForSubcategory,
         setCurrentCategory,
+        loadedProducts,
+        setLoadedProducts
     } = useContext(ProductContext)
 
     const { categoryId, subcategoryId } = useParams()
@@ -25,9 +27,8 @@ const Catalog = () => {
     const [modalVisible, setModalVisible] = useState(false)
     const [picture, setPicture] = useState('')
     const [height, setHeight] = useState(false)
-    const [loadedProducts, setLoadedProducts] = useState(2);
 
-    const products = productList.sort((a, b) => {
+    const products = productList.products.sort((a, b) => {
         const name_a = a.name.toLowerCase()
         const name_b = b.name.toLowerCase()
 
@@ -38,22 +39,21 @@ const Catalog = () => {
             return -1;
         }
         return 0;
-    }).slice(0, loadedProducts * 10)
+    })
 
     window.onscroll = () => {
-        if (products.length < productList.length)
-            if (window.innerHeight + (window.scrollY + 5) >= document.body.offsetHeight) setLoadedProducts(loadedProducts + 1)
+        if ((loadedProducts * 10) < productList.total)
+            if (window.innerHeight + (window.scrollY + 5) >= document.body.offsetHeight) setLoadedProducts(loadedProducts + 2)
     }
 
     useEffect(() => {
         setSectionCurrent('catálogo')
-        if (subcategoryId === undefined) getProducts(categoryId, setLoading)
-        else getProductsForSubcategory(subcategoryId, setLoading)
-    }, [categoryId, subcategoryId])
+        subcategoryId === undefined ? getProducts(categoryId, setLoading) : getProductsForSubcategory(subcategoryId, setLoading)
+    }, [categoryId, subcategoryId, loadedProducts])
 
     const Categories = () => category.map(e => (
         <li key={e.categoryId}>
-            <pre>
+            <pre onClick={() => setLoadedProducts(2)}>
                 <Link
                     className={categoryId === e.categoryId ? 'btnCategories categorySelect' : 'btnCategories'}
                     to={"/catalogo/" + e.categoryId}
@@ -70,8 +70,11 @@ const Catalog = () => {
             e !== categoryId &&
             <Link
                 key={e.split('|')[1]}
+                onClick={() => {
+                    setLoadedProducts(2)
+                    setCurrentCategory(subcategoryId)
+                }}
                 to={'/catalogo/' + categoryId + '/' + e.split('|')[1]}
-                onClick={() => setCurrentCategory(subcategoryId)}
                 className={subcategoryId === e.split('|')[1] ? "btnSubcategory  btnSubcategorySelected" : "btnSubcategory"}
             >
                 {e.split('|')[0]}
@@ -108,7 +111,8 @@ const Catalog = () => {
                 <div className="containerCatalog">
                     {
                         products.map(e => (
-                            <div key={e.id}
+                            <div
+                                key={e.id}
                                 className="productCatalog"
                                 title={e.name}
                                 onClick={() => {

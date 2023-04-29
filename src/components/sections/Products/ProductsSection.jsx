@@ -12,7 +12,7 @@ import Searcher from './Searcher'
 
 const Categories = ({ categoryId, setLoadedProducts }) => category.map(e => {
   return (
-    <li key={e.categoryId} onClick={() => setLoadedProducts(1)}>
+    <li key={e.categoryId} onClick={() => setLoadedProducts(2)}>
       <Link className={categoryId === e.categoryId ? 'btnCategories categorySelect' : 'btnCategories'} to={"/productos/" + e.categoryId} >{e.categoryName}</Link>
     </li>
   )
