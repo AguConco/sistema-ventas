@@ -42,7 +42,7 @@ const Catalog = () => {
     })
 
     window.onscroll = () => {
-        if ((loadedProducts * 10) < productList.total)
+        if ((loadedProducts * 10) < productList.total && subcategoryId === undefined)
             if (window.innerHeight + (window.scrollY + 5) >= document.body.offsetHeight) setLoadedProducts(loadedProducts + 2)
     }
 
