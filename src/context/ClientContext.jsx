@@ -21,14 +21,15 @@ const ClientProvider = ({ children }) => {
     }
 
     const removeClient = (e) => {
-        $.ajax({
-            url: 'http://localhost:80/Bazar-Backend/client.php',
-            type: 'DELETE',
-            data: { id: e },      // la informacion que queres mandar
-            success: response => {
-                response && setListState(!listState)
-            }
+        fetch('http://localhost:80/Bazar-Backend/client.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: e }),
         })
+            .then(e => e.json())
+            .then(e => e.response === 'success' && setListState(!listState))
     }
 
     const editClient = (e) => {

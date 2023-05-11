@@ -130,19 +130,6 @@ const ProductProvider = ({ children }) => {
 
     }
 
-    const getProductsForSubcategory = (subcategoryId, setLoading) => {
-        setLoading(true)
-        fetch(`http://localhost:80/Bazar-Backend/subcategory.php?subcategoryId=${subcategoryId}&offset=${(loadedProducts * 10) - 20}`)
-            .then(e => e.json())
-            .then(e => {
-                const { total, products } = e
-                if ( loadedProducts === 2) setProductList(e) // Serviria como para hacer una paginacion
-                else setProductList({ total, 'products': [...productList.products, ...products] }) // Muestra todos los productos
-            })
-            .finally(() => setLoading(false))
-
-    }
-
     const sortPricePublic = e => {
         setListState(!listState)
         e ?
@@ -201,7 +188,6 @@ const ProductProvider = ({ children }) => {
             editProduct,
             removeProduct,
             getProducts,
-            getProductsForSubcategory,
             sortPricePublic,
             sortPriceWholesaler,
             sortAvailableQuantity,

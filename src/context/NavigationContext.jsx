@@ -36,13 +36,6 @@ const NavigationProvider = ({ children }) => {
             icon: <FontAwesomeIcon icon={faFileInvoiceDollar} />,
             description: 'Realizar pedidos, remito y comprobantes',
             type: ''
-        },
-        {
-            name: 'catálogo',
-            url:'catalogo/all',
-            icon: <FontAwesomeIcon icon={faBook} />,
-            description: 'Muestra de los productos a los clientes',
-            type: '_blank'
         }
     ]
 
