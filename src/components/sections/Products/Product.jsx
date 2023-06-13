@@ -20,8 +20,8 @@ const Product = ({ detail }) => {
                     </div>
                 </Link>
             </td>
-            <td>$ {detail.price.price_public}</td>
             <td>$ {detail.price.price_wholesaler}</td>
+            <td>$ {detail.price.price_public}</td>
             <td>{detail.available_quantity}</td>
             <td><span className={detail.state === 'active' ? 'active' : 'inactive'}> {detail.state === 'active' ? 'Activo' : 'Inactivo'} </span></td>
             <td>

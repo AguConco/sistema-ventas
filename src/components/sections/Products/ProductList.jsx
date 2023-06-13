@@ -32,8 +32,8 @@ const Productlist = ({ setModalVisible, categoryId }) => {
                         <thead>
                             <tr>
                                 <th>Producto</th>
-                                <th>Público</th>
                                 <th>mayorista</th>
+                                <th>Público</th>
                                 <th>Stock</th>
                                 <th>Estado</th>
                                 <th>Opciones</th>
@@ -43,8 +43,10 @@ const Productlist = ({ setModalVisible, categoryId }) => {
                             {productList?.products.map(e => <Product key={e.id} detail={e} />)}
                         </tbody>
                     </table>
-                    <div>
-                       {(loadedProducts * 10) < productList.total && <button className='seeMore' onClick={() =>  setLoadedProducts(loadedProducts + 2)}>ver más</button>}
+                    <div className='pagination'>
+                       {loadedProducts > 2 && <button onClick={() =>  setLoadedProducts(loadedProducts - 2)}>Anterior</button>}
+                       <span>{loadedProducts / 2} de {Math.ceil(productList.total / 20)}</span>
+                       {(loadedProducts * 10) < productList.total && <button onClick={() =>  setLoadedProducts(loadedProducts + 2)}>Siguente</button>}
                     </div>
                 </div>
                 :

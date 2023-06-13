@@ -44,7 +44,7 @@ const ProductsSection = () => {
           <Categories categoryId={categoryId} setLoadedProducts={setLoadedProducts} />
         </ul>
         <div>
-          <div className='sortType'>
+          {/* <div className='sortType'>
             <button className='sortProducts' onClick={() => setSortVisible(!sortVisible)}>Ordenar</button>
             {sortVisible &&
               <ul onClick={() => setSortVisible(false)}>
@@ -58,7 +58,7 @@ const ProductsSection = () => {
                 <li onClick={() => sortAvailableQuantity(false)}>Más stock</li>
               </ul>
             }
-          </div>
+          </div> */}
           <Searcher />
           <BtnAddProduct setModalVisible={setModalVisible} />
         </div>

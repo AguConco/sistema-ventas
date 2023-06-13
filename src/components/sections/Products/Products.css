@@ -368,15 +368,24 @@ table td:nth-last-child(1) img {
     margin: 0;
 }
 
-.seeMore {
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 100px;
+}
+
+.pagination span {
+    font-size: 15px;
+}
+
+.pagination button {
     color: var(--primary);
-    background: var(--gray-light);
+    background: none;
     border-radius: 5px;
     padding: 5px 10px;
     outline: none;
     border: none;
     cursor: pointer;
-    display: inline-block;
-    width: 100px;
-    margin: 10px calc(50% - 100px);
 }

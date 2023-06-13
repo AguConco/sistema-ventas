@@ -9,9 +9,12 @@ const ClientProvider = ({ children }) => {
     const [listState, setListState] = useState(false)
     const [historyClient, setHistoryClient] = useState([])
 
+    const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
+    // const urlHost = 'http://localhost:80/Bazar-Backend/'
+
     const addClient = (e) => {
         $.ajax({
-            url: 'http://localhost:80/Bazar-Backend/client.php',
+            url: `${urlHost}client.php`,
             type: 'POST',
             data: e,      // la informacion que queres mandar
             success: response => {
@@ -21,20 +24,25 @@ const ClientProvider = ({ children }) => {
     }
 
     const removeClient = (e) => {
-        fetch('http://localhost:80/Bazar-Backend/client.php', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id: e }),
-        })
-            .then(e => e.json())
-            .then(e => e.response === 'success' && setListState(!listState))
+        const clientId = new FormData()
+        clientId.append('id', e)
+
+        $.ajax({
+            url: `${urlHost}removeClient.php`,              // a donde queres enviar la informacion
+            type: 'POST',
+            processData: false,
+            contentType: false,               // como la queres mandar si POST, GET, PUT o DELETE
+            data: clientId,      // la informacion que queres mandar
+            success: e => {
+                const { response } = JSON.parse(e)
+                response === 'success' && setListState(!listState)
+            }    //success
+        }) // ajax
     }
 
     const editClient = (e) => {
         $.ajax({
-            url: 'http://localhost:80/Bazar-Backend/editClient.php',
+            url: `${urlHost}editClient.php`,
             type: 'POST',
             data: e,      // la informacion que queres mandar
             success: response => {
@@ -45,7 +53,7 @@ const ClientProvider = ({ children }) => {
 
     const getClients = (c, setLoading) => {
         setLoading(true)
-        fetch('http://localhost:80/Bazar-Backend/client.php?c=' + c)
+        fetch(`${urlHost}client.php?c=${c}`)
             .then(e => e.json())
             .then(e => {
                 setLoading(false)
@@ -54,7 +62,7 @@ const ClientProvider = ({ children }) => {
     }
 
     const orderCompleted = () => {
-        fetch('http://localhost:80/Bazar-Backend/historyClient.php')
+        fetch(`${urlHost}historyClient.php`)
             .then(e => e.json())
             .then(e => setHistoryClient(e))
     }

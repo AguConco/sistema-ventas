@@ -11,6 +11,9 @@ const ProductProvider = ({ children }) => {
     const [loadedProducts, setLoadedProducts] = useState(2);
     const [responseAjax, setResponseAjax] = useState('')
 
+    const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
+    // const urlHost = 'http://localhost:80/Bazar-Backend/'
+
     const addProduct = data => {
 
         const {
@@ -40,7 +43,7 @@ const ProductProvider = ({ children }) => {
         productData.append('state', state)
 
         $.ajax({
-            url: `http://localhost:80/Bazar-Backend/addProduct.php`,              // a donde queres enviar la informacion
+            url: `${urlHost}addProduct.php`,              // a donde queres enviar la informacion
             type: 'POST',                 // como la queres mandar si POST, GET, PUT o DELETE
             processData: false,
             contentType: false,
@@ -81,7 +84,7 @@ const ProductProvider = ({ children }) => {
         productEditData.append('state', state)
 
         $.ajax({
-            url: `http://localhost:80/Bazar-Backend/editProduct.php`,              // a donde queres enviar la informacion
+            url: `${urlHost}editProduct.php`,              // a donde queres enviar la informacion
             type: 'POST',                 // como la queres mandar si POST, GET, PUT o DELETE
             processData: false,
             contentType: false,
@@ -99,7 +102,7 @@ const ProductProvider = ({ children }) => {
         productData.append('picture', picture)
 
         $.ajax({
-            url: `http://localhost:80/Bazar-Backend/removeProduct.php`,              // a donde queres enviar la informacion
+            url: `${urlHost}removeProduct.php`,              // a donde queres enviar la informacion
             type: 'POST',
             processData: false,
             contentType: false,               // como la queres mandar si POST, GET, PUT o DELETE
@@ -119,12 +122,13 @@ const ProductProvider = ({ children }) => {
     const getProducts = (categoryId, setLoading) => {
         setCurrentCategory(categoryId)
         setLoading(true)
-        fetch(`http://localhost:80/Bazar-Backend/category.php?categoryId=${categoryId}&offset=${(loadedProducts * 10) - 20}`)
+        fetch(`${urlHost}category.php?categoryId=${categoryId}&limit=${20}&offset=${(loadedProducts * 10) - 20}`)
             .then(e => e.json())
             .then(e => {
-                const { total, products } = e
-                if (currentCategory !== categoryId || loadedProducts === 2) setProductList(e) // Serviria como para hacer una paginacion
-                else setProductList({ total, 'products': [...productList.products, ...products] }) // Muestra todos los productos
+                setProductList(e)
+                // const { total, products } = e
+                // if (currentCategory !== categoryId || loadedProducts === 2) setProductList(e) // Serviria como para hacer una paginacion
+                // else setProductList({ total, 'products': [...productList.products, ...products] }) // Muestra todos los productos
             })
             .finally(() => setLoading(false))
 

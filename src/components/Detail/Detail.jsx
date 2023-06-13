@@ -79,7 +79,7 @@ const Detail = () => {
             setLoading(true)
             setId(productId)
 
-            fetch('http://localhost:80/Bazar-Backend/productDetail.php?id=' + productId)
+            fetch('https://panel-control-bazar.000webhostapp.com/backend/productDetail.php?id=' + productId)
                 .then(e => e.json())
                 .then(e => {
                     if (e.length !== 0) {
