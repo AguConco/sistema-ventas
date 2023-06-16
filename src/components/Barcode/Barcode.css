@@ -1,0 +1,91 @@
+.section-barcode {
+    padding: 40px;
+    max-width: 350px;
+}
+
+.form-barcode, .form-add-available-quantity {
+    display: flex;
+}
+
+.form-barcode input, .form-add-available-quantity input {
+    margin-right: 10px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid #aaa;
+    outline: none;
+}
+
+.form-barcode button, .form-add-available-quantity button{
+    background: var(--primary);
+    color: #fff;
+    padding: 5px 10px;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-add-available-quantity {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-add-available-quantity input {
+    width: 150px;
+}
+
+.product-barcode {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+
+.product-barcode img {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+.product-barcode h1 {
+    text-align: center;
+    position: relative;
+    margin-top: 10px;
+}
+
+.product-barcode-code {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.product-barcode div span {
+    font-size: 18px;
+}
+
+.section-barcode .sectionAddForm {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.section-barcode .sectionAddForm .containerInputFile {
+    margin: auto;
+}
+
+.section-barcode .sectionAddForm .containerInputsInfo {
+    width: 100%;
+    margin-left: 15px;
+}
+
+.section-barcode .sectionAddForm button {
+    margin: 5px 25px;
+    width: 100%;
+}

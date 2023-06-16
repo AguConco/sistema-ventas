@@ -13,8 +13,8 @@ const OrdersProvider = ({ children }) => {
     const [remit, setRemit] = useState(null)
     const [viewProductSearch, setViewProductSearch] = useState([])
 
-    const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
-    // const urlHost = 'http://localhost:80/Bazar-Backend/'
+    // const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
+    const urlHost = 'http://localhost:80/Bazar-Backend/'
 
     const newOrder = (e, setModalVisible) => {
         $.ajax({

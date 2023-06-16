@@ -9,6 +9,7 @@ import ProductProvider from './context/ProductContext';
 import Detail from './components/Detail/Detail';
 import ClientProvider from './context/ClientContext';
 import OrdersProvider from './context/OrdersContext';
+import { Barcode } from './components/Barcode/Barcode';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                   <Route exact path='/productos/:categoryId' element={<ProductsSection />} />
                   <Route exact path='/pedidos' element={<Orders />} />
                   <Route exact path='/:productId' element={<Detail />} />
+                  <Route exact path='/barcode' element={<Barcode />} />
                 </Routes>
               </div>
             </ProductProvider>
