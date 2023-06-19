@@ -1,5 +1,4 @@
 import { useContext, useState } from "react"
-import { filterSearch } from "../../../funtions/filterSearch"
 import { OrdersContext } from "../../../context/OrdersContext"
 
 const FormSearchProduct = () => {
@@ -9,30 +8,24 @@ const FormSearchProduct = () => {
         searchProduct,
         searchResult,
         addProductToOrder,
-        viewProductSearch,
-        setViewProductSearch
+        setSearchResult
     } = useContext(OrdersContext)
 
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [quantity, setQuantity] = useState()
     const [code, setCode] = useState('')
     const [name, setName] = useState('')
-    const [loadedProducts, setLoadedProducts] = useState(1);
-
-    const products = viewProductSearch.slice(0, loadedProducts * 10)
 
     const changeValueName = e => {
         const valueInputName = e.value.trim()
         const dataSearch = { code: '', name: valueInputName }
         searchProduct(dataSearch)
-        setViewProductSearch(filterSearch({ ...dataSearch, searchResult }))
     }
 
     const changeValueCode = e => {
         const valueInputCode = e.value.trim()
         const dataSearch = { code: valueInputCode, name: '' }
         searchProduct(dataSearch)
-        setViewProductSearch(filterSearch({ ...dataSearch, searchResult }))
     }
 
     const submitForm = e => {
@@ -51,19 +44,15 @@ const FormSearchProduct = () => {
             setQuantity('')
             setCode('')
             setName('')
+            setSearchResult(null)
         }
-    }
-
-    const loadOnScroll = e => {
-        if (products.length < viewProductSearch.length)
-            if ((e.scrollTop + e.clientHeight + 5) >= e.scrollHeight) setLoadedProducts(loadedProducts + 1)
     }
 
     return (
         <form className="formSearch" onSubmit={e => submitForm(e)}>
             <input
                 type="text"
-                maxLength="10"
+                maxLength="20"
                 placeholder="Código"
                 onChange={({ target }) => {
                     setSelectedProduct(null)
@@ -93,23 +82,24 @@ const FormSearchProduct = () => {
 
             />
             <button type="submit">Agregar al pedido</button>
-            <div className="containerResultSearch" onScroll={({ target }) => loadOnScroll(target)}>
-                {products.map(e =>
-                    <button
-                        key={e.id}
-                        onClick={() => {
-                            setViewProductSearch([])
-                            setSelectedProduct(e)
-                        }}
-                        type="button"
-                        className="resultSearch"
-                    >
-                        <img src={e.picture} alt={e.name} />
-                        <div>
-                            <span> {e.code} <br /> {e.name} </span>
-                        </div>
-                    </button>
-                )}
+            <div className="containerResultSearch">
+                {searchResult &&
+                    searchResult.map(e =>
+                        <button
+                            key={e.id}
+                            onClick={() => {
+                                setSelectedProduct(e)
+                                setSearchResult(null)
+                            }}
+                            type="button"
+                            className="resultSearch"
+                        >
+                            <img src={e.picture} alt={e.name} />
+                            <div>
+                                <span> {e.code} <br /> {e.name} </span>
+                            </div>
+                        </button>
+                    )}
             </div>
         </form>
     )

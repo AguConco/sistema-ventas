@@ -8,7 +8,7 @@ const OrdersProvider = ({ children }) => {
     const [clientSelected, setClientSelected] = useState("")
     const [currentOrder, setCurrentOrder] = useState(undefined)
     const [pending, setPending] = useState([])
-    const [searchResult, setSearchResult] = useState([])
+    const [searchResult, setSearchResult] = useState(null)
     const [productsOrder, setproductsOrder] = useState({ products: [] })
     const [remit, setRemit] = useState(null)
     const [viewProductSearch, setViewProductSearch] = useState([])
@@ -18,7 +18,7 @@ const OrdersProvider = ({ children }) => {
 
     const newOrder = (e, setModalVisible) => {
         $.ajax({
-            url: 'https://panel-control-bazar.000webhostapp.com/backend/newOrder.php',
+            url: `${urlHost}newOrder.php`,
             type: 'POST',
             data: e,
             success: e => {
@@ -36,7 +36,7 @@ const OrdersProvider = ({ children }) => {
             return
         }
 
-        fetch(`https://panel-control-bazar.000webhostapp.com/backend/pendingOrders.php`)
+        fetch(`${urlHost}pendingOrders.php`)
             .then(e => e.json())
             .then(e => {
                 setPending(e)
@@ -50,19 +50,21 @@ const OrdersProvider = ({ children }) => {
     }
 
     const searchProduct = ({ code, name }) => {
-        // if (code.length === 1 || name.length === 1) {
         fetch(`${urlHost}searchProduct.php?name=${name}&code=${code}`)
             .then(e => e.json())
             .then(e => {
-                setSearchResult(e)
-                setViewProductSearch(e)
+                if (e?.response === 'error') {
+                    setSearchResult(null)
+                } else {
+                    setSearchResult(e)
+                    setViewProductSearch(e)
+                }
             })
-        // }
     }
 
     const addProductToOrder = (e, setSelectedProduct) => {
         $.ajax({
-            url: '${urlHost}order.php',
+            url: `${urlHost}order.php`,
             type: 'POST',
             data: e,
             success: e => {
@@ -76,8 +78,8 @@ const OrdersProvider = ({ children }) => {
 
     const removeProductToOrder = e => {
         $.ajax({
-            url: `${urlHost}order.php`,
-            type: 'DELETE',
+            url: `${urlHost}removeProductOrder.php`,
+            type: 'POST',
             data: e,
             success: e => e && getProductsOrder(currentOrder.order_id)
 
@@ -112,8 +114,8 @@ const OrdersProvider = ({ children }) => {
 
     const cancelOrder = e => {
         $.ajax({
-            url: `${urlHost}actionOrder.php`,
-            type: 'DELETE', // cambiar a POST y crear un archivo especifico para esa función
+            url: `${urlHost}cancelOrder.php`,
+            type: 'POST',
             data: e,
             success: e => e && setCurrentOrder(undefined)
         })
@@ -121,28 +123,16 @@ const OrdersProvider = ({ children }) => {
 
     const confirmOrder = e => {
         $.ajax({
-            url: `${urlHost}getProductOrder.php`,
+            url: `${urlHost}confirmOrder.php`,
             type: 'POST',
             data: e,
-            success: e => {
-                const productsOrderUpdate = JSON.parse(e)
-
-                for (let i = 0; i < productsOrderUpdate.length; i++) {
-                    $.ajax({
-                        url: `${urlHost}actionOrder.php`,
-                        type: 'POST',
-                        data: productsOrderUpdate[i],
-                        success: e => {
-                            productsOrderUpdate.length === (i + 1) &&
-                                $.ajax({
-                                    url: `${urlHost}generateRemit.php`,
-                                    type: 'POST',
-                                    data: { orderId: currentOrder.order_id },
-                                    success: e => e && setCurrentOrder(undefined)
-                                })
-                        }
-                    })
-                }
+            success: () => {
+                $.ajax({
+                    url: `${urlHost}generateRemit.php`,
+                    type: 'POST',
+                    data: { orderId: currentOrder.order_id },
+                    success: e => e && setCurrentOrder(undefined)
+                })
             }
         })
 
@@ -168,7 +158,8 @@ const OrdersProvider = ({ children }) => {
         generateRemit,
         editQuantity,
         cancelOrder,
-        confirmOrder
+        confirmOrder,
+        setSearchResult
     }}>{children}</OrdersContext.Provider>
 }
 

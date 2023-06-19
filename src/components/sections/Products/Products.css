@@ -107,6 +107,7 @@
     border: 1px solid var(--gray-light);
     box-shadow: 0 5px 10px var(--shadow);
     border-radius:  5px;
+    width: 350px;
 }
 
 .searcher form input {
@@ -114,9 +115,31 @@
 }
 
 .searcher form input:nth-child(2) {
-    width: calc(100% - 115px);
+    width: 200px;
     margin: 0;
 }
+
+.searcher form .loading {
+    margin: 10px auto;
+    animation: load 1.4s infinite linear;
+}
+
+@-webkit-keyframes load {
+    0% {
+      transform: scale(.5) rotate(0deg);
+    }
+    100% {
+      transform: scale(.5) rotate(360deg);
+    }
+  }
+  @keyframes load {
+    0% {
+      transform: scale(.5) rotate(0deg);
+    }
+    100% {
+      transform: scale(.5) rotate(360deg);
+    }
+  }
 
 .searcher form .containerResultSearch {
     position: relative;

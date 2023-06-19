@@ -157,6 +157,7 @@
 }
 
 .detailOrder table thead tr th:nth-child(3),
+.detailOrder table thead tr th:nth-child(1),
 .detailOrder table thead tr th:nth-last-child(1) {
     text-align: start;
 }
@@ -188,6 +189,11 @@
     height: 55px;
 }
 
+.detailOrder table td:nth-child(2) {
+    text-align: center;
+}
+
+.detailOrder table td:nth-child(1),
 .detailOrder table td:nth-child(3) {
     text-align: start;
 }
