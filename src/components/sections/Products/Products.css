@@ -195,6 +195,8 @@ table th {
 table th:nth-child(1) {
     border-radius: 5px 0 0 5px;
     width: 350px;
+    min-width: 350px;
+    max-width: 350px;
 }
 
 table th:nth-child(2),
@@ -202,6 +204,8 @@ table th:nth-child(3),
 table th:nth-child(4),
 table th:nth-child(5) {
     width: 150px;
+    max-width: 150px;
+    min-width: 150px;
 }
 
 table th:nth-child(6) {
@@ -411,4 +415,49 @@ table td:nth-last-child(1) img {
     outline: none;
     border: none;
     cursor: pointer;
+}
+
+
+@media (max-width: 426px) {
+    .headerSection {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        padding: 20px;
+    }
+
+    .headerSectionProducts ul {
+        max-width: 100%;
+    }
+    
+    .searcher form {
+        right: auto;
+        left: 50%;
+        transform: translateX(-46%);
+        max-width: 100vw;
+    }
+    
+    .containerTableProducts {
+        width: 100%;
+        overflow-x: scroll;
+        height: calc(100vh - 180px);
+    }
+    
+    .tableProducts thead {
+        top: 0;
+    }
+    
+    .productListEmpty {
+        height: 200px;
+        width: 80%;
+    }
+    
+    .productListEmpty p {
+        text-align: center;
+    }
+
+    .pagination button {
+        font-size: 16px;
+    }
+    
 }

@@ -198,6 +198,14 @@
     text-align: start;
 }
 
+.detailOrder table td:nth-child(3) span {
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+}
+
 .detailOrder table td:nth-child(3) div {
     display: flex;
     align-items: center;
@@ -336,4 +344,121 @@
     width: 40px;
     object-fit: contain;
     margin-right: 10px;
+}
+
+@media (max-width: 426px){
+    .headerSectionOrders div{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .headerSectionOrders div .btnAdd {
+        margin-left: 0;
+    }
+
+    .selectOrder {
+        margin: 30px auto;
+        padding: 50px ;
+    }
+    
+    .formSearch {
+        padding: 10px;
+        margin: 0 20px 20px 20px;
+    }
+    
+    .formSearch input {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 48%;
+    }
+    
+    .formSearch input:nth-child(1) {
+        margin-right: 4%;
+    }
+
+    .formSearch input:nth-last-child(3) {
+        width: 100%;
+    }
+    
+    .formSearch button {
+        width: 100%;
+    }
+    
+    .infoOrder {
+        gap: 10px;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    
+    .infoOrder div:nth-child(2) {
+        justify-content: end;
+        gap: 10px;
+    }
+    
+    .infoOrder div:nth-child(2) div {
+        display: flex;
+        gap: 10px;
+    }
+
+    .infoOrder button {
+        margin-left: 0;
+    }
+    
+    .detailOrder .containerTableOrder {
+        overflow: scroll;
+        height: calc(100vh - 470px);
+    }
+
+    .detailOrder table thead {
+        top: 0;
+    }
+
+    .detailOrder table thead th {
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+    }
+    
+    .detailOrder table thead th:nth-child(3) {
+        width: 400px;
+        min-width: 400px;
+        max-width: 400px;
+    }
+    
+    .detailOrder table thead th:nth-child(4) {
+        width: 150px;
+        min-width: 150px;
+        max-width: 150px;
+    }
+    
+    .viewGenerateRemit {
+        height: 500px;
+    }
+    
+    .confirmCancel, .confirmConfirm{
+        top: 130px;
+        right: 20px;
+        width: calc(100% - 40px);
+    }
+    
+    .confirmConfirm {
+        right: 20px;
+    }
+     
+    .containerResultSearch {
+        max-height: 400px;
+        width: 100%;
+        left: 0;
+        top: 150px;
+    }
+    
+    .resultSearch {
+        margin: 10px auto;
+    }
+    
+    .resultSearch img{
+        height: 50px;
+        width: 50px;
+    }
 }

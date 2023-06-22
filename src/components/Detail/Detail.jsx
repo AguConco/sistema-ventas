@@ -26,6 +26,9 @@ const Detail = () => {
     const [picture, setPicture] = useState()
     const [newPicture, setNewPicture] = useState(undefined)
 
+    // const urlhost = 'https://panel-control-bazar.000webhostapp.com/backend/'
+    const urlhost = 'http://localhost:80/Bazar-Backend/'
+
     const { removeProduct, editProduct, responseAjax, setResponseAjax } = useContext(ProductContext)
     const navigate = useNavigate()
 
@@ -79,7 +82,7 @@ const Detail = () => {
             setLoading(true)
             setId(productId)
 
-            fetch('https://panel-control-bazar.000webhostapp.com/backend/productDetail.php?id=' + productId)
+            fetch(`${urlhost}productDetail.php?id=${productId}`)
                 .then(e => e.json())
                 .then(e => {
                     if (e.length !== 0) {

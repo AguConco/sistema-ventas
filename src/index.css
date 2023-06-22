@@ -66,3 +66,16 @@ ul {
 .containerSections {
   width: 100%;
 }
+
+@media (max-width: 426px) {
+  *::-webkit-scrollbar-thumb {
+      border: 7px solid var(--white);
+      background: var(--gray-light);
+      border-radius: 10px;
+      display: none;
+  }
+  
+  *:hover::-webkit-scrollbar-thumb {
+      display: block;
+  }
+}

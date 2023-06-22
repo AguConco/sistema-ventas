@@ -22,30 +22,32 @@ const Order = () => {
                 </div>
                 <OptionsOrder setModalVisible={setModalVisible} />
             </div>
-            <table cellSpacing={0}>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Cantidad</th>
-                        <th>Producto</th>
-                        <th>p/unidad</th>
-                        <th>subtotal</th>
-                        <th>opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {productsOrder.products.map(e => (<ProductOrder key={e.id} e={e} />))}
-                    {productsOrder.total !== null &&
+            <div className="containerTableOrder">
+                <table cellSpacing={0}>
+                    <thead>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Precio total:</td>
-                            <td>${productsOrder.total}</td>
-                            <td></td>
-                        </tr>}
-                </tbody>
-            </table>
+                            <th>Código</th>
+                            <th>Cantidad</th>
+                            <th>Producto</th>
+                            <th>p/unidad</th>
+                            <th>subtotal</th>
+                            <th>opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {productsOrder.products.map(e => (<ProductOrder key={e.id} e={e} />))}
+                        {productsOrder.total !== null &&
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Precio total:</td>
+                                <td>${productsOrder.total}</td>
+                                <td></td>
+                            </tr>}
+                    </tbody>
+                </table>
+            </div>
             {productsOrder.total === null &&
                 <div className="orderEmpty">
                     Todavía no se agregaron productos al pedido

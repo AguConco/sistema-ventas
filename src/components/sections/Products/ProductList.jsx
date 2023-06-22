@@ -27,7 +27,7 @@ const Productlist = ({ setModalVisible, categoryId }) => {
             </div>
             :
             !loading ?
-                <div>
+                <div className='containerTableProducts'>
                     <table className='tableProducts' cellSpacing={0}>
                         <thead>
                             <tr>

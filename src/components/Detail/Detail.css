@@ -196,3 +196,60 @@
 .saveIcon path {
     fill: #1872fa;
 }
+
+@media (max-width: 426px) {
+    .containerDetail {
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .containerImage {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .detailName {
+        margin-bottom: 15px;
+        padding-left: 0;
+        line-height: 30px;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .detailCode {
+        padding-left: 0;
+        display: inline;
+    }
+    
+    .containerDetail .active,
+    .containerDetail .inactive {
+        margin-left: 40px;
+    }    
+    
+    .price {
+        padding-left: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+    
+    .options {
+        margin-top: 20px;
+        padding-left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .options div {
+        gap: 10px;
+        display: flex;
+    }
+
+    .options button {
+        position: relative;
+        margin-right: 0;
+    }
+    
+}

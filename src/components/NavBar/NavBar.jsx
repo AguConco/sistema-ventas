@@ -17,7 +17,7 @@ const Section = ({ section, sectionCurrent }) => {
                 className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'}
                 to={'/' + section.url}
             >
-                {section.icon} {section.name}
+                {section.icon} <span>{section.name}</span>
             </Link>}
         </li>
     )

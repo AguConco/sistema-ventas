@@ -68,7 +68,7 @@ const AddProduct = () => {
     return (
         <section className="sectionAddForm">
             <h3>Agregar producto nuevo</h3>
-            
+
             {responseAjax.response === 'error' && <span className="responseAjax">{responseAjax.message}</span>}
             <form id="addForm" onSubmit={e => submitAddProduct(e)}>
                 <div className="containerInputFile">
@@ -136,9 +136,10 @@ const AddProduct = () => {
                         }
                     </div>
                 </div>
+                <div className="containerBtnAddProduct">
                     <button className="reset" type="button" onClick={() => resetForm()} >reset</button>
                     <button className="agregar" type="submit">Agregar</button>
-
+                </div>
             </form>
         </section>
     )

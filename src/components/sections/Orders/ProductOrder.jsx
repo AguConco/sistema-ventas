@@ -24,7 +24,7 @@ const ProductOrder = ({ e }) => {
             <td>
                 <div>
                     <img src={e.picture} alt={e.name} />
-                    <span >{e.name}</span>
+                    <span>{e.name}</span>
                 </div>
             </td>
             <td>${e.price}</td>

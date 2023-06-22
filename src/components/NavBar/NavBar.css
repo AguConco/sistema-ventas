@@ -75,3 +75,52 @@ nav ul li {
     padding: 7px 10px;
     border-radius: 5px;
 }
+
+@media (max-width: 426px) {
+    .containerNav {
+        height: 80px;
+        width: 100%;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        border-top: 1px solid var(--gray-light);
+        border-right: none;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    nav ul {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .linkSection {
+        margin: 5px 0;
+        font-size: 16px;
+        display: block;
+        padding: 7px 10px;
+        border-radius: 5px;
+        text-transform: capitalize;
+        align-items: center;
+        display: flex;
+    }
+
+    .linkSection svg {
+        height: 25px;
+        width: 25px;
+        margin-right: 0;
+    }
+
+    .linkSection span {
+        display: none;
+    }
+    
+    .config {
+        display: none;
+    }
+}

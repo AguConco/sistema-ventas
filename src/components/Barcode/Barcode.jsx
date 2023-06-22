@@ -13,7 +13,6 @@ export function Barcode() {
     const [addProduct, setAddProduct] = useState(false)
 
     const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
-    // const urlHost = 'http://localhost:80/Bazar-Backend/'
 
     const productExist = (e) => {
         e.preventDefault()
@@ -63,7 +62,6 @@ export function Barcode() {
     useEffect(() => {
         setSectionCurrent('barcode')
     }, [])
-    // onChange={({ target }) => setCode(target.value)}
     return (
         <section className='section-barcode'>
             <form onSubmit={(e) => productExist(e)} className='form-barcode'>
