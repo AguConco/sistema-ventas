@@ -28,7 +28,6 @@ const NavBar = () => {
     const { sections, sectionCurrent } = useContext(NavigationContext)
 
     return (
-        sectionCurrent !== 'barcode' && 
         <div className="containerNav">
             <nav>
                 <div className='logo'>

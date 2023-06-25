@@ -66,3 +66,16 @@
     width: 250px;
     font-size: 16px;
 }
+
+@media (max-width: 426px) {
+
+    .containerTableClient { 
+        width: 100%;
+        max-height: calc(100vh - 100px);
+        overflow: scroll;
+    }
+    
+    .tableClients thead {
+        top: 0;
+    }    
+}

@@ -30,7 +30,7 @@ const ClientsSection = () => {
                     <BtnAddClient setModalVisible={setModalVisible} />
                 </div>
             </div>}
-            <div>
+            <div className='containerTableClient'>
                 <ClientsList setModalVisible={setModalVisible} />
             </div>
             {modalVisible &&

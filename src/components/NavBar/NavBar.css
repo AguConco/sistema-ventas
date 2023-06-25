@@ -87,6 +87,7 @@ nav ul li {
         top: auto;
         border-top: 1px solid var(--gray-light);
         border-right: none;
+        z-index: 1000;
     }
 
     .logo {

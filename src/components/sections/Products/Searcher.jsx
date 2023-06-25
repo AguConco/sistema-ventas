@@ -52,7 +52,6 @@ const Searcher = () => {
                             {searchResult &&
                                 searchResult.map(e =>
                                     <Link
-                                        target="_blank"
                                         to={'/' + e.id}
                                         key={e.id}
                                         className="resultSearch"

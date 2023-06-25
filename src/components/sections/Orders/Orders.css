@@ -165,6 +165,15 @@
 .detailOrder table thead tr th {
     text-align: end;
 }
+.detailOrder table thead tr th:nth-child(2) {
+    text-align: center;
+}
+
+.detailOrder table thead tr th:nth-child(1) {
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+}
 
 .detailOrder table thead th:nth-child(3) {
     width: 400px;
@@ -358,7 +367,7 @@
     }
 
     .selectOrder {
-        margin: 30px auto;
+        margin: 30px;
         padding: 50px ;
     }
     

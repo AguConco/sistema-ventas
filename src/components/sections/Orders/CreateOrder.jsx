@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { ClientContext } from "../../../context/ClientContext"
 import { OrdersContext } from "../../../context/OrdersContext"
 import { generateId } from "../../../funtions/generateId"
+import { Link } from "react-router-dom"
 
 const CreateOrder = ({ setModalVisible }) => {
 
@@ -25,7 +26,7 @@ const CreateOrder = ({ setModalVisible }) => {
                 orderId: generateId()
             }, setModalVisible)
         }}>
-            <h3>Nuevo pedido para:</h3>
+            <h3>Nuevo pedido para</h3>
             {!loading &&
                 <select className="selectClient" onChange={e => {
                     e.target.value !== "" ?

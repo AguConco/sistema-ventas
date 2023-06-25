@@ -40,7 +40,7 @@ const NavigationProvider = ({ children }) => {
             type: ''
         },
         {
-            name: 'Código',
+            name: 'barcode',
             url:'barcode',
             icon: barcodeIcon,
             description: 'agregar / actualizar productos y facturar por código de barras',

@@ -2,6 +2,7 @@
     font-size: 28px;
     margin: 15px 0 10px;
     font-weight: 300;
+    max-width: 100%;
 }
 
 .transportClient {

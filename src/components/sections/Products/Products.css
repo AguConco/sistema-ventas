@@ -428,6 +428,7 @@ table td:nth-last-child(1) img {
 
     .headerSectionProducts ul {
         max-width: 100%;
+        margin-bottom: 15px;
     }
     
     .searcher form {

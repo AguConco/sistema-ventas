@@ -7,7 +7,6 @@ const ProductProvider = ({ children }) => {
 
     const [listState, setListState] = useState(false)
     const [productList, setProductList] = useState({ 'products': [] })
-    const [currentCategory, setCurrentCategory] = useState(null)
     const [loadedProducts, setLoadedProducts] = useState(2);
     const [responseAjax, setResponseAjax] = useState('')
 
@@ -53,7 +52,6 @@ const ProductProvider = ({ children }) => {
 
                 setResponseAjax(JSON.parse(e))
                 if (response === 'success') {
-                    setCurrentCategory(null)
                     setListState(!listState)
                 }
             }    //success
@@ -110,7 +108,6 @@ const ProductProvider = ({ children }) => {
             success: e => {
                 const { response, message } = JSON.parse(e)
                 if (response === 'success') {
-                    setCurrentCategory(null)
                     setListState(!listState)
                 } else {
                     alert(message)
@@ -120,7 +117,6 @@ const ProductProvider = ({ children }) => {
     }
 
     const getProducts = (categoryId, setLoading) => {
-        setCurrentCategory(categoryId)
         setLoading(true)
         fetch(`${urlHost}category.php?categoryId=${categoryId}&limit=${20}&offset=${(loadedProducts * 10) - 20}`)
             .then(e => e.json())
@@ -186,7 +182,6 @@ const ProductProvider = ({ children }) => {
             responseAjax,
             setResponseAjax,
             setLoadedProducts,
-            setCurrentCategory,
             setProductList,
             addProduct,
             editProduct,
