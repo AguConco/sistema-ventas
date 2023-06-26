@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import './AddProduct.css'
 import { ProductContext } from "../../../../context/ProductContext"
 import { generateId } from "../../../../funtions/generateId"
-import { sub } from "../../../../constants/constants"
+import { category, sub } from "../../../../constants/constants"
 import { roundToSpecialNumber } from "../../../../funtions/roundNumber"
 
 const AddProduct = () => {
@@ -123,13 +123,12 @@ const AddProduct = () => {
                     {/* <input value={subcategory} type="text" placeholder="subcategoría" disabled required /> */}
                     <div className="containerSubcaterogies">
                         {
-                            sub.map(s => (
-                                s[0] === categoryId &&
-                                s.map(e => (
-                                    e !== categoryId &&
-                                    <div>
-                                        <input type={"checkbox"} id={e.split('|')[0]} onClick={e => addSubcategoria(e.target.value)} value={e.split('|')[1]} />
-                                        <label htmlFor={e.split('|')[0]}>{e.split('|')[0]}</label>
+                            category.map(c => (
+                                c.categoryId === categoryId &&
+                                c.subcategory.map(e => (
+                                    <div key={e.code}>
+                                        <input type={"checkbox"} id={e.name} onClick={e => addSubcategoria(e.target.value)} value={e.code} />
+                                        <label htmlFor={e.name}>{e.name}</label>
                                     </div>
                                 ))
                             ))

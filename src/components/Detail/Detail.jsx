@@ -6,6 +6,7 @@ import Loading from '../Loading/Loading'
 import './Detail.css'
 import { ProductContext } from '../../context/ProductContext'
 import { roundToSpecialNumber } from '../../funtions/roundNumber'
+import { category } from '../../constants/constants'
 
 
 const Detail = () => {
@@ -55,7 +56,11 @@ const Detail = () => {
             code: detail.code,
             availableQuantity,
             state,
-            picture: newPicture
+            picture: newPicture,
+            category: {
+                category_id: detail.category.category_id,
+                subcategory: detail.category.subcategory
+            }
         }
         if (edit) {
             editProduct(newData)
@@ -63,12 +68,22 @@ const Detail = () => {
         }
     }
 
+    const handleCheckboxChange = (code) => {
+        const selectedSubcategories = detail.category.subcategory.split('|')
+        const updatedSubcategories = selectedSubcategories.includes(code)
+            ? selectedSubcategories.filter(item => item !== code)
+            : [...selectedSubcategories, code]
+
+        const updatedCategory = { ...detail.category, subcategory: updatedSubcategories.join('|') }
+        setDetail(prevState => ({ ...prevState, category: updatedCategory }))
+    };
+
+
     useEffect(() => {
         switch (responseAjax.response) {
             case 'success':
                 setEdit(false)
                 newPicture !== undefined && setPicture(URL.createObjectURL(newPicture))
-                // setId(null)
                 setNewPicture()
                 break;
             case 'not change':
@@ -113,10 +128,7 @@ const Detail = () => {
                             edit ?
                                 alert('Guarda los cambios antes de salir')
                                 :
-                                window.history.state !== null ?
-                                    window.history.back()
-                                    :
-                                    navigate('/productos/all')
+                                window.history.back() || navigate('/productos/all')
                         }}>
                             <FontAwesomeIcon icon={faArrowAltCircleLeft} />
                             <span>Volver para atras</span>
@@ -143,6 +155,37 @@ const Detail = () => {
                                         {edit && <div onClick={() => edit && state === 'active' ? setState('inactive') : setState('active')}></div>}
                                         {state === 'active' ? 'Activo' : 'Inactivo'}
                                     </span>
+                                </div>
+                                <div className='containerCategoryAndSubcategories'>
+                                    {edit
+                                        ? category.map(c => (
+                                            c.categoryId === detail.category.category_id &&
+                                            <>
+                                                <span>{c.categoryName}</span>
+                                                {c.subcategory.map(e => (
+                                                    <div key={e.code} className='containerInputSubcategories'>
+                                                        <input
+                                                            checked={detail.category.subcategory.split('|').includes(e.code)}
+                                                            type={"checkbox"}
+                                                            id={e.name}
+                                                            onChange={() => handleCheckboxChange(e.code)}
+                                                            value={e.code} />
+                                                        <label htmlFor={e.name}>{e.name}</label>
+                                                    </div>
+                                                ))}
+                                            </>
+                                        ))
+                                        : category.map(c => (
+                                            c.categoryId === detail.category.category_id &&
+                                            <>
+                                                <span>{c.categoryName}</span>
+                                                {c.subcategory.map(e => (
+                                                    detail.category.subcategory.split('|').map(s => e.code === s && <span key={s}>{e.name}</span>)
+                                                ))}
+                                            </>
+                                        ))
+
+                                    }
                                 </div>
                                 <div className='price'>
                                     <p>Precio mayorista

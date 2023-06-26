@@ -55,7 +55,7 @@ const Order = () => {
             }
             {modalVisible && remit &&
                 <Modal setModalVisible={setModalVisible} >
-                    <object className="viewGenerateRemit" data={remit} type="application/pdf"></object>
+                    <iframe className="viewGenerateRemit" src={remit} type="application/pdf"></iframe>
                 </Modal>
             }
         </div >

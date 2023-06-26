@@ -68,7 +68,8 @@ const ProductProvider = ({ children }) => {
             pricePublic,
             priceWholesaler,
             availableQuantity,
-            state
+            state,
+            category
         } = data
 
         const productEditData = new FormData()
@@ -80,6 +81,7 @@ const ProductProvider = ({ children }) => {
         productEditData.append('discount', discount)
         productEditData.append('availableQuantity', availableQuantity)
         productEditData.append('state', state)
+        productEditData.append('subcategory', category.subcategory)
 
         $.ajax({
             url: `${urlHost}editProduct.php`,              // a donde queres enviar la informacion

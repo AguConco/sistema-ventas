@@ -11,7 +11,7 @@ const Section = ({ section, sectionCurrent }) => {
     const { setCurrentCategory } = useContext(ProductContext)
 
     return (
-        <li key={section.name}>
+        <li>
             {<Link
                 onClick={() => setCurrentCategory(null)}
                 className={section.name === sectionCurrent ? 'linkSection linkSectionCurrent' : 'linkSection'}
@@ -34,7 +34,7 @@ const NavBar = () => {
                     <h1>BR</h1>
                     <div></div>
                 </div>
-                <ul>{sections.map(s => (<Section section={s} sectionCurrent={sectionCurrent} />))} </ul>
+                <ul>{sections.map(s => (<Section section={s} key={s.name} sectionCurrent={sectionCurrent} />))} </ul>
             </nav>
             <Link className='config' to={'/'}><FontAwesomeIcon icon={faGear} /> Configuración</Link>
         </div>

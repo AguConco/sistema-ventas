@@ -1,39 +1,282 @@
-export const sub = [
-    ['cc', 'Aluminio y acero|scc01', 'Melamina|scc02', 'Teflón|scc03', 'Cerámica|scc04', 'Herméticos|scc05', 'Platos y compoteras|scc06', 'Vasos y copas|scc07', 'Jarras, jarros y tazas|scc08', 'Cubiertos|scc09', 'Utensillos|scc10', 'Bandejas, bowls y ensaladeras|scc11', 'Botellas y bidones|scc12', 'Tablas|scc13', 'Artículos de asador|scc14', 'Secaplatos y coladores|scc15', 'Repostería|scc16', 'Electrodomésticos|scc17', 'Infantiles|scc18', 'Rigolleau|scc19', 'Carol|scc20', 'Tramontina|scc21'],
-    ['cr', 'Decoración|scr01', 'Portaretratos|scr02', 'Lamparas, velas y sahumerios|scr03', 'Flores y floreros|scr04', 'Bolsos, billeteras y necesers|scr05', 'Relojes|scr06'],
-    ['cj', 'Juegos de mesa|scj01', 'Didácticos|scj02', 'Verano|scj03', 'Vehiculos|scj04', 'Muñecas/os|scj05', 'Animales|scj06', 'Musicales|scj07', 'Pelotas|scj08', 'Bebé|scj09'],
-    ['cmt', 'Mates|scmt01', 'Termos|scmt02', 'Equipos de mate|scmt03', 'Bombillas|scmt04', 'Vertedores|scmt05', 'Portatermos|scmt06', 'Repuestos|scmt07', 'Pavas|scmt08', 'Lumilagro|scmt09'],
-    ['clb', 'Alfombras|sclb01', 'Limpieza casa|sclb02', 'Limpieza personal|sclb03', 'Baldes, fuentes y palanganas|sclb04', 'Ropa|sclb05', 'Cortinas|sclb06', 'Baño|sclb07'],
-    ['cv', 'Electrónica|scv01', 'Jardinería|scv02', 'Librería|scv03', 'Invierno|scv04', 'Camping|scv05', 'Organizadores|scv06']
-]
-
 export const category = [
-    {
-      categoryName: 'Todos',
-      categoryId: 'all'
-    },
-    {
-      categoryName: 'Cocina',
-      categoryId: 'cc'
-    },
-    {
-      categoryName: 'Regalería',
-      categoryId: 'cr'
-    },
-    {
-      categoryName: 'Juguetería',
-      categoryId: 'cj'
-    },
-    {
-      categoryName: 'Mates/Termos',
-      categoryId: 'cmt'
-    },
-    {
-      categoryName: 'Limpieza/Baño',
-      categoryId: 'clb'
-    },
-    {
-      categoryName: 'Varios',
-      categoryId: 'cv'
-    }
-  ]
+  {
+    categoryName: 'Todos',
+    categoryId: 'all'
+  },
+  {
+    categoryName: 'Cocina',
+    categoryId: 'cc',
+    subcategory: [
+      {
+        name: 'Aluminio y acero',
+        code: 'scc01'
+      },
+      {
+        name: 'Melamina',
+        code: 'scc02'
+      },
+      {
+        name: 'Teflón',
+        code: 'scc03'
+      },
+      {
+        name: 'Cerámica',
+        code: 'scc04'
+      },
+      {
+        name: 'Herméticos',
+        code: 'scc05'
+      },
+      {
+        name: 'Platos y compoteras',
+        code: 'scc06'
+      },
+      {
+        name: 'Vasos y copas',
+        code: 'scc07'
+      },
+      {
+        name: 'Jarras, jarros y tazas',
+        code: 'scc08'
+      },
+      {
+        name: 'Cubiertos',
+        code: 'scc09'
+      },
+      {
+        name: 'Utensillos',
+        code: 'scc10'
+      },
+      {
+        name: 'Bandejas, bowls y ensaladeras',
+        code: 'scc11'
+      },
+      {
+        name: 'Botellas y bidones',
+        code: 'scc12'
+      },
+      {
+        name: 'Tablas',
+        code: 'scc13'
+      },
+      {
+        name: 'Artículos de asador',
+        code: 'scc14'
+      },
+      {
+        name: 'Secaplatos y coladores',
+        code: 'scc15'
+      },
+      {
+        name: 'Repostería',
+        code: 'scc16'
+      },
+      {
+        name: 'Electrodomésticos',
+        code: 'scc17'
+      },
+      {
+        name: 'Infantiles',
+        code: 'scc18'
+      },
+      {
+        name: 'Rigolleau',
+        code: 'scc19'
+      },
+      {
+        name: 'Carol',
+        code: 'scc20'
+      },
+      {
+        name: 'Tramontina',
+        code: 'scc21'
+      },
+    ]
+  },
+  {
+    categoryName: 'Regalería',
+    categoryId: 'cr',
+    subcategory: [
+      {
+        name: 'Decoración',
+        code: 'scr01'
+      },
+      {
+        name: 'Portaretratos',
+        code: 'scr02'
+      },
+      {
+        name: 'Lamparas, velas y sahumerios',
+        code: 'scr03'
+      },
+      {
+        name: 'Flores y floreros',
+        code: 'scr04'
+      },
+      {
+        name: 'Bolsos, billeteras y necesers',
+        code: 'scr05'
+      },
+      {
+        name: 'Relojes',
+        code: 'scr06'
+      }
+    ]
+  },
+  {
+    categoryName: 'Juguetería',
+    categoryId: 'cj',
+    subcategory: [
+      {
+        name: 'Juegos de mesa',
+        code: 'scj01'
+      },
+      {
+        name: 'Didácticos',
+        code: 'scj02'
+      },
+      {
+        name: 'Verano',
+        code: 'scj03'
+      },
+      {
+        name: 'Vehiculos',
+        code: 'scj04'
+      },
+      {
+        name: 'Muñecas/os',
+        code: 'scj05'
+      },
+      {
+        name: 'Animales',
+        code: 'scj06'
+      },
+      {
+        name: 'Musicales',
+        code: 'scj07'
+      },
+      {
+        name: 'Pelotas',
+        code: 'scj08'
+      },
+      {
+        name: 'Bebé',
+        code: 'scj09'
+      },
+      {
+        name: 'Nena',
+        code: 'scj10'
+      },
+      {
+        name: 'Nene',
+        code: 'scj11'
+      }
+    ]
+  },
+  {
+    categoryName: 'Mates/Termos',
+    categoryId: 'cmt',
+    subcategory: [
+      {
+        name: 'Mates',
+        code: 'scmt01'
+      },
+      {
+        name: 'Termos',
+        code: 'scmt02'
+      },
+      {
+        name: 'Equipos de mate',
+        code: 'scmt03'
+      },
+      {
+        name: 'Bombillas',
+        code: 'scmt04'
+      },
+      {
+        name: 'Vertedores',
+        code: 'scmt05'
+      },
+      {
+        name: 'Portatermos',
+        code: 'scmt06'
+      },
+      {
+        name: 'Repuestos',
+        code: 'scmt07'
+      },
+      {
+        name: 'Pavas',
+        code: 'scmt08'
+      },
+      {
+        name: 'Lumilagro',
+        code: 'scmt09'
+      }
+    ]
+  },
+  {
+    categoryName: 'Limpieza/Baño',
+    categoryId: 'clb',
+    subcategory: [
+      {
+        name: 'Alfombras',
+        code: 'sclb01'
+      },
+      {
+        name: 'Limpieza casa',
+        code: 'sclb02'
+      },
+      {
+        name: 'Limpieza personal',
+        code: 'sclb03'
+      },
+      {
+        name: 'Baldes, fuentes y palanganas',
+        code: 'sclb04'
+      },
+      {
+        name: 'Ropa',
+        code: 'sclb05'
+      },
+      {
+        name: 'Cortinas',
+        code: 'sclb06'
+      },
+      {
+        name: 'Baño',
+        code: 'sclb07'
+      }
+    ]
+  },
+  {
+    categoryName: 'Varios',
+    categoryId: 'cv',
+    subcategory: [
+      {
+        name: 'Electrónica',
+        code: 'scv01'
+      },
+      {
+        name: 'Jardinería',
+        code: 'scv02'
+      },
+      {
+        name: 'Librería',
+        code: 'scv03'
+      },
+      {
+        name: 'Invierno',
+        code: 'scv04'
+      },
+      {
+        name: 'Camping',
+        code: 'scv05'
+      },
+      {
+        name: 'Organizadores',
+        code: 'scv06'
+      }
+    ]
+  }
+]

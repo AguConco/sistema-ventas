@@ -11,12 +11,7 @@ import FormSearchProduct from './FormSearchProduct'
 const Orders = () => {
 
     const { setSectionCurrent } = useContext(NavigationContext)
-    const {
-        currentOrder,
-        pendingOrders,
-        pending,
-        setCurrentOrder
-    } = useContext(OrdersContext)
+    const { currentOrder, pendingOrders, pending, setCurrentOrder } = useContext(OrdersContext)
 
     const [modalVisible, setModalVisible] = useState(false)
 
