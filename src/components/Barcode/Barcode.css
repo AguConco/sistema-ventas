@@ -73,6 +73,7 @@
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
+    margin: 20px 0 150px;
 }
 
 .section-barcode .sectionAddForm .containerInputFile {

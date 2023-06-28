@@ -1,17 +1,19 @@
 import { createContext, useState } from "react";
 import $ from 'jquery'
+import { useNavigate } from "react-router-dom";
 
 export const OrdersContext = createContext()
 
 const OrdersProvider = ({ children }) => {
 
     const [clientSelected, setClientSelected] = useState("")
-    const [currentOrder, setCurrentOrder] = useState(undefined)
     const [pending, setPending] = useState([])
     const [searchResult, setSearchResult] = useState(null)
     const [productsOrder, setproductsOrder] = useState({ products: [] })
     const [remit, setRemit] = useState(null)
     const [viewProductSearch, setViewProductSearch] = useState([])
+
+    const navigate = useNavigate()
 
     // const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
     const urlHost = 'http://localhost:80/Bazar-Backend/'
@@ -30,20 +32,17 @@ const OrdersProvider = ({ children }) => {
         })
     }
 
-    const pendingOrders = id => {
-        if (id === undefined) {
-            setCurrentOrder(undefined)
-            return
-        }
-
+    const pendingOrders = (id) => {
         fetch(`${urlHost}pendingOrders.php`)
             .then(e => e.json())
             .then(e => {
                 setPending(e)
-                for (const p of e) {
-                    if (p.client_id === id) {
-                        setCurrentOrder(p)
-                        return
+                if (id) {
+                    for (const p of e) {
+                        if (p.client_id === id) {
+                            navigate(`/pedidos/${p.client_id}/${p.order_id}`)
+                            return
+                        }
                     }
                 }
             })
@@ -67,21 +66,21 @@ const OrdersProvider = ({ children }) => {
             url: `${urlHost}order.php`,
             type: 'POST',
             data: e,
-            success: e => {
-                if (e) {
+            success: response => {
+                if (response) {
                     setSelectedProduct(null)
-                    getProductsOrder(currentOrder.order_id)
+                    getProductsOrder(e.orderId)
                 }
             }
         })
     }
 
-    const removeProductToOrder = e => {
+    const removeProductToOrder = (e, orderId) => {
         $.ajax({
             url: `${urlHost}removeProductOrder.php`,
             type: 'POST',
             data: e,
-            success: e => e && getProductsOrder(currentOrder.order_id)
+            success: e => e && getProductsOrder(orderId)
 
         })
     }
@@ -92,7 +91,7 @@ const OrdersProvider = ({ children }) => {
             .then(e => setproductsOrder(e))
     }
 
-    const editQuantity = (data, setAvailableQuantity, state) => {
+    const editQuantity = (data, setAvailableQuantity, state, orderId) => {
         if (state)
             fetch(`${urlHost}productDetail.php?id=${data}`)
                 .then(e => e.json())
@@ -102,7 +101,7 @@ const OrdersProvider = ({ children }) => {
                 url: `${urlHost}editQuantity.php`,
                 type: 'POST',
                 data: data,
-                success: e => e && getProductsOrder(currentOrder.order_id)
+                success: e => e && getProductsOrder(orderId)
             })
     }
 
@@ -117,11 +116,11 @@ const OrdersProvider = ({ children }) => {
             url: `${urlHost}cancelOrder.php`,
             type: 'POST',
             data: e,
-            success: e => e && setCurrentOrder(undefined)
+            success: e => e && navigate('pedidos/')
         })
     }
 
-    const confirmOrder = e => {
+    const confirmOrder = (e) => {
         $.ajax({
             url: `${urlHost}confirmOrder.php`,
             type: 'POST',
@@ -130,8 +129,8 @@ const OrdersProvider = ({ children }) => {
                 $.ajax({
                     url: `${urlHost}generateRemit.php`,
                     type: 'POST',
-                    data: { orderId: currentOrder.order_id },
-                    success: e => e && setCurrentOrder(undefined)
+                    data: e,
+                    success: e => e && navigate('pedidos/')
                 })
             }
         })
@@ -140,7 +139,6 @@ const OrdersProvider = ({ children }) => {
 
     return <OrdersContext.Provider value={{
         clientSelected,
-        currentOrder,
         pending,
         searchResult,
         productsOrder,
@@ -148,7 +146,6 @@ const OrdersProvider = ({ children }) => {
         viewProductSearch,
         setViewProductSearch,
         setClientSelected,
-        setCurrentOrder,
         newOrder,
         pendingOrders,
         searchProduct,

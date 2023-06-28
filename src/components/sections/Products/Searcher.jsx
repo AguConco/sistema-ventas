@@ -55,6 +55,7 @@ const Searcher = () => {
                                         to={'/' + e.id}
                                         key={e.id}
                                         className="resultSearch"
+                                        title={e.name}
                                     >
                                         <img src={e.picture} alt={e.name} />
                                         <div>

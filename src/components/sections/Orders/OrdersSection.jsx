@@ -7,19 +7,21 @@ import CreateOrder from './CreateOrder'
 import { OrdersContext } from '../../../context/OrdersContext'
 import Order from './Order'
 import FormSearchProduct from './FormSearchProduct'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const Orders = () => {
+const OrdersSection = () => {
 
     const { setSectionCurrent } = useContext(NavigationContext)
-    const { currentOrder, pendingOrders, pending, setCurrentOrder } = useContext(OrdersContext)
+    const { pendingOrders, pending } = useContext(OrdersContext)
+    const { clientId } = useParams()
+    const navigate = useNavigate()
 
     const [modalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
         setSectionCurrent('pedidos')
         pendingOrders('')
-        setCurrentOrder(undefined)
-    }, [])
+    }, [clientId])
 
     return (
         <section>
@@ -28,14 +30,14 @@ const Orders = () => {
                 </div>
                 <div>
                     {pending.length !== 0 &&
-                        <select onChange={e => pendingOrders(e.target.value)}>
-                            <option value={undefined}>Pedidos pendientes</option>
-                            {pending.map(e => <option key={e.client_id} value={e.client_id}>{e.client}</option>)}
+                        <select onChange={e => navigate('/pedidos/' + e.target.value)}>
+                            <option value={''}>Pedidos pendientes</option>
+                            {pending.map(e => <option key={e.client_id} value={e.client_id+'/'+e.order_id}>{e.client}</option>)}
                         </select>}
                     <BtnNewOrder setModalVisible={setModalVisible} />
                 </div>
             </div>
-            {currentOrder !== undefined ?
+            {clientId !== undefined ?
                 <div>
                     <FormSearchProduct />
                     <Order />
@@ -51,4 +53,4 @@ const Orders = () => {
     )
 }
 
-export default Orders
+export default OrdersSection

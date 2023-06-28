@@ -24,9 +24,11 @@
     padding: 15px;
     box-shadow: 0 5px 10px var(--shadow);
     border-radius: 10px;
-    max-height: 95vh;
+    max-height: calc(95vh - 100px);
+    transform: translateY(-40px);
     overflow: auto;
     position: relative;
+    overflow-x: hidden;
 }
 
 .modal img {

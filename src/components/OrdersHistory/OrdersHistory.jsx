@@ -13,8 +13,6 @@ const OrdersHistory = ({ client }) => {
         orderCompleted()
     }, [])
 
-    console.log(historyClient, client)
-
     return (
         <div className='sectionOrdersHistory'>
             <h2>Historial de pedidos</h2>

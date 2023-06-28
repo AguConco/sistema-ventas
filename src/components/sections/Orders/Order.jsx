@@ -3,24 +3,25 @@ import { OrdersContext } from "../../../context/OrdersContext"
 import Modal from "../../Modal/Modal"
 import OptionsOrder from "./OptionsOrder"
 import ProductOrder from "./ProductOrder"
+import { useParams } from "react-router-dom"
 
 const Order = () => {
 
-    const { currentOrder, getProductsOrder, productsOrder, remit } = useContext(OrdersContext)
+    const { getProductsOrder, productsOrder, remit } = useContext(OrdersContext)
     const [modalVisible, setModalVisible] = useState(false)
+    const { orderId } = useParams()
 
     useEffect(() => {
-        currentOrder !== undefined && getProductsOrder(currentOrder.order_id)
-    }, [currentOrder])
+        getProductsOrder(orderId)
+    }, [orderId])
 
     return (
         <div className='detailOrder'>
             <div className='infoOrder' >
                 <div>
-                    <h4>Pedido para: <span>{currentOrder.client}</span></h4>
                     <h4>Total: <span>${productsOrder.total}</span></h4>
                 </div>
-                <OptionsOrder setModalVisible={setModalVisible} />
+                <OptionsOrder setModalVisible={setModalVisible} orderId={orderId} />
             </div>
             <div className="containerTableOrder">
                 <table cellSpacing={0}>
@@ -35,7 +36,7 @@ const Order = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {productsOrder.products.map(e => (<ProductOrder key={e.id} e={e} />))}
+                        {productsOrder.products.map(e => (<ProductOrder key={e.id} e={e} orderId={orderId} />))}
                         {productsOrder.total !== null &&
                             <tr>
                                 <td></td>

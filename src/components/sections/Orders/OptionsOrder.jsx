@@ -1,9 +1,9 @@
 import { useContext, useState } from "react"
 import { OrdersContext } from "../../../context/OrdersContext"
 
-const OptionsOrder = ({ setModalVisible }) => {
+const OptionsOrder = ({ setModalVisible, orderId }) => {
 
-    const { currentOrder, generateRemit, cancelOrder, confirmOrder, productsOrder } = useContext(OrdersContext)
+    const { generateRemit, cancelOrder, confirmOrder, productsOrder } = useContext(OrdersContext)
 
     const [confirmedCancelOrder, setConfirmedCancelOrder] = useState(false)
     const [confirmedConfirmOrder, setConfirmedConfirmOrder] = useState(false)
@@ -20,7 +20,7 @@ const OptionsOrder = ({ setModalVisible }) => {
                     </button>
                     <button className="generateRemit" onClick={() => {
                         setModalVisible(true)
-                        generateRemit(currentOrder.order_id)
+                        generateRemit(orderId)
                     }}>
                         Generear remito
                     </button>
@@ -35,22 +35,22 @@ const OptionsOrder = ({ setModalVisible }) => {
             {confirmedCancelOrder &&
                 <div className="confirmCancel">
                     <span>
-                        ¿Quieres cancelar el pedido de {currentOrder.client}?
+                        ¿Quieres cancelar el pedido?
                         <br />
                         Al cancelarlo no hay forma de recuperarlo
                     </span>
                     <div>
                         <button onClick={() => setConfirmedCancelOrder(!confirmedCancelOrder)}>No</button>
-                        <button onClick={() => cancelOrder({ orderId: currentOrder.order_id })}>Cancelar</button>
+                        <button onClick={() => cancelOrder({ orderId })}>Cancelar</button>
                     </div>
                 </div>
             }
             {confirmedConfirmOrder &&
                 <div className="confirmConfirm">
-                    <span>¿Quieres confirmar el pedido de {currentOrder.client}?</span>
+                    <span>¿Quieres confirmar el pedido?</span>
                     <div>
                         <button onClick={() => setConfirmedConfirmOrder(!confirmedConfirmOrder)}>No</button>
-                        <button onClick={() => confirmOrder({ orderId: currentOrder.order_id })}>Confirmar</button>
+                        <button onClick={() => confirmOrder({ orderId })}>Confirmar</button>
                     </div>
                 </div>
             }

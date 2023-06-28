@@ -7,16 +7,15 @@ export function Barcode() {
 
     const { setSectionCurrent } = useContext(NavigationContext)
 
-    // const [code, setCode] = useState(null)
     const [product, setProduct] = useState(null)
     const [availableQuantity, setAvailableQuantity] = useState(null)
     const [addProduct, setAddProduct] = useState(false)
+    // const [barcode, setBarcode] = useState('');
 
     const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
 
     const productExist = (e) => {
         e.preventDefault()
-
         setAddProduct(false)
 
         const code = document.getElementById('code').value
@@ -62,10 +61,15 @@ export function Barcode() {
     useEffect(() => {
         setSectionCurrent('barcode')
     }, [])
+
     return (
         <section className='section-barcode'>
             <form onSubmit={(e) => productExist(e)} className='form-barcode'>
-                <input type="text" id='code'  placeholder='Num. código de barras' required />
+                <input
+                    type="text"
+                    id='code'
+                    placeholder='Num. código de barras'
+                    required />
                 <button type="submit">Buscar</button>
             </form>
             {product &&

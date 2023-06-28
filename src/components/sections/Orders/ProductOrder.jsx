@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useState } from "react"
 import { OrdersContext } from "../../../context/OrdersContext"
 
-const ProductOrder = ({ e }) => {
+const ProductOrder = ({ e, orderId }) => {
 
-    const { removeProductToOrder, currentOrder, editQuantity } = useContext(OrdersContext)
+    const { removeProductToOrder, editQuantity } = useContext(OrdersContext)
     const [confirmed, setConfirmed] = useState(false)
     const [confirmedEdit, setConfirmedEdit] = useState(false)
     const [quantity, setQuantity] = useState()
@@ -13,7 +13,7 @@ const ProductOrder = ({ e }) => {
 
     const validateForm = (e, id) => {
         e.preventDefault()
-        editQuantity({id,quantity}, setAvailableQuantity, false)
+        editQuantity({ id, quantity }, setAvailableQuantity, false, orderId)
         setConfirmedEdit(false)
     }
 
@@ -31,9 +31,11 @@ const ProductOrder = ({ e }) => {
             <td>${e.quantity * e.price}</td>
             <td>
                 <div>
-
-                    <div onClick={() => editQuantity(e.product_id, setAvailableQuantity, true)}>
-                        <div onClick={() => setConfirmedEdit(!confirmedEdit)} style={{ width: '100%' }}>
+                    <div>
+                        <div onClick={() => {
+                            setConfirmedEdit(!confirmedEdit)
+                            editQuantity(e.product_id, setAvailableQuantity, true)
+                        }} style={{ width: '100%' }}>
                             <FontAwesomeIcon icon={faEdit} className='editIcon' style={{ marginRight: '20%' }} />
                         </div>
                         {confirmedEdit &&
@@ -59,7 +61,7 @@ const ProductOrder = ({ e }) => {
                             <div id='confirmedRemove'>
                                 <h4>¿Quieres eliminar <span>"{e.name}"</span> del pedido?</h4>
                                 <button>Cancelar</button>
-                                <button onClick={() => removeProductToOrder({ productId: e.product_id, orderId: currentOrder.order_id })}>Eliminar</button>
+                                <button onClick={() => removeProductToOrder({ productId: e.product_id, orderId })}>Eliminar</button>
                             </div>
                         }
                         <span>Eliminar</span>
