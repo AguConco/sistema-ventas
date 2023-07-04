@@ -15,8 +15,8 @@ const OrdersProvider = ({ children }) => {
 
     const navigate = useNavigate()
 
-    // const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
-    const urlHost = 'http://localhost:80/Bazar-Backend/'
+    const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
+    // const urlHost = 'http://localhost:80/Bazar-Backend/'
 
     const newOrder = (e, setModalVisible) => {
         $.ajax({

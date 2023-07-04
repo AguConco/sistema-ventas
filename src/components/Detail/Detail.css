@@ -21,6 +21,19 @@
 .containerDetail {
     margin: 20px 0;
     display: flex;
+    gap: 20px;
+}
+
+.containerImageAndDrive {
+    display: flex;
+    overflow-x: auto;
+    min-width: 250px;
+    width: 250px;
+    position: relative;
+    scroll-snap-type: x mandatory;
+    border-radius: 10px;
+    border: 1px solid var(--gray-light);
+    height: 285px;
 }
 
 .containerImage {
@@ -28,15 +41,13 @@
     height: 250px;
     min-width: 250px;
     width: 250px;
-    border-radius: 10px;
-    border: 1px solid var(--gray-light);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
     padding: 10px;
     position: relative;
+    scroll-snap-align: start;
 }
 
 .containerImage img {
@@ -45,9 +56,17 @@
     object-fit: contain;
 }
 
+canvas {
+    padding: 10px;
+    height: 250px;
+    width: 250px;
+    scroll-snap-align: start;
+}
+
 .containerImage .newImage {
     position: absolute;
     width: 100px;
+    height: 100px;
     object-fit: contain;
     top: 4px;
     left: 5px;
@@ -222,6 +241,10 @@
         margin: 20px 0 100px;
         display: flex;
         flex-direction: column;
+    }
+
+    .containerImageAndDrive {
+        margin: auto;
     }
 
     .containerImage {

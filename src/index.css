@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: 'Copperplate';
+  src: url('./assets/fonts/Copperplate.otf');
+}
+
+@font-face {
   font-family: 'Omelette';
   src: url('./assets/fonts/Omelette.otf');
 }
