@@ -1,0 +1,55 @@
+.options .loading {
+    margin: 5px;
+    animation: load 1.4s infinite linear;
+}
+
+@-webkit-keyframes load {
+    0% {
+        transform: scale(.3) rotate(0deg);
+    }
+
+    100% {
+        transform: scale(.3) rotate(360deg);
+    }
+}
+
+@keyframes load {
+    0% {
+        transform: scale(.3) rotate(0deg);
+    }
+
+    100% {
+        transform: scale(.3) rotate(360deg);
+    }
+}
+
+.selectFolder {
+    outline: none;
+    max-width: 220px;
+}
+
+.selectFolder:focus {
+    outline: 1px solid var(--gray-light);
+    outline-offset: 2px;
+}
+
+.folderName {
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.folderName a {
+    border-bottom: 1px solid var(--gray-light);
+    margin-left: 5px;
+}
+
+.folderName a:hover {
+    color: var(--gray-dark);
+}
+
+@media (max-width: 426px) {
+    .folderName {
+        margin-bottom: 0;
+    }
+}

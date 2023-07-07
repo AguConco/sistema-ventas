@@ -44,21 +44,6 @@ const ProductsSection = () => {
           <Categories categoryId={categoryId} setLoadedProducts={setLoadedProducts} />
         </ul>
         <div>
-          {/* <div className='sortType'>
-            <button className='sortProducts' onClick={() => setSortVisible(!sortVisible)}>Ordenar</button>
-            {sortVisible &&
-              <ul onClick={() => setSortVisible(false)}>
-                <li onClick={() => sortName(true)}>Nombre A-Z</li>
-                <li onClick={() => sortName(false)}>Nombre Z-A</li>
-                <li onClick={() => sortPriceWholesaler(true)}>Menor precio mayorista</li>
-                <li onClick={() => sortPriceWholesaler(false)}>Mayor precio mayorista</li>
-                <li onClick={() => sortPricePublic(true)}>Menor precio público</li>
-                <li onClick={() => sortPricePublic(false)}>Mayor precio público</li>
-                <li onClick={() => sortAvailableQuantity(true)}>Menos stock</li>
-                <li onClick={() => sortAvailableQuantity(false)}>Más stock</li>
-              </ul>
-            }
-          </div> */}
           <Searcher />
           <BtnAddProduct setModalVisible={setModalVisible} />
         </div>

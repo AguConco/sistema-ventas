@@ -132,48 +132,16 @@ const ProductProvider = ({ children }) => {
 
     }
 
-    const sortPricePublic = e => {
-        setListState(!listState)
-        e ?
-            setProductList(productList.sort((a, b) => a.price.price_public - b.price.price_public))
-            :
-            setProductList(productList.sort((a, b) => b.price.price_public - a.price.price_public))
-    }
+    const changeFolderDrive = async (data) => {
+        const dataFolder = new FormData()
+        dataFolder.append('id', data.id)
+        dataFolder.append('folder', data.folderId)
 
-    const sortPriceWholesaler = e => {
-        setListState(!listState)
-        e ?
-            setProductList(productList.sort((a, b) => a.price.price_wholesaler - b.price.price_wholesaler))
-            :
-            setProductList(productList.sort((a, b) => b.price.price_wholesaler - a.price.price_wholesaler))
-
-    }
-
-    const sortAvailableQuantity = e => {
-        setListState(!listState)
-        e ?
-            setProductList(productList.sort((a, b) => a.available_quantity - b.available_quantity))
-            :
-            setProductList(productList.sort((a, b) => b.available_quantity - a.available_quantity))
-    }
-
-    const sortName = e => {
-        setListState(!listState)
-        const s = productList.sort((a, b) => {
-            const name_a = a.name.toLowerCase()
-            const name_b = b.name.toLowerCase()
-
-            if (name_a > name_b) {
-                return 1;
-            }
-            if (name_a < name_b) {
-                return -1;
-            }
-            return 0;
+        return await fetch(`${urlHost}editFolderDrive.php`, {
+            method: 'POST',
+            body: dataFolder
         })
 
-
-        e ? setProductList(s) : setProductList(s.reverse())
     }
 
     return <ProductContext.Provider value={
@@ -189,10 +157,7 @@ const ProductProvider = ({ children }) => {
             editProduct,
             removeProduct,
             getProducts,
-            sortPricePublic,
-            sortPriceWholesaler,
-            sortAvailableQuantity,
-            sortName
+            changeFolderDrive
         }
     }>{children}</ProductContext.Provider>
 }

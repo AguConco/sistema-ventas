@@ -68,6 +68,11 @@ ul {
   background: var(--white);
 }
 
+button:active {
+  outline: 1px solid var(--gray-light);
+  outline-offset: 2px;
+}
+
 .containerSections {
   width: 100%;
 }

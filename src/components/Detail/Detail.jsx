@@ -1,15 +1,13 @@
-import { faEdit, faTrash, faArrowAltCircleLeft, faFloppyDisk, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash, faArrowAltCircleLeft, faFloppyDisk, faXmark, faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../Loading/Loading'
 import './Detail.css'
 import { ProductContext } from '../../context/ProductContext'
 import { roundToSpecialNumber } from '../../funtions/roundNumber'
 import { category } from '../../constants/constants'
-import fondoImgDrive from '../../assets/images/fondo-img-drive.png'
-import logodrive from '../../assets/images/drive.png'
-import fotoPrueba from '../../assets/images/04350054_04350054_0_2023-06-12_03_00_04.jpg'
+import { UploadImageDrive } from '../UploadImageDrive/UploadImageDrive'
 
 const Detail = () => {
 
@@ -28,6 +26,7 @@ const Detail = () => {
     const [availableQuantity, setAvailableQuantity] = useState()
     const [picture, setPicture] = useState()
     const [newPicture, setNewPicture] = useState(undefined)
+    const [imageDrive, setImageDrive] = useState('')
 
     const urlhost = 'https://panel-control-bazar.000webhostapp.com/backend/'
     // const urlhost = 'http://localhost:80/Bazar-Backend/'
@@ -37,7 +36,6 @@ const Detail = () => {
 
     const cancelChange = () => {
         setId(null)
-        setResponseAjax({ response: 'not change' })
         setEdit(false)
         setName(detail.name)
         setDiscount(detail.price.discount)
@@ -46,6 +44,7 @@ const Detail = () => {
         setState(detail.state)
         setAvailableQuantity(detail.available_quantity)
         setPicture(picture)
+        setNewPicture(undefined)
     }
 
     const saveChange = () => {
@@ -80,128 +79,11 @@ const Detail = () => {
         setDetail(prevState => ({ ...prevState, category: updatedCategory }))
     };
 
-    const canvasRef = useRef(null);
-
-    const uploadDriveImage = () => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d')
-
-        const imageBackground = new Image()
-        imageBackground.src = fondoImgDrive
-
-        imageBackground.onload = () => {
-            const maxWidth = canvas.width
-            const maxHeight = canvas.height
-
-            let newWidth = imageBackground.width
-            let newHeight = imageBackground.height
-            if (newWidth > maxWidth) {
-                const ratio = maxWidth / newWidth
-                newWidth *= ratio
-                newHeight *= ratio
-            }
-            if (newHeight > maxHeight) {
-                const ratio = maxHeight / newHeight
-                newWidth *= ratio
-                newHeight *= ratio
-            }
-
-            ctx.drawImage(imageBackground, 0, 0, newWidth, newHeight)
-
-            const image = new Image()
-            image.crossOrigin = 'anonymous';
-            image.src = picture
-
-            image.onload = function () {
-                ctx.drawImage(
-                    image,
-                    (maxWidth / 2) - (newWidth / 2) / 2, // posición en X
-                    (maxHeight / 2) - (newHeight / 2) / 2, // posición en Y
-                    newWidth / 2, // tamaño de la imagen en X
-                    newHeight / 2 // tamaño de la imagen en X
-                )
-                const fontPromise = document.fonts.load(`1em Copperplate`);
-
-                fontPromise.then(() => {
-                    console.log(name, '-', detail.name)
-                    ctx.font = '55px Copperplate'
-                    ctx.textAlign = 'center'
-
-                    function wrapText() {
-                        const words = name.split(' ');
-                        let line = '';
-                        let lines = [];
-
-                        for (let i = 0; i < words.length; i++) {
-                            const word = words[i];
-                            const testLine = line + word + ' ';
-                            const metrics = ctx.measureText(testLine);
-                            const testWidth = metrics.width;
-
-                            if (testWidth > 630) {
-                                lines.push(line.trim());
-                                line = word + ' ';
-                            } else {
-                                line = testLine;
-                            }
-                        }
-
-                        lines.push(line.trim());
-                        return lines;
-                    }
-
-                    const lines = wrapText()
-                    const lineHeight = lines.length >= 3 ? 40 : 45;
-                    const startY = 50;
-
-                    for (let i = 0; i < lines.length; i++) {
-                        const line = lines[i];
-                        let y = startY + (lineHeight * i);
-
-                        if (lines.length === 1) y = 75
-
-                        ctx.fillText(line, 540, y + 50);
-                    }
-
-                    ctx.font = '55px Copperplate'
-                    ctx.textAlign = 'center'
-                    ctx.fillStyle = 'white'
-                    ctx.fillText('$' + priceWholesaler, 540, 985);
-
-                    const dataDriveImage = new FormData()
-                    dataDriveImage.append('image', canvas.toDataURL())
-                    dataDriveImage.append('name', detail.name)
-
-                    fetch(`${urlhost}uploadDrive/uploadDrive.php`, {
-                        method: 'POST',
-                        body: dataDriveImage,
-                    })
-                        .then(e => e.json()) 
-                        .then(e => {
-                            console.log(e);
-                        })
-                        .catch(error => {
-                            console.error('Error al guardar la imagen:', error);
-                        });
-                })
-            }
-        }
-
-
-    }
-
     useEffect(() => {
-        switch (responseAjax.response) {
-            case 'success':
-                setEdit(false)
-                newPicture !== undefined && setPicture(URL.createObjectURL(newPicture))
-                setNewPicture()
-                break;
-            case 'not change':
-                setNewPicture(undefined)
-                break;
-            default:
-                break;
+        if (responseAjax.response === 'success') {
+            setEdit(false)
+            newPicture !== undefined && setPicture(URL.createObjectURL(newPicture))
+            setNewPicture()
         }
 
         if (id !== productId) {
@@ -251,17 +133,24 @@ const Detail = () => {
                                     <img src={picture} alt={detail.name} />
                                     {edit &&
                                         <div className='editPicture'>
-                                            <button type='button'>Cambiar Foto</button>
+                                            <span><FontAwesomeIcon icon={faArrowsRotate} /> Cambiar Foto</span>
                                             <input onChange={({ target }) => setNewPicture(target.files[0])} type="file" accept="image/png, image/jpeg, image/webp" />
                                         </div>
                                     }
                                 </div>
-                                <canvas ref={canvasRef} width={1080} height={1080}></canvas>
+                                {imageDrive &&
+                                    <div className="containerImage">
+                                        <img src={imageDrive} />
+                                    </div>}
                             </div>
                             <div>
-                                {edit ?
-                                    <input type={"text"} className={'detailName edit'} disabled={!edit} onChange={({ target }) => setName(target.value.charAt(0).toUpperCase() + target.value.slice(1))} value={name} /> :
-                                    <h1 className={'detailName'}>{name}</h1>
+                                {edit
+                                    ? <input
+                                        type={"text"}
+                                        className={'detailName edit'}
+                                        onChange={({ target }) => setName(target.value.charAt(0).toUpperCase() + target.value.slice(1))}
+                                        value={name} />
+                                    : <h1 className={'detailName'}>{name}</h1>
                                 }
                                 <div>
                                     <span className='detailCode'>Código: {detail.code}</span>
@@ -356,7 +245,15 @@ const Detail = () => {
                                             </div>
                                         }
                                     </button>
-                                    <button onClick={uploadDriveImage}><img src={logodrive} />Agregar a Drive</button>
+                                </div>
+                                <div className="options">
+                                    <UploadImageDrive data={{
+                                        name,
+                                        price: priceWholesaler,
+                                        folder: detail.folder,
+                                        id: detail.id,
+                                        picture
+                                    }} setImageDrive={setImageDrive} />
                                 </div>
                             </div >
                         </div >

@@ -75,13 +75,12 @@ const OrdersProvider = ({ children }) => {
         })
     }
 
-    const removeProductToOrder = (e, orderId) => {
+    const removeProductToOrder = (e) => {
         $.ajax({
             url: `${urlHost}removeProductOrder.php`,
             type: 'POST',
             data: e,
-            success: e => e && getProductsOrder(orderId)
-
+            success: response => response && getProductsOrder(e.orderId)
         })
     }
 

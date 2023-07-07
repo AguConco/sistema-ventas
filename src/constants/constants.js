@@ -102,7 +102,7 @@ export const category = [
         code: 'scr01'
       },
       {
-        name: 'Portaretratos',
+        name: 'Portarretratos',
         code: 'scr02'
       },
       {
