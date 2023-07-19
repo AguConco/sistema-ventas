@@ -22,16 +22,9 @@ const Categories = ({ categoryId, setLoadedProducts }) => category.map(e => {
 const ProductsSection = () => {
 
   const { setSectionCurrent } = useContext(NavigationContext)
-  const {
-    sortAvailableQuantity,
-    sortPriceWholesaler,
-    sortPricePublic,
-    sortName,
-    setLoadedProducts,
-  } = useContext(ProductContext)
+  const { setLoadedProducts } = useContext(ProductContext)
   const { categoryId } = useParams()
   const [modalVisible, setModalVisible] = useState(false)
-  const [sortVisible, setSortVisible] = useState(false)
 
   useEffect(() => {
     setSectionCurrent('productos')

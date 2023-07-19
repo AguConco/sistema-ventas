@@ -10,6 +10,7 @@ import ClientProvider from './context/ClientContext';
 import OrdersProvider from './context/OrdersContext';
 import { Barcode } from './components/Barcode/Barcode';
 import OrdersSection from './components/sections/Orders/OrdersSection';
+import { SearcherSection } from './components/sections/Searcher/SectionSearcher';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                   <Route exact path='/pedidos/:clientId/:orderId' element={<OrdersSection />} />
                   <Route exact path='/:productId' element={<Detail />} />
                   <Route exact path='/barcode' element={<Barcode />} />
+                  <Route exact path='/buscador/:searchValue' element={<SearcherSection />} />
                 </Routes>
               </div>
             </ProductProvider>

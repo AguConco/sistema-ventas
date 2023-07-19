@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import $ from 'jquery'
 import { useNavigate } from "react-router-dom";
+import { urlHost } from "../constants/constants";
 
 export const OrdersContext = createContext()
 
@@ -14,9 +15,6 @@ const OrdersProvider = ({ children }) => {
     const [viewProductSearch, setViewProductSearch] = useState([])
 
     const navigate = useNavigate()
-
-    const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
-    // const urlHost = 'http://localhost:80/Bazar-Backend/'
 
     const newOrder = (e, setModalVisible) => {
         $.ajax({

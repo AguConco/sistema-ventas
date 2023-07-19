@@ -1,0 +1,78 @@
+.sectionSearcher {
+    padding: 20px;
+}
+
+.headerSectionSearcher {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerSectionSearcher .searcher form {
+    top: 110%;
+}
+
+.ContainerResultProductSearch {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.resultProductSearch {
+    width: 200px;
+    border-radius: 10px;
+    background: var(--white-2);
+    padding: 10px;
+}
+
+.resultProductSearch:hover {
+    box-shadow: 0 5px 10px #00000020;
+}
+
+.resultProductSearch .containerPicture {
+    height: 180px;
+    width: 180px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.resultProductSearch .containerPicture img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.resultProductSearch h2 {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.resultProductSearch span {
+    padding-top: 10px;
+    display: block;
+    font-size: 13px;
+}
+
+.formSectionSearcher input{
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 1px solid var(--gray-light);
+    margin: 0 5px;
+    outline: none;
+}
+
+.sectionSearcher .pagination {
+    margin-top: 40px;
+}
+
+.sectionSearcher .back {
+    margin: 20px 0;
+}

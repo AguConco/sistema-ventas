@@ -8,6 +8,7 @@ import { ProductContext } from '../../context/ProductContext'
 import { roundToSpecialNumber } from '../../funtions/roundNumber'
 import { category } from '../../constants/constants'
 import { UploadImageDrive } from '../UploadImageDrive/UploadImageDrive'
+import { urlHost } from "../../constants/constants";
 
 const Detail = () => {
 
@@ -27,9 +28,6 @@ const Detail = () => {
     const [picture, setPicture] = useState()
     const [newPicture, setNewPicture] = useState(undefined)
     const [imageDrive, setImageDrive] = useState('')
-
-    const urlhost = 'https://panel-control-bazar.000webhostapp.com/backend/'
-    // const urlhost = 'http://localhost:80/Bazar-Backend/'
 
     const { removeProduct, editProduct, responseAjax, setResponseAjax } = useContext(ProductContext)
     const navigate = useNavigate()
@@ -90,7 +88,7 @@ const Detail = () => {
             setLoading(true)
             setId(productId)
 
-            fetch(`${urlhost}productDetail.php?id=${productId}`)
+            fetch(`${urlHost}productDetail.php?id=${productId}`)
                 .then(e => e.json())
                 .then(e => {
                     if (e.length !== 0) {

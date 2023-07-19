@@ -280,3 +280,6 @@ export const category = [
     ]
   }
 ]
+
+// export const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
+export const urlHost = 'http://localhost:80/Bazar-Backend/'

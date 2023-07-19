@@ -1,5 +1,6 @@
 import { createContext, useState } from "react"
 import $ from 'jquery'
+import { urlHost } from "../constants/constants"
 
 export const ProductContext = createContext()
 
@@ -9,9 +10,6 @@ const ProductProvider = ({ children }) => {
     const [productList, setProductList] = useState({ 'products': [] })
     const [loadedProducts, setLoadedProducts] = useState(2);
     const [responseAjax, setResponseAjax] = useState('')
-
-    const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
-    // const urlHost = 'http://localhost:80/Bazar-Backend/'
 
     const addProduct = data => {
 

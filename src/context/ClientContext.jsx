@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import $ from 'jquery'
+import { urlHost } from "../constants/constants";
 
 export const ClientContext = createContext()
 
@@ -8,9 +9,6 @@ const ClientProvider = ({ children }) => {
     const [clientsList, setClientsList] = useState([])
     const [listState, setListState] = useState(false)
     const [historyClient, setHistoryClient] = useState([])
-
-    const urlHost = 'https://panel-control-bazar.000webhostapp.com/backend/'
-    // const urlHost = 'http://localhost:80/Bazar-Backend/'
 
     const addClient = (e) => {
         $.ajax({

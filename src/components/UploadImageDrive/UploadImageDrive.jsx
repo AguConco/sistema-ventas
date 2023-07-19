@@ -1,4 +1,4 @@
-import fondoImgDrive from '../../assets/images/fondo-img-drive.png'
+import backgroundImageDrive from '../../assets/images/fondo-img-drive.png'
 import logodrive from '../../assets/images/drive.png'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { ProductContext } from '../../context/ProductContext'
@@ -28,7 +28,7 @@ export const UploadImageDrive = ({ data, setImageDrive }) => {
         const ctx = canvas.getContext('2d')
 
         const imageBackground = new Image()
-        imageBackground.src = fondoImgDrive
+        imageBackground.src = backgroundImageDrive
 
         imageBackground.onload = () => {
             const widthCanvas = canvas.width
@@ -41,8 +41,8 @@ export const UploadImageDrive = ({ data, setImageDrive }) => {
             image.src = picture
 
             image.onload = function () {
-                const maxWidthPicture = (widthCanvas / 2)
-                const maxHeightPicture = (heightCanvas / 2)
+                const maxWidthPicture = (widthCanvas / 1.5)
+                const maxHeightPicture = (heightCanvas / 1.5)
 
                 const proportion = Math.min(maxWidthPicture / image.width, maxHeightPicture / image.height)
 
