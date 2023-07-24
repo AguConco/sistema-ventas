@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import './AddProduct.css'
 import { ProductContext } from "../../../../context/ProductContext"
 import { generateId } from "../../../../funtions/generateId"
-import { category, sub } from "../../../../constants/constants"
+import { category } from "../../../../constants/constants"
 import { roundToSpecialNumber } from "../../../../funtions/roundNumber"
 
 const AddProduct = () => {

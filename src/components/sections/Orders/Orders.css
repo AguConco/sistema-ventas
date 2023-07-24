@@ -209,6 +209,7 @@
     text-align: end;
     padding: 5px 10px;
     height: 55px;
+    position: relative;
 }
 
 .detailOrder table td:nth-child(2) {
@@ -244,14 +245,32 @@
     font-size: 20px;
 }
 
-.editIcon svg path {
-    fill: rgb(231, 185, 0);
+.cellProduct {
+    cursor: pointer;
+}
+
+.cellProduct span {
+    background: #00000099;
+    padding: 5px;
+    color: #fff;
+    position: absolute;
+    font-size: 11px;
+    border-radius: 5px;
+    top: 100%;
+    right: 0;
+    display: none;
+    z-index: 100;
+}
+
+.cellProduct:hover span{
+    display: block;
 }
 
 .editQuantity {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 100;
     background: var(--white);
     border-radius: 10px;
@@ -262,6 +281,7 @@
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
+    z-index: 110;
 }
 
 .editQuantity input {
@@ -377,6 +397,54 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     word-wrap: break-word;
+}
+
+.addProductNotExist{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: sticky;
+    left: 0;
+    padding: 15px;
+    border-radius: 5px;
+    background: var(--white-2);
+    margin: 0 20px;
+}
+
+.addProductNotExist span {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.addProductNotExist input{
+    min-width: 150px;
+    margin: 5px 10px 5px 0;
+    border-radius: 5px;
+    padding: 7px 10px;
+    border: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.addProductNotExist input:nth-child(2) {
+    min-width: 400px;
+}
+
+.addProductNotExist>div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.addProductNotExist button {
+    padding: 7px 10px;
+    color: var(--primary);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: var(--secondary);
+    width: 150px;
 }
 
 @media (max-width: 426px) {
@@ -525,6 +593,14 @@
     .resultSearch img {
         height: 50px;
         width: 50px;
+    }
+
+    .addProductNotExist input{
+        margin: 5px 0 5px 0;
+    }
+
+    .addProductNotExist input:nth-child(2) {
+        min-width: 150px;
     }
 }
 

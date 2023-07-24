@@ -73,6 +73,19 @@ const OrdersProvider = ({ children }) => {
         })
     }
 
+    const addProductNotExist = (e) => {
+        $.ajax({
+            url: `${urlHost}addProductOrder.php`,
+            type: 'POST',
+            data: e,
+            success: response => {
+                if (response) {
+                    getProductsOrder(e.orderId)
+                }
+            }
+        })
+    }
+
     const removeProductToOrder = (e) => {
         $.ajax({
             url: `${urlHost}removeProductOrder.php`,
@@ -153,7 +166,8 @@ const OrdersProvider = ({ children }) => {
         editQuantity,
         cancelOrder,
         confirmOrder,
-        setSearchResult
+        setSearchResult,
+        addProductNotExist
     }}>{children}</OrdersContext.Provider>
 }
 
