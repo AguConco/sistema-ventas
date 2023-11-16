@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { ProductContext } from '../../context/ProductContext'
 import Loading from '../../components/Loading/Loading'
 import './UploadImageDrive.css'
+import { DeleteImageDrive } from '../DeleteImageDrive/DeleteImageDrive'
 
 // import pictureDev from '../../assets/images/04350054_04350054_0_2023-06-12_03_00_04.webp'
 
@@ -103,7 +104,7 @@ export const UploadImageDrive = ({ data, setImageDrive }) => {
                     setCanvasValue(false)
                     setLoadingUploadImage(true)
 
-                    fetch(`https://upload-drive.onrender.com/upload`, {
+                    fetch(`https://upload-google-drive.onrender.com/upload`, {
                         method: 'POST',
                         body: JSON.stringify({ image: canvas.toDataURL(), name, folder: folderId }),
                     })
@@ -126,7 +127,7 @@ export const UploadImageDrive = ({ data, setImageDrive }) => {
     }
 
     useEffect(() => {
-        fetch(`https://upload-drive.onrender.com/upload`)
+        fetch(`https://upload-google-drive.onrender.com/upload`)
             .then(e => e.json())
             .then(e => {
                 setFolders(e)
@@ -161,7 +162,10 @@ export const UploadImageDrive = ({ data, setImageDrive }) => {
                     </>
                     {loadingUploadImage
                         ? <Loading />
-                        : nameFolder && <button onClick={uploadDriveImage}><img src={logodrive} />Agregar a Drive</button>
+                        : nameFolder && <>
+                            <button onClick={uploadDriveImage}><img src={logodrive} />Agregar a Drive</button>
+                            <DeleteImageDrive data={{ name, folderId }} />
+                        </>
                     }
                 </>
             }

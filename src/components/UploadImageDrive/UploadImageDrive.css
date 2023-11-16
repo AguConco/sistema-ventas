@@ -53,3 +53,18 @@
         margin-bottom: 0;
     }
 }
+
+.delete-image-drive {
+    position: relative;
+}
+
+.delete-image-drive pre {
+    position: absolute;
+    background: #00000099;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 5px;
+    top: calc(100% + 10px);
+    left: 0;
+    pointer-events: none;
+}
